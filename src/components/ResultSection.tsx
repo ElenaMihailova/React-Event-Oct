@@ -1,30 +1,21 @@
 import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { ButtonIcon } from "./IconButton";
-
 import GridonRounded from "../assets/icon/GridonRounded.png";
 import ListAltRounded from "../assets/icon/ListAltRounded.png";
 import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
 
 interface ResultSectionProps {
-  page: number;
-  itemsPerPage: number;
+  cards: Array<{
+    id: string;
+    title: string;
+    description: string;
+  }>;
 }
 
-export const ResultSection: React.FC<ResultSectionProps> = ({
-  page,
-  itemsPerPage,
-}) => {
-  const totalItems = 9;
-  const cards = Array.from({ length: totalItems }, (_, index) => ({
-    id: index + 1,
-    title: `Запрос ${index + 1}`,
-  }));
-
-  const displayedCards = cards.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
-  );
+export const ResultSection: React.FC<ResultSectionProps> = ({ cards }) => {
+  // Убедитесь, что `cards` является массивом, чтобы избежать ошибок
+  const displayCards = Array.isArray(cards) ? cards : [];
 
   return (
     <>
@@ -39,13 +30,14 @@ export const ResultSection: React.FC<ResultSectionProps> = ({
       </Box>
 
       <Box display="flex" flexDirection="row" gap={2}>
-        {displayedCards.map((card) => (
+        {displayCards.map((card) => (
           <Paper
             key={card.id}
             elevation={3}
             sx={{ padding: 2, marginBottom: 2 }}
           >
             <Typography variant="body1">{card.title}</Typography>
+            <Typography variant="body2">{card.description}</Typography>
           </Paper>
         ))}
       </Box>
