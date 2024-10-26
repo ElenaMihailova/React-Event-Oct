@@ -15,7 +15,7 @@ interface CardData {
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
-  const [cards, setCards] = useState<CardData[]>([]);  // Инициализация как пустой массив
+  const [cards, setCards] = useState<CardData[]>([]); // Инициализация как пустой массив
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +26,7 @@ export const CatalogPage: React.FC = () => {
     const fetchCards = async () => {
       try {
         setLoading(true);
-        
+
         // Лог перед отправкой запроса
         console.log("Запрос данных карточек...");
 
@@ -107,7 +107,7 @@ export const CatalogPage: React.FC = () => {
                 <ResultSection
                   cards={cards.slice(
                     (page - 1) * itemsPerPage,
-                    page * itemsPerPage
+                    page * itemsPerPage,
                   )}
                 />
                 <Pagination

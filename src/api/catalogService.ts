@@ -1,7 +1,5 @@
-
 import axios from "axios";
 import { HelpRequestData } from "../types/types";
-
 
 export const fetchRequestCards = async (): Promise<HelpRequestData[]> => {
   try {
