@@ -1,24 +1,23 @@
 import React from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { CardInformation } from "../components/Card";
+import { HelpRequestData } from "../types/types";
 
 interface ResultSectionProps {
-  cards: Array<{
-    id: string;
-    title: string;
-    description: string;
-  }>;
+  cards: HelpRequestData[];
+  onCardClick: (id: string) => void;
 }
 
-export const ResultSection: React.FC<ResultSectionProps> = ({ cards }) => {
-  const displayCards = Array.isArray(cards) ? cards : [];
-
+export const ResultSection: React.FC<ResultSectionProps> = ({ cards, onCardClick }) => {
   return (
-    <Box display="flex" flexDirection="row" gap={2}>
-      {displayCards.map((card) => (
-        <Paper key={card.id} elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
-          <Typography variant="body1">{card.title}</Typography>
-          <Typography variant="body2">{card.description}</Typography>
-        </Paper>
+    <Box
+      display="flex"
+      gap={1}
+      justifyContent="center"
+    >
+      {cards.map((card) => (
+        <CardInformation key={card.id} {...card}
+          onClick={() => onCardClick(card.id)} />
       ))}
     </Box>
   );

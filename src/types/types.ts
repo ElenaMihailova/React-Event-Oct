@@ -33,4 +33,6 @@ export type HelpRequestData = {
   contributorsCount: number;
   requestGoal: number;
   requestGoalCurrentValue: number;
+  collectedAmount: number;
+  targetAmount: number;
 };
