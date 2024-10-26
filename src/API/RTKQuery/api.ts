@@ -16,7 +16,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     getAuthToken: builder.mutation({
       query: (user) => ({
-        url: routes.loginPath,
+        url: routes.auth,
         method: "POST",
         body: user,
       }),
