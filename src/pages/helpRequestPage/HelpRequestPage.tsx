@@ -92,7 +92,7 @@ const HelpRequestPage = () => {
                   { name: "Восполнить необходимые лекарства", checked: true },
                 ].map((item, index) => (
                   <ListItem key={index}>
-                    <ListItemIcon>
+                    <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>
                       <CheckListIcon green={item.checked} />
                     </ListItemIcon>
                     <ListItemText primary={item.name} />
