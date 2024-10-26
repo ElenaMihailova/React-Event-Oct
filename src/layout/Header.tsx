@@ -15,8 +15,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import Logo from "../../public/Logo.png";
+// import Logo from "../../public/Logo.png";
 import theme from "../theme";
+import Logo from "./Logo";
 
 const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
@@ -43,7 +44,7 @@ const Header: React.FC = () => {
         }}
       >
         <Box sx={{ flex: 1 }}>
-          <img src={Logo} alt="Logo" />
+          <Logo />
         </Box>
 
         <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
         </Typography>
         <Box sx={{ flex: 1 }}>
           <IconButton
-            sx={{ display: "block", marginLeft: "auto" }}
+            sx={{ display: "block", marginLeft: "auto", height: 56, width: 56 }}
             onClick={handleMenu}
           >
             <AccountCircleIcon sx={{ fontSize: 40 }} />
