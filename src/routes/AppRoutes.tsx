@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
-import AuthProvider from "../Auth/AuthProvider";
+import AuthProvider from "../auth/AuthProvider";
 import store from "../API/RTKQuery/index";
 import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
@@ -14,7 +14,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/help-request" element={<HelpRequestPage />} />
+          <Route path="details" element={<HelpRequestPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </ReduxProvider>

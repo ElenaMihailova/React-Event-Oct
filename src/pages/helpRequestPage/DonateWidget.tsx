@@ -7,7 +7,22 @@ import {
   LinearProgress,
 } from "@mui/material";
 
-const DonateWidget = () => {
+interface DonateWidgetProps {
+  requestId: string;
+  requestGoal: number;
+  requestGoalCurrentValue: number;
+  endingDate: string;
+}
+
+const DonateWidget = ({
+  requestId,
+  requestGoal,
+  requestGoalCurrentValue,
+  endingDate,
+}: DonateWidgetProps) => {
+  const date = new Date(endingDate);
+  const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
+
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -26,13 +41,22 @@ const DonateWidget = () => {
             Завершение
           </Typography>
 
-          <Typography variant="body2">20.03.2025</Typography>
+          <Typography variant="body2">{formattedDate}</Typography>
 
           <Typography variant="subtitle2" mt={2}>
             Мы собрали
           </Typography>
           <Box sx={{ width: "100%" }}>
-            <LinearProgress variant="determinate" value={40} />
+            <LinearProgress
+              variant="determinate"
+              sx={{
+                backgroundColor: "#a5cff5", // Цвет фона полосы
+                "& .MuiLinearProgress-bar": {
+                  backgroundColor: "#1E88E5",
+                },
+              }}
+              value={requestGoalCurrentValue}
+            />
           </Box>
           <Box
             sx={{
@@ -44,17 +68,29 @@ const DonateWidget = () => {
             }}
           >
             <Typography variant="body2" color="textSecondary">
-              1 102 563 руб
+              {requestGoalCurrentValue}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              из 2 056 489 руб
+              {requestGoal}
             </Typography>
           </Box>
 
           <Typography variant="body2" color="textSecondary" mt={2}>
             Нас уже 3 566 987
           </Typography>
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+          <Button
+            onClick={() => console.log(requestId)}
+            variant="contained"
+            fullWidth
+            sx={{
+              mt: 2,
+              backgroundColor: "#1E88E5",
+              color: "#ffffff",
+              "&:hover": {
+                backgroundColor: "#1565C0",
+              },
+            }}
+          >
             Помочь
           </Button>
         </CardContent>
