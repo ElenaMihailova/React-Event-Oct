@@ -77,8 +77,11 @@ export const CatalogPage: React.FC = () => {
               minHeight: "100%",
             }}
           >
-
-            <Box display="flex" flexDirection="row" justifyContent="space-between">
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+            >
               <Typography variant="h6">Найдено:</Typography>
 
               <Box>

@@ -6,7 +6,8 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: routes.apiPath,
     prepareHeaders: (headers) => {
-      const tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5OGU1OTJlLTQyNDMtNGMwNC05MDUwLTU5YTUwZWQwMTgzZCIsImlhdCI6MTcyOTk2Njc1NCwiZXhwIjoxNzI5OTcwMzU0fQ.IxjFRY_DNiV-B1ITuXyVOlkZHqWRFSHbbwIkoH3D_Vg";
+      const tempToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5OGU1OTJlLTQyNDMtNGMwNC05MDUwLTU5YTUwZWQwMTgzZCIsImlhdCI6MTcyOTk2Njc1NCwiZXhwIjoxNzI5OTcwMzU0fQ.IxjFRY_DNiV-B1ITuXyVOlkZHqWRFSHbbwIkoH3D_Vg";
       if (tempToken) {
         headers.set("Authorization", `Bearer ${tempToken}`);
       }
