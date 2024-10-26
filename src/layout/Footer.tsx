@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import theme from "../theme";
 
 const Footer = () => {
@@ -14,9 +15,15 @@ const Footer = () => {
           maxWidth: theme.breakpoints.values.lg,
         }}
       >
-        <Typography variant="body1">Об ивенте</Typography>
-        <Typography variant="body1">Github проекта</Typography>
-        <Typography variant="body1">Чат для джунов</Typography>
+        <Typography variant="body1" sx={{ flex: 1, textAlign: "left" }}>
+          Об ивенте
+        </Typography>
+        <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
+          Github проекта
+        </Typography>
+        <Typography variant="body1" sx={{ flex: 1, textAlign: "right" }}>
+          Чат для джунов
+        </Typography>
       </Box>
     </Box>
   );
