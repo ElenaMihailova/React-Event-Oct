@@ -5,7 +5,6 @@ import { FilterSidebar } from "../components/FilterSidebar";
 import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
 
-// Тип для данных карточек
 interface CardData {
   id: string;
   title: string;
@@ -15,7 +14,7 @@ interface CardData {
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
-  const [cards, setCards] = useState<CardData[]>([]); // Инициализация как пустой массив
+  const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,12 +26,11 @@ export const CatalogPage: React.FC = () => {
       try {
         setLoading(true);
 
-        // Лог перед отправкой запроса
         console.log("Запрос данных карточек...");
 
-        const response = await axios.get<CardData[]>("/api/request");
+        const response = await axios.get<CardData[]>("https://natticharity.eveloth.ru/api/request");
 
-        // Лог после получения ответа
+
         console.log("Ответ сервера:", response.data);
 
         setCards(response.data || []);
@@ -61,7 +59,8 @@ export const CatalogPage: React.FC = () => {
       sx={{
         width: "100%",
         boxSizing: "border-box",
-        paddingTop: theme.spacing(4),
+        paddingX: 2,
+        paddingY: 4,
       }}
     >
       <Typography
