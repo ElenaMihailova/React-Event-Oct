@@ -5,6 +5,7 @@ import {
   Typography,
   Divider,
   Button,
+  LinearProgress,
 } from "@mui/material";
 
 const DonateWidget = () => {
@@ -21,8 +22,11 @@ const DonateWidget = () => {
           </Typography>
 
           <Typography>
-            Цель сбора: Оплатить лечение МКБ в клинике "Здоровье". Купить одежду
-            на зимний сезон...
+            <strong>Цель сбора:</strong>
+          </Typography>
+          <Typography>
+            Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний
+            сезон...
           </Typography>
 
           <Typography variant="body1" mt={2}>
@@ -46,13 +50,15 @@ const DonateWidget = () => {
             <Typography color="textSecondary">из 2 056 489 руб</Typography>
           </Box>
 
-          <Divider />
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress variant="determinate" value={40} />
+          </Box>
 
           <Typography variant="h6" mt={2}>
             Нас уже 3 566 987
           </Typography>
           <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-            ПОМОЧЬ
+            Помочь
           </Button>
         </CardContent>
       </Card>
