@@ -6,14 +6,14 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: routes.apiPath,
     prepareHeaders: (headers) => {
-      const tempToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5OGU1OTJlLTQyNDMtNGMwNC05MDUwLTU5YTUwZWQwMTgzZCIsImlhdCI6MTcyOTk2Njc1NCwiZXhwIjoxNzI5OTcwMzU0fQ.IxjFRY_DNiV-B1ITuXyVOlkZHqWRFSHbbwIkoH3D_Vg";
-      if (tempToken) {
-        headers.set("Authorization", `Bearer ${tempToken}`);
+      const token = localStorage.getItem("userId");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
     getAuthToken: builder.mutation({
       query: (user) => ({
@@ -22,13 +22,33 @@ export const api = createApi({
         body: user,
       }),
     }),
-    getRequestCards: builder.query<CardData[], void>({
+
+    getRequestCards: builder.query({
       query: () => ({
         url: routes.requestLoadAll,
+        method: "GET",
+      }),
+    }),
+
+    getRequestCard: builder.query({
+      query: (requestId: string) => ({
+        url: routes.requestLoadDetails(requestId),
+        method: "GET",
+      }),
+    }),
+
+    getRequestContribute: builder.query({
+      query: (requestId: string) => ({
+        url: routes.requestContribute(requestId),
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useGetAuthTokenMutation, useGetRequestCardsQuery } = api;
+export const {
+  useGetAuthTokenMutation,
+  useGetRequestCardsQuery,
+  useGetRequestCardQuery,
+  useGetRequestContributeQuery,
+} = api;
