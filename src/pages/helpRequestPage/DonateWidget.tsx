@@ -7,7 +7,11 @@ import {
   LinearProgress,
 } from "@mui/material";
 
-const DonateWidget = () => {
+interface DonateWidgetProps {
+  requestId: string;
+}
+
+const DonateWidget = ({ requestId }: DonateWidgetProps) => {
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -54,7 +58,13 @@ const DonateWidget = () => {
           <Typography variant="body2" color="textSecondary" mt={2}>
             Нас уже 3 566 987
           </Typography>
-          <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+          <Button
+            onClick={() => console.log(requestId)}
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2 }}
+          >
             Помочь
           </Button>
         </CardContent>

@@ -1,4 +1,4 @@
-const CheckListIcon = ({ green }: { green: boolean }) => {
+const CheckListIcon = ({ green }: { green?: boolean }) => {
   console.log(green);
   return (
     <svg
