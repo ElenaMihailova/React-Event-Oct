@@ -39,7 +39,7 @@ export const ResultSection: React.FC<ResultSectionProps> = ({ page, itemsPerPage
 
       <Box display="flex" flexDirection="row" gap={2}>
         {displayedCards.map((card) => (
-          <Paper key={card.id} elevation={3} sx={{ padding: 2, marginBottom: 2, width: '30%' }}>
+          <Paper key={card.id} elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
             <Typography variant="body1">{card.title}</Typography>
           </Paper>
         ))}

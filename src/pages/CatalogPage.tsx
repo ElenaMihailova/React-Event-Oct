@@ -17,15 +17,21 @@ export const CatalogPage: React.FC = () => {
   };
 
   return (
-    <Box display="flex" flex='1' width="100%" flexDirection="column" p={3}>
+    <Box display="flex" flex='1' width="100%" flexDirection="column">
       <Typography variant="h4" mb={2}>
         Запросы о помощи
       </Typography>
 
       <Box display="flex" mt={2}>
-        <Box width={theme.spacing(32)} mr={2}>
+        <Box
+          sx={{
+            width: theme.spacing(32),
+            height: '100vh',
+          }}
+        >
           <FilterSidebar />
         </Box>
+
 
         <Box flex="1" display="flex" flexDirection="column" gap={2}>
           <SearchSection />
