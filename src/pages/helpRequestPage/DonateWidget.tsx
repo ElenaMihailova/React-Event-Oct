@@ -30,7 +30,7 @@ const DonateWidget = () => {
             Завершение
           </Typography>
 
-          <Typography>20.03.2025</Typography>
+          <Typography variant="body2">20.03.2025</Typography>
 
           <Typography variant="subtitle2" mt={2}>
             Мы собрали

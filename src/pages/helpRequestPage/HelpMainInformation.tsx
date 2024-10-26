@@ -10,17 +10,17 @@ import {
 } from "@mui/material";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
 import CheckListIcon from "./lib/CheckListIcon";
-import verifiedIcon from "./assets/verifyed-icon.svg";
+import verifiedIcon from "../../assets/verifyed-icon.svg";
 
 const HelpMainInformation = () => {
   return (
-    <Box>
+    <Box sx={{ flexGrow: 1 }}>
       <Card variant="outlined" sx={{ py: 3, px: 2, display: "flex" }}>
         <CardContent sx={{ maxWidth: "550px" }}>
           <Typography variant="h5">
             Сбор средств для пенсионерки Ангелины Ивановны
           </Typography>
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Организация
           </Typography>
           <Typography>Фонд помощи для ветеранов и инвалидов "Вера"</Typography>
@@ -30,7 +30,7 @@ const HelpMainInformation = () => {
             <Typography variant="caption">Организация проверена</Typography>
           </Box>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Кому мы помогаем
           </Typography>
           <Typography variant="body2">
@@ -38,7 +38,7 @@ const HelpMainInformation = () => {
             сожалению, её здоровье в последние годы значительно ухудшилось...
           </Typography>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Цель сбора
           </Typography>
           <Typography variant="body2">
@@ -46,7 +46,7 @@ const HelpMainInformation = () => {
             сезон...
           </Typography>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             План действий
           </Typography>
           <List>
@@ -70,17 +70,20 @@ const HelpMainInformation = () => {
                 <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>
                   <CheckListIcon green={item.checked} />
                 </ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemText
+                  primaryTypographyProps={{ variant: "body2" }}
+                  primary={item.name}
+                />
               </ListItem>
             ))}
           </List>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Завершение
           </Typography>
           <Typography variant="body2">20.03.2025</Typography>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Локация
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
@@ -92,7 +95,7 @@ const HelpMainInformation = () => {
             <Typography variant="body2"> Владимир</Typography>
           </Box>
 
-          <Typography sx={{ marginTop: 4, marginBottom: 1.5 }} variant="h6">
+          <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Контакты
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
