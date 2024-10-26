@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
 import theme from "../theme";
 
 const Footer = () => {
