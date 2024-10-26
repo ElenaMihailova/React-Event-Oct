@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   Typography,
-  Divider,
   Button,
   LinearProgress,
 } from "@mui/material";
@@ -32,6 +31,7 @@ const DonateWidget = () => {
           <Typography variant="body1" mt={2}>
             Завершение
           </Typography>
+
           <Typography>20.03.2025</Typography>
 
           <Typography variant="body1" mt={2}>
