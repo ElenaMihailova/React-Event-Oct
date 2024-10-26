@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Pagination } from '@mui/material';
+import React from "react";
+import { Box, Pagination } from "@mui/material";
 
 interface PaginationProps {
   count: number;
@@ -7,7 +7,11 @@ interface PaginationProps {
   onChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
-export const PaginationComponent: React.FC<PaginationProps> = ({ count, page, onChange }) => {
+export const PaginationComponent: React.FC<PaginationProps> = ({
+  count,
+  page,
+  onChange,
+}) => {
   return (
     <Box mt={2} display="flex" justifyContent="center">
       <Pagination

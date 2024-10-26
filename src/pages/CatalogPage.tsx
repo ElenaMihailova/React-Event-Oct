@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Typography, useTheme, Pagination } from '@mui/material';
-import { FilterSidebar } from '../components/FilterSidebar';
-import SearchSection from '../components/SearchSection';
-import { ResultSection } from '../components/ResultSection';
+import React, { useState } from "react";
+import { Box, Typography, useTheme, Pagination } from "@mui/material";
+import { FilterSidebar } from "../components/FilterSidebar";
+import SearchSection from "../components/SearchSection";
+import { ResultSection } from "../components/ResultSection";
 
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
@@ -12,28 +12,34 @@ export const CatalogPage: React.FC = () => {
   const totalItems = 9;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     setPage(value);
   };
 
   return (
-    //TODO 
-    <Box 
-      display="flex" 
+    //TODO
+    <Box
+      display="flex"
       flexDirection="column"
       sx={{
-        width: '100%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        boxSizing: 'border-box',
-        paddingLeft: '16px',
-        paddingRight: '16px',
-        padding: '24px',
-        backgroundColor: '#F5F5F5',
-        minHeight: '100vh',  // Минимальная высота экрана
+        width: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        boxSizing: "border-box",
+        paddingLeft: "16px",
+        paddingRight: "16px",
+        padding: "24px",
+        backgroundColor: "#F5F5F5",
+        minHeight: "100vh", // Минимальная высота экрана
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography variant="h4"
+      sx={{
+        textAlign: 'left',
+      }}>
         Запросы о помощи
       </Typography>
 
@@ -41,7 +47,7 @@ export const CatalogPage: React.FC = () => {
         <Box
           sx={{
             width: theme.spacing(32),
-            height: '100vh',
+            height: "100vh",
             marginRight: theme.spacing(1.5),
           }}
         >
@@ -50,21 +56,25 @@ export const CatalogPage: React.FC = () => {
 
         <Box flex="1" display="flex" flexDirection="column" height="100%">
           <SearchSection />
-          
-          <Box 
+
+          <Box
             sx={{
-              backgroundColor: 'white',
+              backgroundColor: "white",
               padding: `${theme.spacing(2.5)}`,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
               borderRadius: theme.shape.borderRadius,
               flex: 1,
-              minHeight: '100%',
+              minHeight: "100%",
             }}
           >
             <ResultSection page={page} itemsPerPage={itemsPerPage} />
-            <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handlePageChange}
+            />
           </Box>
         </Box>
       </Box>
