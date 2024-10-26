@@ -4,6 +4,12 @@ import { FilterSidebar } from "../components/FilterSidebar";
 import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
 import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
+import { ErrorBlock } from "../components/ErrorBlock";
+
+import { ButtonIcon } from "../components/IconButton";
+import GridonRounded from "../assets/icon/GridonRounded.png";
+import ListAltRounded from "../assets/icon/ListAltRounded.png";
+import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
 
 interface CardData {
   id: string;
@@ -71,12 +77,20 @@ export const CatalogPage: React.FC = () => {
               minHeight: "100%",
             }}
           >
+
+            <Box display="flex" flexDirection="row" justifyContent="space-between">
+              <Typography variant="h6">Найдено:</Typography>
+
+              <Box>
+                <ButtonIcon src={ListAltRounded} alt="List View" />
+                <ButtonIcon src={GridonRounded} alt="Grid View" />
+                <ButtonIcon src={LocationOnFilled} alt="Map View" />
+              </Box>
+            </Box>
             {isLoading ? (
               <Typography>Загрузка...</Typography>
             ) : error ? (
-              <Typography color="error">
-                Ошибка при загрузке данных.
-              </Typography>
+              <ErrorBlock />
             ) : (
               <>
                 <ResultSection
