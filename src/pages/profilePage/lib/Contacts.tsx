@@ -5,7 +5,7 @@ import whatsapp from '../../../assets/whatsapp.svg';
 
 export const Contacts = () => {
     return (
-        <Box sx={{ w: 260, h: 334, p:3 }}>
+        <Box sx={{ w: 260, h: 334, pt: 3.75 }}>
             <Box sx={{ mb: 3.75 }}>
                 <Typography variant="body1" sx={{ fontSize: 20, fontWeight: 'bold', mb: 1 }}>E-mail</Typography>
                 <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>forexample12@gmail.com</Typography>

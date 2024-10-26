@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
 import PersonalRounded from '../../assets/PersonRounded.png';
 import { PersonalData } from "./lib/PersonalData";
@@ -5,6 +6,21 @@ import { Contacts } from "./lib/Contacts";
 import { HelpReqCard } from "./lib/HelpReqCard";
 
 export const ProfilePage = () => {
+  const [activeButton, setActiveButton] = useState('button1');
+  const renderContent = () => {
+    switch (activeButton) {
+      case 'button1':
+        return <PersonalData />;
+      case 'button2':
+        return <Contacts />;
+      case 'button3':
+        return <Box sx={{display: 'flex'}}><HelpReqCard /><HelpReqCard /><HelpReqCard /></Box>;
+      default:
+        return <PersonalData />;
+    }
+  };
+
+
   return (
     <Container maxWidth="xl" component="section" sx={{
       width: 1500,
@@ -26,14 +42,12 @@ export const ProfilePage = () => {
         <Box sx={{width:1080, height:982, ml: 2.5, pl: 4, pt: 1.25, textAlign: "left", backgroundColor: "#FFFFFF" }}>
 
           <Tabs value={0} indicatorColor="primary" textColor="primary" sx={{ width: 388, borderBottom: 1, borderColor: 'divider' }}>
-            <Tab label="Личные данные" />
-            <Tab label="Контакты" />
-            <Tab label="Избранное" />
+            <Tab label="Личные данные" onClick={() => setActiveButton('button1')} />
+            <Tab label="Контакты" onClick={() => setActiveButton('button2')} />
+            <Tab label="Избранное" onClick={() => setActiveButton('button3')} />
           </Tabs>
 
-          {false ? <PersonalData /> : null}
-          {false ? <Contacts /> :  null}
-          {true ? <HelpReqCard /> : null}
+          {renderContent()}
         </Box>
       </Box>
     </Container>

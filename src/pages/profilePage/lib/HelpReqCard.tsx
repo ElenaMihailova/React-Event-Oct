@@ -18,14 +18,14 @@ export const HelpReqCard = () => {
                     </Box>
                 </Box> 
 
-                <Box sx={{mt:1.125, mb:1.125}}>
+                <Box sx={{mt:1.125, mb:2.25}}>
                     <Typography variant="subtitle2" sx={{ textWeight: 500 }}>Организатор</Typography>
                     <Typography variant="body2">
                         Фонд помощи для ветеранов и инвалидов "Вера"
                     </Typography>
                 </Box>
 
-                <Box sx={{mt:1.125, mb:1.125}}>
+                <Box sx={{mt:1.125, mb:2.25}}>
                     <Typography variant="subtitle2" sx={{ textWeight: 500 }}>Локация</Typography>
                         <Box sx={{ display: 'flex', mb: 1 }}>
                             <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>Область:</Typography>
@@ -37,7 +37,7 @@ export const HelpReqCard = () => {
                         </Box>
                 </Box>
 
-                <Box sx={{mt:1.125, mb:1.125}}>
+                <Box sx={{mt:1.125, mb:2.25}}>
                     <Typography variant="subtitle2" sx={{ textWeight: 500 }}>Цель сбора</Typography>
                     <Typography variant="body2">
                         Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний
@@ -45,19 +45,19 @@ export const HelpReqCard = () => {
                     </Typography>
                 </Box>
 
-                <Box sx={{mt:1.125, mb:1.125}}>
+                <Box sx={{mt:1.125, mb:2.25}}>
                     <Typography variant="subtitle2" sx={{ textWeight: 500, mt:2 }}>
                         Завершение
                     </Typography>
+                    <Typography variant="body2">20.03.2025</Typography>
                 </Box>
 
-                <Typography variant="body2">20.03.2025</Typography>
 
                 <Typography variant="subtitle2" sx={{ textWeight: 500, mt:2 }}>
                     Мы собрали
                 </Typography>
                 <Box>
-                    <LinearProgress variant="determinate" value={40} />
+                    <LinearProgress variant="determinate" value={40} color="secondary" />
                 </Box>
                 <Box
                     sx={{
