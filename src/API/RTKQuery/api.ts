@@ -13,6 +13,7 @@ export const api = createApi({
       return headers;
     },
   }),
+
   endpoints: (builder) => ({
     getAuthToken: builder.mutation({
       query: (user) => ({
@@ -21,7 +22,33 @@ export const api = createApi({
         body: user,
       }),
     }),
+
+    getRequestCards: builder.query({
+      query: () => ({
+        url: routes.requestLoadAll,
+        method: "GET",
+      }),
+    }),
+
+    getRequestCard: builder.query({
+      query: (requestId: string) => ({
+        url: routes.requestLoadDetails(requestId),
+        method: "GET",
+      }),
+    }),
+
+    getRequestContribute: builder.query({
+      query: (requestId: string) => ({
+        url: routes.requestContribute(requestId),
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetAuthTokenMutation } = api;
+export const {
+  useGetAuthTokenMutation,
+  useGetRequestCardsQuery,
+  useGetRequestCardQuery,
+  useGetRequestContributeQuery,
+} = api;
