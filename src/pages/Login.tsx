@@ -10,10 +10,10 @@ export const Login: React.FC = () => {
     alignItems: "start",
     flexWrap: "wrap",
     gap: "30px",
+    paddingTop: "30px",
   };
 
   const boxStyle: React.CSSProperties = {
-    width: "1500px",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
