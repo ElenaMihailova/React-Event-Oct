@@ -26,20 +26,16 @@ export const CatalogPage: React.FC = () => {
       flexDirection="column"
       sx={{
         width: "100%",
-        marginLeft: "auto",
-        marginRight: "auto",
         boxSizing: "border-box",
-        paddingLeft: "16px",
-        paddingRight: "16px",
-        padding: "24px",
-        backgroundColor: "#F5F5F5",
-        minHeight: "100vh", // Минимальная высота экрана
+        paddingTop: theme.spacing(4),
       }}
     >
-      <Typography variant="h4"
-      sx={{
-        textAlign: 'left',
-      }}>
+      <Typography
+        variant="h4"
+        sx={{
+          textAlign: "left",
+        }}
+      >
         Запросы о помощи
       </Typography>
 
@@ -47,7 +43,6 @@ export const CatalogPage: React.FC = () => {
         <Box
           sx={{
             width: theme.spacing(32),
-            height: "100vh",
             marginRight: theme.spacing(1.5),
           }}
         >

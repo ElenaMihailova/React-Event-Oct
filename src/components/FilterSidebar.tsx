@@ -8,8 +8,12 @@ import { DateFilter } from "./DateFilter";
 export const FilterSidebar: React.FC = () => {
   const theme = useTheme();
 
-  const [selectedFilters, setSelectedFilters] = useState<{ [key: string]: string | null }>({});
-  const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{ [key: string]: string | null }>({});
+  const [selectedFilters, setSelectedFilters] = useState<{
+    [key: string]: string | null;
+  }>({});
+  const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
+    [key: string]: string | null;
+  }>({});
 
   const handleCheckboxChange = (title: string, value: string) => {
     setSelectedFilters((prev) => ({
@@ -54,7 +58,9 @@ export const FilterSidebar: React.FC = () => {
             title={filter.title}
             options={filter.options}
             selectedOption={selectedFilters[filter.title] || null}
-            onCheckboxChange={(value) => handleCheckboxChange(filter.title, value)}
+            onCheckboxChange={(value) =>
+              handleCheckboxChange(filter.title, value)
+            }
           />
         ))}
         <VolunteerFilter

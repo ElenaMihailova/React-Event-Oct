@@ -14,7 +14,10 @@ interface VolunteerFilterProps {
   onCheckboxChange: (title: string, value: string) => void;
 }
 
-export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({ selectedFilters, onCheckboxChange }) => {
+export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({
+  selectedFilters,
+  onCheckboxChange,
+}) => {
   return (
     <Box>
       <Accordion>
@@ -36,7 +39,9 @@ export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({ selectedFilter
               title={filter.title}
               options={filter.options}
               selectedOption={selectedFilters[filter.title] || null}
-              onCheckboxChange={(value) => onCheckboxChange(filter.title, value)}
+              onCheckboxChange={(value) =>
+                onCheckboxChange(filter.title, value)
+              }
             />
           ))}
         </AccordionDetails>

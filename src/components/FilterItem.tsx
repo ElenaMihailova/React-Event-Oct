@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Typography, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Box,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 
 interface FilterItemProps {
   title: string;
@@ -8,7 +14,12 @@ interface FilterItemProps {
   onCheckboxChange: (value: string) => void;
 }
 
-export const FilterItem: React.FC<FilterItemProps> = ({ title, options, selectedOption, onCheckboxChange }) => {
+export const FilterItem: React.FC<FilterItemProps> = ({
+  title,
+  options,
+  selectedOption,
+  onCheckboxChange,
+}) => {
   return (
     <Box mb={2}>
       <Typography variant="subtitle1" mb={1}>
