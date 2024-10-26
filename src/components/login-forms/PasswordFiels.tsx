@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import {FormControl,
+import { useState } from "react";
+import {
+  FormControl,
   InputLabel,
   OutlinedInput,
   InputAdornment,
-  IconButton
-} from '@mui/material';
-import { Visibility, VisibilityOff} from '@mui/icons-material';
+  IconButton,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface PropsField {
   value: string;
@@ -17,26 +18,30 @@ export const PasswordField = ({ value, onChange }: PropsField) => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.preventDefault();
   };
 
   return (
-    <FormControl sx={{ m: 2, marginLeft: 0}} variant="outlined">
+    <FormControl sx={{ m: 2, marginLeft: 0 }} variant="outlined">
       <InputLabel htmlFor="password">Пароль</InputLabel>
       <OutlinedInput
         id="password"
         name="password"
-        type={showPassword ? 'text' : 'password'}
+        type={showPassword ? "text" : "password"}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
               aria-label={
-                showPassword ? 'hide the password' : 'display the password'
+                showPassword ? "hide the password" : "display the password"
               }
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
