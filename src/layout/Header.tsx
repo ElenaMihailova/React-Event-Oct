@@ -33,6 +33,7 @@ const Header: React.FC = () => {
           marginY: 0,
           marginX: "auto",
           display: "flex",
+          alignItems: "center",
           justifyContent: "space-between",
         }}
       >
@@ -42,8 +43,20 @@ const Header: React.FC = () => {
           alt="Logo"
           sx={{ height: 20, marginRight: 2 }}
         />
-        <IconButton color="inherit" sx={{ ml: "auto" }}>
-          <AccountCircle sx={{ fontSize: { xs: "24px", sm: "36px" } }} />
+
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: "16px",
+            fontWeight: 400, // Добавлено
+            lineHeight: "24px", // Добавлено
+            letterSpacing: "0.15px", // Добавлено
+          }}
+        >
+          Запросы о помощи
+        </Typography>
+        <IconButton edge="end" onClick={handleMenu} color="inherit">
+          <AccountCircleIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
