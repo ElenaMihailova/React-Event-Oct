@@ -9,7 +9,7 @@ import {
 
 const DonateWidget = () => {
   return (
-    <Box>
+    <Box width={320}>
       <Card variant="outlined">
         <CardContent>
           <Typography
@@ -20,23 +20,24 @@ const DonateWidget = () => {
             Вместе для добрых дел
           </Typography>
 
-          <Typography>
-            <strong>Цель сбора:</strong>
-          </Typography>
+          <Typography variant="subtitle2">Цель сбора:</Typography>
           <Typography>
             Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний
             сезон...
           </Typography>
 
-          <Typography variant="body1" mt={2}>
+          <Typography variant="subtitle2" mt={2}>
             Завершение
           </Typography>
 
           <Typography>20.03.2025</Typography>
 
-          <Typography variant="body1" mt={2}>
+          <Typography variant="subtitle2" mt={2}>
             Мы собрали
           </Typography>
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress variant="determinate" value={40} />
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -46,15 +47,15 @@ const DonateWidget = () => {
               mb: 2,
             }}
           >
-            <Typography variant="h6">1 102 563 руб</Typography>
-            <Typography color="textSecondary">из 2 056 489 руб</Typography>
+            <Typography variant="body2" color="textSecondary">
+              1 102 563 руб
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              из 2 056 489 руб
+            </Typography>
           </Box>
 
-          <Box sx={{ width: "100%" }}>
-            <LinearProgress variant="determinate" value={40} />
-          </Box>
-
-          <Typography variant="h6" mt={2}>
+          <Typography variant="body2" color="textSecondary" mt={2}>
             Нас уже 3 566 987
           </Typography>
           <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>

@@ -5,7 +5,8 @@ import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<HelpRequestPage />} />
+      <Route path="/" element={<WelcomePage />} />
+      <Route path="/help-request" element={<HelpRequestPage />} />
     </Routes>
   );
 };
