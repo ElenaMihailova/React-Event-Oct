@@ -17,30 +17,54 @@ export const CatalogPage: React.FC = () => {
   };
 
   return (
-    <Box display="flex" flex='1' width="100%" flexDirection="column">
+    <Box 
+      display="flex" 
+      flexDirection="column"
+      sx={{
+        width: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        boxSizing: 'border-box',
+        paddingLeft: '16px',
+        paddingRight: '16px',
+        padding: '24px',
+        backgroundColor: '#F5F5F5',
+        minHeight: '100vh',  // Минимальная высота экрана
+      }}
+    >
       <Typography variant="h4" mb={2}>
         Запросы о помощи
       </Typography>
 
-      <Box display="flex" mt={2}>
+      <Box display="flex" mt={2} flex="1">
         <Box
           sx={{
             width: theme.spacing(32),
             height: '100vh',
+            marginRight: theme.spacing(1.5),
           }}
         >
           <FilterSidebar />
         </Box>
 
-
-        <Box flex="1" display="flex" flexDirection="column" gap={2}>
+        <Box flex="1" display="flex" flexDirection="column" height="100%">
           <SearchSection />
-          <Box>
+          
+          <Box 
+            sx={{
+              backgroundColor: 'white',
+              padding: `${theme.spacing(2.5)}`,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              borderRadius: theme.shape.borderRadius,
+              flex: 1,
+              minHeight: '100%',
+            }}
+          >
             <ResultSection page={page} itemsPerPage={itemsPerPage} />
             <Pagination count={totalPages} page={page} onChange={handlePageChange} />
           </Box>
-
-
         </Box>
       </Box>
     </Box>
