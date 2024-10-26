@@ -17,6 +17,7 @@ export const FilterSidebar: React.FC = () => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         borderRadius: theme.shape.borderRadius,
+        textAlign: 'left',
       }}
     >
       <Typography variant="h6" mb={2}>

@@ -6,17 +6,18 @@ import { filterDataVolunteer } from '../data/FilterData';
 
 export const VolunteerFilter: React.FC = () => {
   return (
-    <Box>
+    <Box >
       <Accordion>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls="volunteer-content"
           id="volunteer-header"
         >
           <Typography variant="h6">Волонтерство</Typography>
         </AccordionSummary>
 
-        <AccordionDetails>
+        <AccordionDetails sx={{
+          backgroundColor: '#F5F5F5'
+        }}>
           {filterDataVolunteer.map((filter, index) => (
             <FilterItem
               key={index}
@@ -26,6 +27,6 @@ export const VolunteerFilter: React.FC = () => {
           ))}
         </AccordionDetails>
       </Accordion>
-    </Box>
+    </Box >
   );
 };

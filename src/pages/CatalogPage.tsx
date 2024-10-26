@@ -17,6 +17,7 @@ export const CatalogPage: React.FC = () => {
   };
 
   return (
+    //TODO 
     <Box 
       display="flex" 
       flexDirection="column"
