@@ -5,10 +5,6 @@ import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
 import { useGetRequestCardQuery } from "../../API/RTKQuery/api";
 
-interface HelpRequestPageProps {
-  requestId: string;
-}
-
 export interface ActionsScheduleElement {
   stepLabel: string;
   isDone?: boolean;
