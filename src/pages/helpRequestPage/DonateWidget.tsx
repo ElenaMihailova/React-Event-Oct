@@ -12,16 +12,12 @@ const DonateWidget = () => {
     <Box width={320}>
       <Card variant="outlined">
         <CardContent>
-          <Typography
-            sx={{ fontWeight: "bold", marginTop: 1, marginBottom: 1.5 }}
-            variant="h5"
-            fontSize={20}
-          >
+          <Typography sx={{ marginTop: 1, marginBottom: 1.5 }} variant="h6">
             Вместе для добрых дел
           </Typography>
 
           <Typography variant="subtitle2">Цель сбора:</Typography>
-          <Typography>
+          <Typography variant="body2">
             Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний
             сезон...
           </Typography>
