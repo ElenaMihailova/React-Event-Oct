@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Typography, useTheme, Pagination } from "@mui/material";
-import axios from "axios";
 import { FilterSidebar } from "../components/FilterSidebar";
 import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
+import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
 
 interface CardData {
   id: string;
@@ -14,36 +14,10 @@ interface CardData {
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
-  const [cards, setCards] = useState<CardData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const itemsPerPage = 3;
+
+  const { data: cards = [], isLoading, error } = useGetRequestCardsQuery();
   const totalPages = Math.ceil(cards.length / itemsPerPage);
-
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        setLoading(true);
-
-        console.log("Запрос данных карточек...");
-
-        const response = await axios.get<CardData[]>("https://natticharity.eveloth.ru/api/request");
-
-
-        console.log("Ответ сервера:", response.data);
-
-        setCards(response.data || []);
-      } catch (err) {
-        setError("Ошибка при загрузке данных.");
-        console.error("Ошибка при запросе:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCards();
-  }, []);
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
@@ -97,10 +71,12 @@ export const CatalogPage: React.FC = () => {
               minHeight: "100%",
             }}
           >
-            {loading ? (
+            {isLoading ? (
               <Typography>Загрузка...</Typography>
             ) : error ? (
-              <Typography color="error">{error}</Typography>
+              <Typography color="error">
+                Ошибка при загрузке данных.
+              </Typography>
             ) : (
               <>
                 <ResultSection

@@ -6,7 +6,6 @@ import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
 import { Login } from "../pages/Login";
 
-
 const AppRoutes = () => {
   return (
     <AuthProvider>
