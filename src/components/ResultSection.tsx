@@ -8,16 +8,18 @@ interface ResultSectionProps {
   onCardClick: (id: string) => void;
 }
 
-export const ResultSection: React.FC<ResultSectionProps> = ({ cards, onCardClick }) => {
+export const ResultSection: React.FC<ResultSectionProps> = ({
+  cards,
+  onCardClick,
+}) => {
   return (
-    <Box
-      display="flex"
-      gap={1}
-      justifyContent="center"
-    >
+    <Box display="flex" gap={1} justifyContent="center">
       {cards.map((card) => (
-        <CardInformation key={card.id} {...card}
-          onClick={() => onCardClick(card.id)} />
+        <CardInformation
+          key={card.id}
+          {...card}
+          onClick={() => onCardClick(card.id)}
+        />
       ))}
     </Box>
   );

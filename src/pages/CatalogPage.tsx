@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, useTheme, Pagination } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { FilterSidebar } from "../components/FilterSidebar";
 import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
@@ -9,7 +10,6 @@ import { ButtonIcon } from "../components/IconButton";
 import GridonRounded from "../assets/icon/GridonRounded.png";
 import ListAltRounded from "../assets/icon/ListAltRounded.png";
 import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
-import { useNavigate } from "react-router-dom";
 
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
@@ -29,7 +29,7 @@ export const CatalogPage: React.FC = () => {
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
-    value: number
+    value: number,
   ) => {
     setPage(value);
   };
@@ -88,7 +88,11 @@ export const CatalogPage: React.FC = () => {
               minHeight: "100%",
             }}
           >
-            <Box display="flex" flexDirection="row" justifyContent="space-between">
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+            >
               <Typography variant="h6">Найдено: {cards.length}</Typography>
 
               <Box>
