@@ -10,7 +10,7 @@ import Volunteering from "../assets/Volunteering1.png";
 import Person from "../assets/Person.png";
 import Organization from "../assets/Organisation.png";
 
-interface HelpRequestData {
+export interface HelpRequestData {
   id: string;
   title: string;
   organization: {

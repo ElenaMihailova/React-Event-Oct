@@ -21,6 +21,11 @@ export const CatalogPage: React.FC = () => {
   const { data: cards = [], isLoading, error } = useGetRequestCardsQuery();
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
+  const [displayMode, setDisplayMode] = useState<"grid" | "list">("grid");
+  const handleDisplayModeChange = (mode: "grid" | "list") => {
+    setDisplayMode(mode);
+  };
+
   useEffect(() => {
     console.log("Cards data:", cards);
     console.log("Loading state:", isLoading);
@@ -96,8 +101,28 @@ export const CatalogPage: React.FC = () => {
               <Typography variant="h6">Найдено: {cards.length}</Typography>
 
               <Box>
-                <ButtonIcon src={ListAltRounded} alt="List View" />
-                <ButtonIcon src={GridonRounded} alt="Grid View" />
+                <ButtonIcon
+                  src={GridonRounded}
+                  alt="Grid View"
+                  onClickTable={() => handleDisplayModeChange("grid")}
+                  sx={{
+                    backgroundColor:
+                      displayMode === "grid"
+                        ? "rgba(0, 0, 0, 0.08)"
+                        : "transparent",
+                  }}
+                />
+                <ButtonIcon
+                  src={ListAltRounded}
+                  alt="List View"
+                  onClickTable={() => handleDisplayModeChange("list")}
+                  sx={{
+                    backgroundColor:
+                      displayMode === "list"
+                        ? "rgba(0, 0, 0, 0.08)"
+                        : "transparent",
+                  }}
+                />
                 <ButtonIcon src={LocationOnFilled} alt="Map View" />
               </Box>
             </Box>
@@ -116,6 +141,7 @@ export const CatalogPage: React.FC = () => {
                     contributorsCount: card.contributorsCount,
                   }))}
                   onCardClick={handleCardClick}
+                  displayMode={displayMode}
                 />
                 <Pagination
                   count={totalPages}
