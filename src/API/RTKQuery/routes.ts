@@ -8,5 +8,5 @@ export default {
   userInfo: "api/user",
   requestContribute: (id: string): string => `api/request/${id}/contribution`,
   requestLoadDetails: (id: string): string => `api/request/${id}`,
-  requestLoadAll: (id: string): string => `api/request`,
+  requestLoadAll:"api/request",
 };
