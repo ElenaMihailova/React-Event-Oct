@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
-import starEmpty from "./assets/star-empty.svg";
-import starFilled from "./assets/star-filled.svg";
+import starEmpty from "../assets/star-empty.svg";
+import starFilled from "../assets/star-filled.svg";
 
 interface ButtonInFavorites extends PropsWithChildren {
   filled: boolean;

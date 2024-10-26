@@ -12,8 +12,9 @@ import {
   ListItemIcon,
 } from "@mui/material";
 
-import ButtonInFavorites from "./ButtonInFavorites";
+import ButtonInFavorites from "./lib/ButtonInFavorites";
 import CheckListIcon from "./lib/CheckListIcon";
+import DonateWidget from "./DonateWidget";
 
 const HelpRequestPage = () => {
   return (
@@ -32,7 +33,7 @@ const HelpRequestPage = () => {
                 Сбор средств для пенсионерки Ангелины Ивановны
               </Typography>
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
@@ -43,7 +44,7 @@ const HelpRequestPage = () => {
               </Typography>
 
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
@@ -56,7 +57,7 @@ const HelpRequestPage = () => {
               </Typography>
 
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
@@ -68,7 +69,7 @@ const HelpRequestPage = () => {
               </Typography>
 
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
@@ -101,7 +102,7 @@ const HelpRequestPage = () => {
               </List>
 
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
@@ -110,28 +111,47 @@ const HelpRequestPage = () => {
               <Typography>20.03.2025</Typography>
 
               <Typography
-                sx={{ fontWeight: "bold", paddingTop: 4, paddingBottom: 1.5 }}
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
                 variant="h5"
                 fontSize={20}
               >
                 Локация
               </Typography>
               <Typography>
-                область: Владимирская
-                <br />
-                Населённый пункт: Владимир
-              </Typography>
-
-              <Typography variant="body1" mt={2}>
-                Контакты
+                <strong>Oбласть:</strong> Владимирская
               </Typography>
               <Typography>
-                Телефон: +7 999 888 99 50
-                <br />
-                E-mail: forExample2@yandex.ru
-                <br />
-                Сайт: forexamplehelp.ru
+                <strong>Населённый пункт:</strong> Владимир
               </Typography>
+
+              <Typography
+                sx={{ fontWeight: "bold", marginTop: 4, marginBottom: 1.5 }}
+                variant="h5"
+                fontSize={20}
+              >
+                Контакты
+              </Typography>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Box>
+                  <Typography>
+                    <strong>Телефон:</strong>
+                  </Typography>
+                  <Typography>+7 999 888 99 50</Typography>
+                </Box>
+                <Box>
+                  <Typography>
+                    <strong>E-mail:</strong>
+                  </Typography>
+                  <Typography>forExample2@yandex.ru</Typography>
+                </Box>
+
+                <Box>
+                  <Typography>
+                    <strong>Сайт:</strong>
+                  </Typography>
+                  <Typography>forexamplehelp.ru</Typography>
+                </Box>
+              </Box>
             </CardContent>
             <CardContent>
               <ButtonInFavorites onClick={() => {}} filled={false}>
@@ -141,54 +161,7 @@ const HelpRequestPage = () => {
           </Card>
         </Box>
 
-        {/* Right Column */}
-        <Box>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography variant="h6">Вместе для добрых дел</Typography>
-
-              <Typography>
-                Цель сбора: Оплатить лечение МКБ в клинике "Здоровье". Купить
-                одежду на зимний сезон...
-              </Typography>
-
-              <Typography variant="body1" mt={2}>
-                Завершение
-              </Typography>
-              <Typography>20.03.2025</Typography>
-
-              <Typography variant="body1" mt={2}>
-                Мы собрали
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  mt: 1,
-                  mb: 2,
-                }}
-              >
-                <Typography variant="h6">1 102 563 руб</Typography>
-                <Typography color="textSecondary">из 2 056 489 руб</Typography>
-              </Box>
-
-              <Divider />
-
-              <Typography variant="h6" mt={2}>
-                Нас уже 3 566 987
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{ mt: 2 }}
-              >
-                ПОМОЧЬ
-              </Button>
-            </CardContent>
-          </Card>
-        </Box>
+        <DonateWidget />
       </Box>
     </Container>
   );
