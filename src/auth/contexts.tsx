@@ -5,7 +5,6 @@ interface AuthContextType {
   logIn: () => void;
   logOut: () => void;
   initLoggedIn: (isLoggedIn: boolean) => void;
-
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);

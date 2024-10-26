@@ -16,7 +16,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import useAuth from "../auth/hook";
-import Logo from "../../public/Logo.png";
+import Logo from "./Logo";
 import theme from "../theme";
 
 const Header: React.FC = () => {
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
         }}
       >
         <Box sx={{ flex: 1 }}>
-          <img src={Logo} alt="Logo" />
+          <Logo />
         </Box>
 
         <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
         </Typography>
         <Box sx={{ flex: 1 }}>
           <IconButton
-            sx={{ display: "block", marginLeft: "auto" }}
+            sx={{ display: "block", marginLeft: "auto", height: 56, width: 56 }}
             onClick={handleMenu}
           >
             <AccountCircleIcon sx={{ fontSize: 40 }} />

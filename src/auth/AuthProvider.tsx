@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthContext from './contexts.js';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "./contexts";
 
 interface Props {
   children: React.ReactNode;
-};
+}
 
 const AuthProvider = ({ children }: Props) => {
-  const localStorageToken = localStorage.getItem('userId');
+  const localStorageToken = localStorage.getItem("userId");
 
   const initLoggedIn = (): boolean => {
     if (localStorageToken) {
@@ -22,18 +22,19 @@ const AuthProvider = ({ children }: Props) => {
 
   const logIn = (): void => setLoggedIn(true);
   const logOut = (): void => {
-    localStorage.removeItem('userId');
+    localStorage.removeItem("userId");
     setLoggedIn(false);
-    navigate('/')
+    navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{
-      loggedIn,
-      logIn,
-      logOut,
-      initLoggedIn,
-    }}
+    <AuthContext.Provider
+      value={{
+        loggedIn,
+        logIn,
+        logOut,
+        initLoggedIn,
+      }}
     >
       {children}
     </AuthContext.Provider>
