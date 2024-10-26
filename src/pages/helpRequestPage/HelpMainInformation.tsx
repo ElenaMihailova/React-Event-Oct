@@ -47,7 +47,9 @@ const HelpMainInformation = ({
     <Box sx={{ flexGrow: 1 }}>
       <Card variant="outlined" sx={{ py: 3, px: 2, display: "flex" }}>
         <CardContent sx={{ maxWidth: "550px" }}>
-          <Typography variant="h5">{title}</Typography>
+          <Typography variant="h5">
+            {title.replace(/^\[\d+\]\s*/, "")}
+          </Typography>
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Организация
           </Typography>

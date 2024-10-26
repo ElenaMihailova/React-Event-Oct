@@ -2,10 +2,7 @@ import { Box, Typography, Container } from "@mui/material";
 
 import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
-import {
-  useGetRequestCardQuery,
-  useGetRequestCardsQuery,
-} from "../../API/RTKQuery/api";
+import { useGetRequestCardQuery } from "../../API/RTKQuery/api";
 
 interface HelpRequestPageProps {
   requestId: string;
@@ -51,9 +48,7 @@ interface GetRequestCardQuery {
   data: DataRequestCard;
 }
 
-const HelpRequestPage = ({
-  requestId = "a0f43343-3015-45a9-b161-3a6aa9b3a0b4",
-}: HelpRequestPageProps) => {
+const HelpRequestPage = ({ requestId }: HelpRequestPageProps) => {
   const { data } = useGetRequestCardQuery<GetRequestCardQuery>(requestId);
   if (!data) return;
   console.log(data);
@@ -77,6 +72,7 @@ const HelpRequestPage = ({
           requestId={requestId}
           requestGoal={data.requestGoal}
           requestGoalCurrentValue={data.requestGoalCurrentValue}
+          endingDate={data.endingDate}
         />
       </Box>
     </Container>
