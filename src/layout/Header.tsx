@@ -15,6 +15,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import useAuth from "../auth/hook";
 import Logo from "../../public/Logo.png";
 import theme from "../theme";
 
@@ -28,6 +29,8 @@ const Header: React.FC = () => {
   const handleClose = () => {
     setMenuButton(null);
   };
+
+  const { logOut } = useAuth();
 
   return (
     <AppBar position="fixed">
@@ -73,7 +76,7 @@ const Header: React.FC = () => {
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <ListItemIcon>
+            <ListItemIcon onClick={logOut}>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>

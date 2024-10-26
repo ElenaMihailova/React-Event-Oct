@@ -2,9 +2,10 @@ import { createContext } from "react";
 
 interface AuthContextType {
   loggedIn: boolean;
-  logIn: (value: unknown) => void;
+  logIn: () => void;
   logOut: () => void;
   initLoggedIn: (isLoggedIn: boolean) => void;
+
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
