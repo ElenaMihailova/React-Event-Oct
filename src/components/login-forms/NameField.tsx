@@ -3,6 +3,7 @@ import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 interface PropsField {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  failAuth: boolean;
 }
 
 export const NameField = ({ value, onChange }: PropsField) => {
