@@ -11,18 +11,18 @@ export const TestProfiles: React.FC = () => {
   const tests: Test[] = [
     {
       name: "Первый пользователь",
-      login: "test1example@gmail.com",
-      password: "qwerty123",
+      login: "testUser18@test.com",
+      password: "password18",
     },
     {
       name: "Второй пользователь",
-      login: "test2example@gmail.com",
-      password: "qwerty123",
+      login: "testUser19@test.com",
+      password: "password19",
     },
     {
       name: "Третий пользователь",
-      login: "test3example@gmail.com",
-      password: "qwerty123",
+      login: "testUser20@test.com",
+      password: "password20",
     },
   ];
 

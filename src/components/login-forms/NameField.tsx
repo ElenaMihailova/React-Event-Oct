@@ -8,10 +8,10 @@ interface PropsField {
 export const NameField = ({ value, onChange }: PropsField) => {
   return (
     <FormControl sx={{ m: 2, marginLeft: 0 }} variant="outlined">
-      <InputLabel htmlFor="password">Логин</InputLabel>
+      <InputLabel htmlFor="login">Логин</InputLabel>
       <OutlinedInput
-        id="username"
-        name="username"
+        id="login"
+        name="login"
         label="Логин"
         placeholder="Введите e-mail"
         autoFocus
