@@ -42,7 +42,8 @@ interface DataRequestCard {
   goalDescription: string;
   endingDate: string;
   location: Location;
-
+  requestGoal: number;
+  requestGoalCurrentValue: number;
   contacts: Contacts;
 }
 
@@ -72,7 +73,11 @@ const HelpRequestPage = ({
           organization={data.organization}
           title={data.title}
         />
-        <DonateWidget requestId={requestId} />
+        <DonateWidget
+          requestId={requestId}
+          requestGoal={data.requestGoal}
+          requestGoalCurrentValue={data.requestGoalCurrentValue}
+        />
       </Box>
     </Container>
   );

@@ -9,9 +9,15 @@ import {
 
 interface DonateWidgetProps {
   requestId: string;
+  requestGoal: number;
+  requestGoalCurrentValue: number;
 }
 
-const DonateWidget = ({ requestId }: DonateWidgetProps) => {
+const DonateWidget = ({
+  requestId,
+  requestGoal,
+  requestGoalCurrentValue,
+}: DonateWidgetProps) => {
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -36,7 +42,11 @@ const DonateWidget = ({ requestId }: DonateWidgetProps) => {
             Мы собрали
           </Typography>
           <Box sx={{ width: "100%" }}>
-            <LinearProgress variant="determinate" value={40} />
+            <LinearProgress
+              variant="determinate"
+              color="secondary"
+              value={33}
+            />
           </Box>
           <Box
             sx={{
@@ -48,10 +58,10 @@ const DonateWidget = ({ requestId }: DonateWidgetProps) => {
             }}
           >
             <Typography variant="body2" color="textSecondary">
-              1 102 563 руб
+              {requestGoalCurrentValue}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              из 2 056 489 руб
+              {requestGoal}
             </Typography>
           </Box>
 
