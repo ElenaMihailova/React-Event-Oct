@@ -1,8 +1,15 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+} */
+
+#root {
+  width: 100%;     /* Замените max-width на width */
+  margin: 0;      /* Уберите отступы */
+  padding: 0;     /* Уберите внутренние отступы */
+  text-align: left; /* Или center, в зависимости от вашего дизайна */
 }
 
 .logo {
