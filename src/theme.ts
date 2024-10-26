@@ -12,11 +12,18 @@ const theme = createTheme({
       primary: "#000000DE",
       secondary: "#00000099",
     },
+    background: {
+      default: "#f5f5f5",
+    },
   },
 
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
 
+    body1: {
+      fontSize: "16px",
+      fontWeight: 400,
+    },
     body2: {
       fontSize: "14px",
     },

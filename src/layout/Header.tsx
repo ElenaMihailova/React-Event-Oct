@@ -26,12 +26,21 @@ const Header: React.FC = () => {
 
   return (
     <AppBar position="fixed">
-      <Toolbar>
+      <Toolbar
+        sx={{
+          maxWidth: theme.breakpoints.values.lg,
+          width: "100%",
+          marginY: 0,
+          marginX: "auto",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Box
           component="img"
           src={Logo}
           alt="Logo"
-          sx={{ height: 20, marginRight: 2, position: "absolute" }}
+          sx={{ height: 20, marginRight: 2 }}
         />
         <IconButton color="inherit" sx={{ ml: "auto" }}>
           <AccountCircle sx={{ fontSize: { xs: "24px", sm: "36px" } }} />
