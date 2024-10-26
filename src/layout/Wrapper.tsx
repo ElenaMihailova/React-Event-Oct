@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import { Box, Container } from "@mui/material";
+import Header from "./Header";
+import Footer from "./Footer";
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -9,24 +9,11 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      minHeight="100vh"
-      margin="auto"    
-      padding="0"     
-      textAlign="center" 
-    >
+    <Box display="flex" flexDirection="column" minHeight="100vh">
       <Header />
-      <Box
-        component="main"
-        flex="1"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Container component="main" maxWidth="md" sx={{ flexGrow: 1 }}>
         {children}
-      </Box>
+      </Container>
       <Footer />
     </Box>
   );
