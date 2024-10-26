@@ -58,14 +58,5 @@ export const PasswordField = ({ value, onChange }: PropsField) => {
         onChange={onChange}
       />
     </FormControl>
-    // <TextField
-    //   required
-    //   id="password"
-    //   name="password"
-    //   label="Password"
-    //   type="password"
-    //   value={value}
-    //   onChange={onChange}
-    // />
   );
 };
