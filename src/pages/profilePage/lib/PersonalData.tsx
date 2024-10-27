@@ -41,7 +41,10 @@ export const PersonalData = () => {
         </Box>
 
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h6" sx={{ fontSize: 20, fontWeight: 500, mr: 0.5 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontSize: 20, fontWeight: 500, mr: 0.5 }}
+          >
             Локация для помощи
           </Typography>
           <Box sx={{ display: "flex", mb: 1 }}>
@@ -118,4 +121,3 @@ export const PersonalData = () => {
     </Box>
   );
 };
-
