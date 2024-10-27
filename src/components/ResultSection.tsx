@@ -1,54 +1,43 @@
 import React from "react";
-import { Box, Paper, Typography } from "@mui/material";
-import { ButtonIcon } from "./IconButton";
-
-import GridonRounded from "../assets/icon/GridonRounded.png";
-import ListAltRounded from "../assets/icon/ListAltRounded.png";
-import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
+import { Box } from "@mui/material";
+import { CardInformation } from "./Card";
+import { CardHorizontal } from "./CardHorizontal";
+import { HelpRequestData } from "../types/types";
 
 interface ResultSectionProps {
-  page: number;
-  itemsPerPage: number;
+  cards: HelpRequestData[];
+  onCardClick: (id: string) => void;
+  displayMode: "grid" | "list";
 }
 
 export const ResultSection: React.FC<ResultSectionProps> = ({
-  page,
-  itemsPerPage,
+  cards,
+  onCardClick,
+  displayMode,
 }) => {
-  const totalItems = 9;
-  const cards = Array.from({ length: totalItems }, (_, index) => ({
-    id: index + 1,
-    title: `Запрос ${index + 1}`,
-  }));
-
-  const displayedCards = cards.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
-  );
-
   return (
-    <>
-      <Box display="flex" flexDirection="row" justifyContent="space-between">
-        <Typography variant="h6">Найдено:</Typography>
-
-        <Box>
-          <ButtonIcon src={ListAltRounded} alt="List View" />
-          <ButtonIcon src={GridonRounded} alt="Grid View" />
-          <ButtonIcon src={LocationOnFilled} alt="Map View" />
-        </Box>
-      </Box>
-
-      <Box display="flex" flexDirection="row" gap={2}>
-        {displayedCards.map((card) => (
-          <Paper
+    <Box
+      display="flex"
+      gap={1}
+      justifyContent="center"
+      flexDirection={displayMode === "grid" ? "row" : "column"}
+      flexWrap={displayMode === "grid" ? "wrap" : "nowrap"}
+    >
+      {cards.map((card) =>
+        displayMode === "grid" ? (
+          <CardInformation
             key={card.id}
-            elevation={3}
-            sx={{ padding: 2, marginBottom: 2 }}
-          >
-            <Typography variant="body1">{card.title}</Typography>
-          </Paper>
-        ))}
-      </Box>
-    </>
+            {...card}
+            onClick={() => onCardClick(card.id)}
+          />
+        ) : (
+          <CardHorizontal
+            key={card.id}
+            {...card}
+            onClick={() => onCardClick(card.id)}
+          />
+        ),
+      )}
+    </Box>
   );
 };
