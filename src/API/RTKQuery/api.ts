@@ -68,7 +68,7 @@ export const api = createApi({
 
     getRequestCards: builder.query<RequestDetails[], undefined>({
       query: () => ({
-        url: routes.userFavourites,
+        url: routes.requestLoadAll,
         method: "GET",
       }),
     }),
