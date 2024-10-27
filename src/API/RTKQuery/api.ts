@@ -1,5 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import routes from "./routes";
+import {
+  AddToFavouritesResponse,
+  AuthResponse,
+  FavoritesList,
+  RequestDetails,
+  UserCredentials,
+  UserInfo,
+} from "../models/ResponseTypes";
 
 export const api = createApi({
   reducerPath: "queryApi",
@@ -15,7 +23,7 @@ export const api = createApi({
   }),
 
   endpoints: (builder) => ({
-    getAuthToken: builder.mutation({
+    getAuthToken: builder.mutation<AuthResponse, UserCredentials>({
       query: (user) => ({
         url: routes.auth,
         method: "POST",
@@ -23,49 +31,49 @@ export const api = createApi({
       }),
     }),
 
-    loadUserFavorites: builder.query({
+    loadUserFavorites: builder.query<FavoritesList, undefined>({
       query: () => ({
         url: routes.userFavourites,
         method: "GET",
       }),
     }),
 
-    addToFavourites: builder.query({
+    addToFavourites: builder.query<AddToFavouritesResponse, undefined>({
       query: () => ({
         url: routes.userFavourites,
         method: "POST",
       }),
     }),
 
-    removeFromFavourites: builder.query({
+    removeFromFavourites: builder.query<string, string>({
       query: (requestId: string) => ({
         url: routes.userFavoritesWithID(requestId),
         method: "DELETE",
       }),
     }),
 
-    loadUserInfo: builder.query({
+    loadUserInfo: builder.query<UserInfo, undefined>({
       query: () => ({
         url: routes.userInfo,
         method: "GET",
       }),
     }),
 
-    contributeToRequest: builder.query({
+    contributeToRequest: builder.query<string, string>({
       query: (requestId: string) => ({
         url: routes.requestContribute(requestId),
         method: "POST",
       }),
     }),
 
-    getRequestCards: builder.query({
+    getRequestCards: builder.query<RequestDetails, undefined>({
       query: () => ({
         url: routes.requestLoadAll,
         method: "GET",
       }),
     }),
 
-    getRequestCard: builder.query({
+    getRequestCard: builder.query<RequestDetails[], string>({
       query: (requestId: string) => ({
         url: routes.requestLoadDetails(requestId),
         method: "GET",
