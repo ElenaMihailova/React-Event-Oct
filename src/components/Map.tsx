@@ -11,13 +11,13 @@ interface MapBlockProps {
 const MapBlock: React.FC<MapBlockProps> = ({ requests, onMarkerClick }) => {
   return (
     <MapContainer
-    center={[55.751244, 37.618423]} 
+      center={[55.751244, 37.618423]}
       zoom={5}
       style={{
         height: "100%",
         minHeight: "400px",
         width: "100%",
-    }}
+      }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

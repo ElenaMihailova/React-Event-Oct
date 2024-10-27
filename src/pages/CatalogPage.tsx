@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Typography, useTheme, Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FilterSidebar } from "../components/FilterSidebar";
@@ -30,7 +30,9 @@ export const CatalogPage: React.FC = () => {
 
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
-  const [displayMode, setDisplayMode] = useState<"grid" | "list" | "map">("grid");
+  const [displayMode, setDisplayMode] = useState<"grid" | "list" | "map">(
+    "grid",
+  );
   const [filters, setFilters] = useState<{ [key: string]: string | null }>({});
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
@@ -169,9 +171,12 @@ export const CatalogPage: React.FC = () => {
                 <ButtonIcon
                   src={LocationOnFilled}
                   alt="Map View"
-                  onClickTable={() => handleDisplayModeChange("map")}  // Устанавливаем "map"
+                  onClickTable={() => handleDisplayModeChange("map")} // Устанавливаем "map"
                   sx={{
-                    backgroundColor: displayMode === "map" ? "rgba(0, 0, 0, 0.08)" : "transparent",
+                    backgroundColor:
+                      displayMode === "map"
+                        ? "rgba(0, 0, 0, 0.08)"
+                        : "transparent",
                   }}
                 />
               </Box>
@@ -184,7 +189,10 @@ export const CatalogPage: React.FC = () => {
             ) : filteredCards.length === 0 ? (
               <EmptyBlock />
             ) : displayMode === "map" ? (
-              <MapBlock requests={filteredCards} onMarkerClick={handleCardClick} />
+              <MapBlock
+                requests={filteredCards}
+                onMarkerClick={handleCardClick}
+              />
             ) : (
               <>
                 <ResultSection
