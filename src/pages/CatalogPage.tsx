@@ -24,6 +24,7 @@ export const CatalogPage: React.FC = () => {
     isLoading,
     error,
   } = useGetRequestCardsQuery(undefined);
+
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
   const [displayMode, setDisplayMode] = useState<"grid" | "list">("grid");

@@ -66,14 +66,14 @@ export const api = createApi({
       }),
     }),
 
-    getRequestCards: builder.query<RequestDetails, undefined>({
+    getRequestCards: builder.query<RequestDetails[], undefined>({
       query: () => ({
         url: routes.requestLoadAll,
         method: "GET",
       }),
     }),
 
-    getRequestCard: builder.query<RequestDetails[], string>({
+    getRequestCard: builder.query<RequestDetails, string>({
       query: (requestId: string) => ({
         url: routes.requestLoadDetails(requestId),
         method: "GET",

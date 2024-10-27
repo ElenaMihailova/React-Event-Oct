@@ -53,16 +53,6 @@ export interface UserInfo {
   favouriteRequests: string[];
 }
 
-interface Organization {
-  title: string;
-  isVerified: boolean;
-}
-
-interface ActionSchedule {
-  stepLabel: string;
-  isDone: boolean;
-}
-
 interface Location {
   latitude: number;
   longitude: number;
@@ -76,26 +66,41 @@ interface Contacts {
   website: string;
 }
 
-interface HelperRequirements {
-  helperType: string;
-  isOnline: boolean;
-  qualification: string;
-}
-
 export interface RequestDetails {
   id: string;
   title: string;
-  organization: Organization;
+  organization: {
+    title: string;
+    isVerified?: boolean;
+  };
   description: string;
   goalDescription: string;
-  actionsSchedule: ActionSchedule[];
-  endingDate: string;
-  location: Location;
-  contacts: Contacts;
-  requesterType: string;
-  helpType: string;
-  helperRequirements: HelperRequirements;
+  actionsSchedule: Array<{
+    stepLabel: string;
+    isDone?: boolean;
+  }>;
+  endingDate: Date;
+  location: {
+    latitude: number;
+    longitude: number;
+    district: string;
+    city: string;
+  };
+  contacts: {
+    email: string;
+    phone?: string;
+    website?: string;
+  };
+  requesterType: "person" | "organization";
+  helpType: "finance" | "material";
+  helperRequirements: {
+    helperType: "group" | "single";
+    isOnline: boolean;
+    qualification: "professional" | "common";
+  };
   contributorsCount: number;
   requestGoal: number;
   requestGoalCurrentValue: number;
+  collectedAmount: number;
+  targetAmount: number;
 }
