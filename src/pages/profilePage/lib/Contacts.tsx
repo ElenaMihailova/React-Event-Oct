@@ -10,18 +10,13 @@ export const Contacts = () => {
 
   if (isLoading) {
     return <CircularProgress />;
-  };
+  }
 
   if (error) {
-    return <ErrorBlock />
-  };
+    return <ErrorBlock />;
+  }
 
-  const {
-    email,
-    phone
-  } = data?.contacts || {};
-
-
+  const { email, phone } = data?.contacts || {};
 
   return (
     <Box sx={{ w: 260, h: 334, pt: 3.75 }}>

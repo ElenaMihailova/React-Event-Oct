@@ -7,16 +7,7 @@ interface Props {
 }
 
 const AuthProvider = ({ children }: Props) => {
-  const localStorageToken = localStorage.getItem("userId");
-
-  const initLoggedIn = (): boolean => {
-    if (localStorageToken) {
-      return true;
-    }
-    return false;
-  };
-
-  const [loggedIn, setLoggedIn] = useState(initLoggedIn());
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,7 +26,6 @@ const AuthProvider = ({ children }: Props) => {
         loggedIn,
         logIn,
         logOut,
-        initLoggedIn,
       }}
     >
       {children}

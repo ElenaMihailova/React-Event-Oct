@@ -2,10 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import routes from "./routes";
 import {
   AddToFavouritesResponse,
-  AuthResponse,
   FavoritesList,
   RequestDetails,
-  UserCredentials,
   UserInfo,
 } from "../models/ResponseTypes";
 

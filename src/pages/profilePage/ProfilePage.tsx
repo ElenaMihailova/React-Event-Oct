@@ -10,18 +10,18 @@ import useAuth from "../../auth/hook";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");
-    
+
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
-  const firstName = data?.name || '';
-  const lastName = data?.lastName || '';
-  const status = data?.status || 'Начинающий';
+  const firstName = data?.name || "";
+  const lastName = data?.lastName || "";
+  const status = data?.status || "Начинающий";
 
   const { logOut } = useAuth();
 
   const handleLogOut = (): void => {
     logOut();
-  }
+  };
 
   const renderContent = () => {
     switch (activeButton) {
@@ -73,15 +73,13 @@ export const ProfilePage = () => {
                 mb: 0,
               }}
             >
-
               {isLoading ? (
                 "Загрузка..."
               ) : error ? (
                 <ErrorBlock />
               ) : (
-                `${firstName} ${lastName}` 
+                `${firstName} ${lastName}`
               )}
-
             </Typography>
             <Typography
               variant="body2"
@@ -124,7 +122,10 @@ export const ProfilePage = () => {
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab label="Личные данные" onClick={() => setActiveButton("button1")} />
+            <Tab
+              label="Личные данные"
+              onClick={() => setActiveButton("button1")}
+            />
             <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
             <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
           </Tabs>
@@ -141,5 +142,4 @@ export const ProfilePage = () => {
       </Box>
     </Container>
   );
-
 };
