@@ -3,10 +3,25 @@ import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
+import { useLoadUserInfoQuery } from "../../API/RTKQuery/api";
+import { ErrorBlock } from "../../components/ErrorBlock";
 import { Favorites } from "./lib/Favorites";
+import useAuth from "../../auth/hook";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");
+
+  const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
+
+  const firstName = data?.name || "";
+  const lastName = data?.lastName || "";
+  const status = data?.status || "Начинающий";
+
+  const { logOut } = useAuth();
+
+  const handleLogOut = (): void => {
+    logOut();
+  };
 
   const renderContent = () => {
     switch (activeButton) {
@@ -58,17 +73,24 @@ export const ProfilePage = () => {
                 mb: 0,
               }}
             >
-              Ангелина Фомина
+              {isLoading ? (
+                "Загрузка..."
+              ) : error ? (
+                <ErrorBlock />
+              ) : (
+                `${firstName} ${lastName}`
+              )}
             </Typography>
             <Typography
               variant="body2"
               sx={{ textAlign: "left", ml: 2.5, mt: 1.25, mb: 3.75 }}
             >
-              Статус: начинающий
+              Статус: {status}
             </Typography>
             <Box
               component="button"
               sx={{ width: 280, height: 42, m: 2.5, fontSize: 24 }}
+              onClick={handleLogOut}
             >
               Выйти из аккаунта
             </Box>

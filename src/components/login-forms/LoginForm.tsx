@@ -26,11 +26,7 @@ export const LoginForm: React.FC = () => {
     onSubmit: async (values) => {
       try {
         const { data } = await getToken(values);
-
-        if (data) {
-          localStorage.setItem("userId", data.token);
-        }
-
+        localStorage.setItem("userId", data.token);
         setFailAuth(false);
         logIn();
         navigate("/catalog");

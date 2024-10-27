@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   AppBar,
   Toolbar,
@@ -20,7 +21,7 @@ import useAuth from "../auth/hook";
 import Logo from "./Logo";
 import theme from "../theme";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -29,14 +30,18 @@ const Header: React.FC = () => {
     setMenuButton(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setMenuButton(null);
-    logOut();
   };
 
-  const handleProfile = () => {
+  const handleProfile = (): void => {
     setMenuButton(null);
     navigate("./profile");
+  };
+
+  const handleLogOut = (): void => {
+    logOut();
+    setMenuButton(null);
   };
 
   const handleHelpRequestsClick = () => {
@@ -98,8 +103,8 @@ const Header: React.FC = () => {
             </ListItemIcon>
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={logOut}>
+          <MenuItem onClick={handleLogOut}>
+            <ListItemIcon>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>
@@ -109,5 +114,3 @@ const Header: React.FC = () => {
     </AppBar>
   );
 };
-
-export default Header;

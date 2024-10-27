@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
 import { useGetRequestCardQuery } from "../../API/RTKQuery/api";
+import useAuth from "../../auth/hook";
 
 export interface ActionsScheduleElement {
   stepLabel: string;
@@ -41,15 +42,35 @@ interface DataRequestCard {
   contacts: Contacts;
 }
 
+interface ErrorRequesrCard {
+  status: number;
+  data: { message: string };
+}
+
 interface GetRequestCardQuery {
   data?: DataRequestCard;
+  error?: ErrorRequesrCard;
 }
 
 const HelpRequestPage = () => {
   const [searchParams] = useSearchParams();
   const requestId: string | null = searchParams.get("id");
 
-  const { data } = useGetRequestCardQuery<GetRequestCardQuery>(requestId || "");
+  const { logOut } = useAuth();
+
+  const { data, error } = useGetRequestCardQuery<GetRequestCardQuery>(
+    requestId || "",
+  );
+
+  if (error) {
+    switch (error.status) {
+      case 403:
+        logOut();
+        break;
+      default:
+        throw error;
+    }
+  }
 
   if (!requestId) {
     return <Typography>Не передан requestId в searchParams</Typography>;
