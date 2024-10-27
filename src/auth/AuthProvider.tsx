@@ -7,8 +7,7 @@ interface Props {
 }
 
 const AuthProvider = ({ children }: Props) => {
-  const localStorageToken = localStorage.getItem('userId');
-
+  const localStorageToken = localStorage.getItem("userId");
 
   const initLoggedIn = () => {
     if (localStorageToken) {
