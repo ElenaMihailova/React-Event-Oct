@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 export const PersonalData = () => {
   return (
     <Box>
-      <Box sx={{ mt: 3.75, width: 550, height: 860 }}>
+      <Box sx={{ mt: 3.75, width: 550 }}>
         <Box sx={{ mb: 4 }}>
           <Typography
             variant="body1"

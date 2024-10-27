@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Typography, FormControl, Button, useTheme } from "@mui/material";
 import { FilterItem } from "./FilterItem";
 import { VolunteerFilter } from "./VolunteerFilter";
 import { filterData } from "../data/FilterData";
 import { DateFilter } from "./DateFilter";
 
-export const FilterSidebar: React.FC = () => {
+interface FilterSidebarProps {
+  filters: { [key: string]: string | null };
+  setFilters: React.Dispatch<
+    React.SetStateAction<{ [key: string]: string | null }>
+  >;
+  selectedVolunteerFilters: { [key: string]: string | null };
+  setSelectedVolunteerFilters: React.Dispatch<
+    React.SetStateAction<{ [key: string]: string | null }>
+  >;
+}
+
+export const FilterSidebar: React.FC<FilterSidebarProps> = ({
+  filters,
+  setFilters,
+  selectedVolunteerFilters,
+  setSelectedVolunteerFilters,
+}) => {
   const theme = useTheme();
 
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: string | null;
-  }>({});
-  const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
-    [key: string]: string | null;
-  }>({});
-
   const handleCheckboxChange = (title: string, value: string) => {
-    setSelectedFilters((prev) => ({
+    setFilters((prev) => ({
       ...prev,
       [title]: prev[title] === value ? null : value,
     }));
@@ -30,7 +39,7 @@ export const FilterSidebar: React.FC = () => {
   };
 
   const handleResetFilters = () => {
-    setSelectedFilters({});
+    setFilters({});
     setSelectedVolunteerFilters({});
   };
 
@@ -52,12 +61,12 @@ export const FilterSidebar: React.FC = () => {
       </Typography>
 
       <FormControl component="fieldset" sx={{ flexGrow: 1 }}>
-        {filterData.map((filter, index) => (
+        {filterData.map((filter) => (
           <FilterItem
-            key={index}
+            key={filter.title}
             title={filter.title}
             options={filter.options}
-            selectedOption={selectedFilters[filter.title] || null}
+            selectedOption={filters[filter.title] || null}
             onCheckboxChange={(value) =>
               handleCheckboxChange(filter.title, value)
             }
