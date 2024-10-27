@@ -21,27 +21,18 @@ export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({
   return (
     <Box>
       <Accordion>
-        <AccordionSummary
-          aria-controls="volunteer-content"
-          id="volunteer-header"
-        >
+        <AccordionSummary aria-controls="volunteer-content" id="volunteer-header">
           <Typography variant="h6">Волонтерство</Typography>
         </AccordionSummary>
 
-        <AccordionDetails
-          sx={{
-            backgroundColor: "#F5F5F5",
-          }}
-        >
-          {filterDataVolunteer.map((filter, index) => (
+        <AccordionDetails sx={{ backgroundColor: "#F5F5F5" }}>
+          {filterDataVolunteer.map((filter) => (
             <FilterItem
-              key={index}
+              key={filter.title}
               title={filter.title}
               options={filter.options}
               selectedOption={selectedFilters[filter.title] || null}
-              onCheckboxChange={(value) =>
-                onCheckboxChange(filter.title, value)
-              }
+              onCheckboxChange={(value) => onCheckboxChange(filter.title, value)}
             />
           ))}
         </AccordionDetails>

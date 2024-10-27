@@ -2,14 +2,14 @@ export const filterData = [
   {
     title: "Кому мы помогаем",
     options: [
-      { label: "Пенсионерам", value: "pensioners" },
-      { label: "Дома престарелых", value: "nursingHomes" },
+      { label: "Пенсионерам", value: "person" },
+      { label: "Дома престарелых", value: "organization" },
     ],
   },
   {
     title: "Чем мы помогаем",
     options: [
-      { label: "Вещи", value: "stuff" },
+      { label: "Вещи", value: "material" },
       { label: "Финансирование", value: "finance" },
     ],
   },
@@ -19,8 +19,8 @@ export const filterDataVolunteer = [
   {
     title: "Специализация",
     options: [
-      { label: "Квалифицированная", value: "qualified" },
-      { label: "Не требует профессии", value: "noProfession" },
+      { label: "Квалифицированная", value: "professional" },
+      { label: "Не требует профессии", value: "common" },
     ],
   },
   {
@@ -34,7 +34,7 @@ export const filterDataVolunteer = [
     title: "Необходимо волонтеров",
     options: [
       { label: "Группа", value: "group" },
-      { label: "Один", value: "individual" },
+      { label: "Один", value: "single" },
     ],
   },
 ];

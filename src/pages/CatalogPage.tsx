@@ -19,14 +19,13 @@ export const CatalogPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const {
-    data: cards = [],
-    isLoading,
-    error,
-  } = useGetRequestCardsQuery(undefined);
+  const { data: cards = [], isLoading, error } = useGetRequestCardsQuery(undefined);
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
   const [displayMode, setDisplayMode] = useState<"grid" | "list">("grid");
+  const [filters, setFilters] = useState<{ [key: string]: string | null }>({});
+  const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{ [key: string]: string | null }>({});
+
   const handleDisplayModeChange = (mode: "grid" | "list") => {
     setDisplayMode(mode);
   };
@@ -37,10 +36,7 @@ export const CatalogPage: React.FC = () => {
     console.log("Error:", error);
   }, [cards, isLoading, error]);
 
-  const handlePageChange = (
-    _event: React.ChangeEvent<unknown>,
-    value: number,
-  ) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
@@ -48,39 +44,52 @@ export const CatalogPage: React.FC = () => {
     navigate(`/details?id=${id}`);
   };
 
-  // Индексы для пагинации
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedCards = cards.slice(startIndex, endIndex);
+  // Фильтруем карточки на основе выбранных фильтров
+  const filteredCards = cards.filter((card) => {
+    return (
+      Object.entries(filters).every(([filterKey, filterValue]) => {
+        if (filterValue === null) return true;
+
+        if (filterKey === "Кому мы помогаем") {
+          return card.requesterType === filterValue;
+        }
+        if (filterKey === "Чем мы помогаем") {
+          return card.helpType === filterValue;
+        }
+        return true;
+      }) &&
+      Object.entries(selectedVolunteerFilters).every(([filterKey, filterValue]) => {
+        if (filterValue === null) return true;
+
+        if (filterKey === "Специализация") {
+          return card.helperRequirements?.qualification === filterValue;
+        }
+        if (filterKey === "Необходимо волонтеров") {
+          return card.helperRequirements?.helperType === filterValue;
+        }
+        if (filterKey === "Формат") {
+          // Сравниваем значение `isOnline` с фильтром
+          return filterValue === "online" ? card.helperRequirements?.isOnline === true : card.helperRequirements?.isOnline === false;
+        }
+        return true;
+      })
+    );
+  });
+
+  const paginatedCards = filteredCards.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      sx={{
-        width: "100%",
-        boxSizing: "border-box",
-        paddingX: 2,
-        paddingY: 4,
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{
-          textAlign: "left",
-        }}
-      >
-        Запросы о помощи
-      </Typography>
+    <Box display="flex" flexDirection="column" sx={{ width: "100%", boxSizing: "border-box", paddingX: 2, paddingY: 4 }}>
+      <Typography variant="h4" sx={{ textAlign: "left" }}>Запросы о помощи</Typography>
 
       <Box display="flex" mt={2} flex="1">
-        <Box
-          sx={{
-            width: theme.spacing(32),
-            marginRight: theme.spacing(1.5),
-          }}
-        >
-          <FilterSidebar />
+        <Box sx={{ width: theme.spacing(32), marginRight: theme.spacing(1.5) }}>
+          <FilterSidebar
+            setFilters={setFilters}
+            filters={filters}
+            selectedVolunteerFilters={selectedVolunteerFilters}
+            setSelectedVolunteerFilters={setSelectedVolunteerFilters}
+          />
         </Box>
 
         <Box flex="1" display="flex" flexDirection="column" height="100%">
@@ -98,12 +107,8 @@ export const CatalogPage: React.FC = () => {
               minHeight: "100%",
             }}
           >
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-between"
-            >
-              <Typography variant="h6">Найдено: {cards.length}</Typography>
+            <Box display="flex" flexDirection="row" justifyContent="space-between">
+              <Typography variant="h6">Найдено: {filteredCards.length}</Typography>
 
               <Box>
                 <ButtonIcon
@@ -111,10 +116,7 @@ export const CatalogPage: React.FC = () => {
                   alt="Grid View"
                   onClickTable={() => handleDisplayModeChange("grid")}
                   sx={{
-                    backgroundColor:
-                      displayMode === "grid"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
+                    backgroundColor: displayMode === "grid" ? "rgba(0, 0, 0, 0.08)" : "transparent",
                   }}
                 />
                 <ButtonIcon
@@ -122,10 +124,7 @@ export const CatalogPage: React.FC = () => {
                   alt="List View"
                   onClickTable={() => handleDisplayModeChange("list")}
                   sx={{
-                    backgroundColor:
-                      displayMode === "list"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
+                    backgroundColor: displayMode === "list" ? "rgba(0, 0, 0, 0.08)" : "transparent",
                   }}
                 />
                 <ButtonIcon src={LocationOnFilled} alt="Map View" />
