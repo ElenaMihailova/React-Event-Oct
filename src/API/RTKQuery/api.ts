@@ -79,6 +79,8 @@ export const api = createApi({
         method: "GET",
       }),
     }),
+
+    
   }),
 });
 
@@ -92,3 +94,4 @@ export const {
   useLoadUserFavoritesQuery,
   useRemoveFromFavouritesQuery,
 } = api;
+

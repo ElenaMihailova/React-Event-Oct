@@ -3,10 +3,18 @@ import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
+import { useLoadUserInfoQuery } from "../../API/RTKQuery/api";
+import { ErrorBlock } from "../../components/ErrorBlock";
 import { Favorites } from "./lib/Favorites";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");
+    
+  const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
+
+  const firstName = data?.name || '';
+  const lastName = data?.lastName || '';
+  const status = data?.status || 'Начинающий';
 
   const renderContent = () => {
     switch (activeButton) {
@@ -58,13 +66,21 @@ export const ProfilePage = () => {
                 mb: 0,
               }}
             >
-              Ангелина Фомина
+
+              {isLoading ? (
+                "Загрузка..."
+              ) : error ? (
+                <ErrorBlock />
+              ) : (
+                `${firstName} ${lastName}` 
+              )}
+
             </Typography>
             <Typography
               variant="body2"
               sx={{ textAlign: "left", ml: 2.5, mt: 1.25, mb: 3.75 }}
             >
-              Статус: начинающий
+              Статус: {status}
             </Typography>
             <Box
               component="button"
@@ -100,10 +116,7 @@ export const ProfilePage = () => {
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab
-              label="Личные данные"
-              onClick={() => setActiveButton("button1")}
-            />
+            <Tab label="Личные данные" onClick={() => setActiveButton("button1")} />
             <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
             <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
           </Tabs>
@@ -120,4 +133,5 @@ export const ProfilePage = () => {
       </Box>
     </Container>
   );
+
 };
