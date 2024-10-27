@@ -23,6 +23,41 @@ export const api = createApi({
       }),
     }),
 
+    loadUserFavorites: builder.query({
+      query: () => ({
+        url: routes.userFavourites,
+        method: "GET",
+      }),
+    }),
+
+    addToFavourites: builder.query({
+      query: () => ({
+        url: routes.userFavourites,
+        method: "POST",
+      }),
+    }),
+
+    removeFromFavourites: builder.query({
+      query: (requestId: string) => ({
+        url: routes.userFavoritesWithID(requestId),
+        method: "DELETE",
+      }),
+    }),
+
+    loadUserInfo: builder.query({
+      query: () => ({
+        url: routes.userInfo,
+        method: "GET",
+      }),
+    }),
+
+    contributeToRequest: builder.query({
+      query: (requestId: string) => ({
+        url: routes.requestContribute(requestId),
+        method: "POST",
+      }),
+    }),
+
     getRequestCards: builder.query({
       query: () => ({
         url: routes.requestLoadAll,
@@ -36,13 +71,6 @@ export const api = createApi({
         method: "GET",
       }),
     }),
-
-    getRequestContribute: builder.query({
-      query: (requestId: string) => ({
-        url: routes.requestContribute(requestId),
-        method: "GET",
-      }),
-    }),
   }),
 });
 
@@ -50,5 +78,9 @@ export const {
   useGetAuthTokenMutation,
   useGetRequestCardsQuery,
   useGetRequestCardQuery,
-  useGetRequestContributeQuery,
+  useContributeToRequestQuery,
+  useAddToFavouritesQuery,
+  useLoadUserInfoQuery,
+  useLoadUserFavoritesQuery,
+  useRemoveFromFavouritesQuery,
 } = api;
