@@ -1,4 +1,9 @@
-import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  FormHelperText,
+} from "@mui/material";
 
 interface PropsField {
   value: string;
@@ -6,7 +11,7 @@ interface PropsField {
   failAuth: boolean;
 }
 
-export const NameField = ({ value, onChange }: PropsField) => {
+export const NameField = ({ value, onChange, failAuth }: PropsField) => {
   return (
     <FormControl sx={{ m: 2, marginLeft: 0 }} variant="outlined">
       <InputLabel htmlFor="login">Логин</InputLabel>
@@ -19,6 +24,9 @@ export const NameField = ({ value, onChange }: PropsField) => {
         value={value}
         onChange={onChange}
       />
+      <FormHelperText id="errorLogin" error>
+        {failAuth && "Введите корректный email-адрес"}
+      </FormHelperText>
     </FormControl>
   );
 };

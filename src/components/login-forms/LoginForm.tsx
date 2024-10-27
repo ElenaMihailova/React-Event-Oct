@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { NameField } from "./NameField";
 import { PasswordField } from "./PasswordFiels";
 import { SubmitButton } from "./SubmitButton";
@@ -32,7 +33,7 @@ export const LoginForm: React.FC = () => {
         navigate("/catalog");
       } catch (err) {
         setFailAuth(true);
-        // toast.error(t('toastify.error.connectionErr'));
+        toast.error("Ошибка! Попробуйте еще раз");
         throw err;
       }
     },
@@ -53,6 +54,7 @@ export const LoginForm: React.FC = () => {
       <PasswordField
         value={formik.values.password}
         onChange={formik.handleChange}
+        failAuth={failAuth}
       />
       <SubmitButton isDisabled={!formik.isValid || !formik.dirty} />
     </Stack>
