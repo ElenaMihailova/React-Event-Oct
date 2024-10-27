@@ -23,7 +23,7 @@ export const api = createApi({
   }),
 
   endpoints: (builder) => ({
-    getAuthToken: builder.mutation<AuthResponse, UserCredentials>({
+    getAuthToken: builder.mutation({
       query: (user) => ({
         url: routes.auth,
         method: "POST",

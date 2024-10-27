@@ -20,7 +20,10 @@ const AuthProvider = ({ children }: Props) => {
 
   const navigate = useNavigate();
 
-  const logIn = (): void => setLoggedIn(true);
+  const logIn = (): void => {
+    console.log("AUTH");
+    setLoggedIn(true);
+  };
   const logOut = (): void => {
     localStorage.removeItem("userId");
     setLoggedIn(false);

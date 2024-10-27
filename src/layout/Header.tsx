@@ -23,7 +23,7 @@ import theme from "../theme";
 export const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
-  const { logOut } = useAuth();
+  const { logOut, loggedIn } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);
@@ -34,8 +34,9 @@ export const Header: React.FC = () => {
   };
 
   const handleProfile = (): void => {
-    navigate("./profile");
     setMenuButton(null);
+    console.log(loggedIn);
+    navigate("./profile");
   };
 
   const handleLogOut = (): void => {
