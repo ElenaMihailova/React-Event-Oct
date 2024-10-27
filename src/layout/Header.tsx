@@ -39,8 +39,13 @@ const Header: React.FC = () => {
     navigate("./profile");
   };
 
+  const handleHelpRequestsClick = () => {
+    setMenuButton(null);
+    navigate("/catalog");
+  };
+
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="default">
       <Toolbar
         sx={{
           maxWidth: theme.breakpoints.values.lg,
@@ -56,9 +61,20 @@ const Header: React.FC = () => {
           <Logo />
         </Box>
 
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
+        <Typography
+          onClick={handleHelpRequestsClick}
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "center",
+            cursor: "pointer",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Запросы о помощи
         </Typography>
+
         <Box sx={{ flex: 1 }}>
           <IconButton
             sx={{ display: "block", marginLeft: "auto", height: 56, width: 56 }}

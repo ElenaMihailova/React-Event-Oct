@@ -17,8 +17,8 @@ interface DonateWidgetProps {
 
 const DonateWidget = ({
   requestId,
-  requestGoal,
-  requestGoalCurrentValue,
+  requestGoal: requestGoalCurrentValue,
+  requestGoalCurrentValue: requestGoal,
   endingDate,
 }: DonateWidgetProps) => {
   const date = new Date(endingDate);
@@ -52,13 +52,8 @@ const DonateWidget = ({
           <Box sx={{ width: "100%" }}>
             <LinearProgress
               variant="determinate"
-              sx={{
-                backgroundColor: "#a5cff5", // Цвет фона полосы
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "#1E88E5",
-                },
-              }}
-              value={requestGoalCurrentValue}
+              color="primary"
+              value={progress}
             />
           </Box>
           <Box
