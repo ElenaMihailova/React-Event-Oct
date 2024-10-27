@@ -7,7 +7,16 @@ interface Props {
 }
 
 const AuthProvider = ({ children }: Props) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const localStorageToken = localStorage.getItem("userId");
+
+  const initLoggedIn = () => {
+    if (localStorageToken) {
+      return true;
+    }
+    return false;
+  };
+
+  const [loggedIn, setLoggedIn] = useState(initLoggedIn());
 
   const navigate = useNavigate();
 
