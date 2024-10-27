@@ -12,6 +12,7 @@ import ListAltRounded from "../assets/icon/ListAltRounded.png";
 import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
 import { EmptyBlock } from "../components/EmpryBlock";
 import { HelpRequestData } from "../types/types";
+import MapBlock from "../components/Map";
 
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
@@ -29,13 +30,13 @@ export const CatalogPage: React.FC = () => {
 
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
-  const [displayMode, setDisplayMode] = useState<"grid" | "list">("grid");
+  const [displayMode, setDisplayMode] = useState<"grid" | "list" | "map">("grid");
   const [filters, setFilters] = useState<{ [key: string]: string | null }>({});
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
   }>({});
 
-  const handleDisplayModeChange = (mode: "grid" | "list") => {
+  const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
     setDisplayMode(mode);
   };
 
@@ -142,6 +143,7 @@ export const CatalogPage: React.FC = () => {
               display="flex"
               flexDirection="row"
               justifyContent="space-between"
+              marginBottom={3}
             >
               <Typography variant="h6">
                 Найдено: {filteredCards.length}
@@ -170,7 +172,14 @@ export const CatalogPage: React.FC = () => {
                         : "transparent",
                   }}
                 />
-                <ButtonIcon src={LocationOnFilled} alt="Map View" />
+                <ButtonIcon
+                  src={LocationOnFilled}
+                  alt="Map View"
+                  onClickTable={() => handleDisplayModeChange("map")}  // Устанавливаем "map"
+                  sx={{
+                    backgroundColor: displayMode === "map" ? "rgba(0, 0, 0, 0.08)" : "transparent",
+                  }}
+                />
               </Box>
             </Box>
 
@@ -180,6 +189,8 @@ export const CatalogPage: React.FC = () => {
               <ErrorBlock />
             ) : filteredCards.length === 0 ? (
               <EmptyBlock />
+            ) : displayMode === "map" ? (
+              <MapBlock requests={filteredCards} onMarkerClick={handleCardClick} />
             ) : (
               <>
                 <ResultSection
