@@ -20,7 +20,7 @@ import useAuth from "../auth/hook";
 import Logo from "./Logo";
 import theme from "../theme";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -113,5 +113,3 @@ const Header: React.FC = () => {
     </AppBar>
   );
 };
-
-export default Header;
