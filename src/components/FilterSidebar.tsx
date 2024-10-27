@@ -7,15 +7,21 @@ import { DateFilter } from "./DateFilter";
 
 interface FilterSidebarProps {
   filters: { [key: string]: string | null };
-  setFilters: React.Dispatch<React.SetStateAction<{ [key: string]: string | null }>>;
+  setFilters: React.Dispatch<
+    React.SetStateAction<{ [key: string]: string | null }>
+  >;
   selectedVolunteerFilters: { [key: string]: string | null };
-  setSelectedVolunteerFilters: React.Dispatch<React.SetStateAction<{ [key: string]: string | null }>>;
+  setSelectedVolunteerFilters: React.Dispatch<
+    React.SetStateAction<{ [key: string]: string | null }>
+  >;
 }
 
-export const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters,
+export const FilterSidebar: React.FC<FilterSidebarProps> = ({
+  filters,
   setFilters,
   selectedVolunteerFilters,
-  setSelectedVolunteerFilters }) => {
+  setSelectedVolunteerFilters,
+}) => {
   const theme = useTheme();
 
   const handleCheckboxChange = (title: string, value: string) => {
@@ -61,7 +67,9 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters,
             title={filter.title}
             options={filter.options}
             selectedOption={filters[filter.title] || null}
-            onCheckboxChange={(value) => handleCheckboxChange(filter.title, value)}
+            onCheckboxChange={(value) =>
+              handleCheckboxChange(filter.title, value)
+            }
           />
         ))}
         <VolunteerFilter
