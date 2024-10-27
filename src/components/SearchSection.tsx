@@ -8,7 +8,11 @@ import {
 } from "@mui/material";
 import searchIcon from "../assets/icon/search.png";
 
-const SearchSection: React.FC = () => {
+interface SearchSectionProps {
+  onSearchChange: (searchText: string) => void;
+}
+
+const SearchSection: React.FC<SearchSectionProps> = ({ onSearchChange }) => {
   const theme = useTheme();
 
   return (
@@ -38,6 +42,7 @@ const SearchSection: React.FC = () => {
         placeholder="Введите название задачи или организации"
         variant="standard"
         fullWidth
+        onChange={(e) => onSearchChange(e.target.value)} // Отслеживаем изменения
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

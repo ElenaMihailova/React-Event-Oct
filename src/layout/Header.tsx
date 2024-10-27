@@ -16,25 +16,41 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import { useNavigate } from "react-router-dom";
 import useAuth from "../auth/hook";
 import Logo from "./Logo";
 import theme from "../theme";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const { logOut } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setMenuButton(null);
   };
 
-  const { logOut } = useAuth();
+  const handleProfile = (): void => {
+    navigate("./profile");
+    setMenuButton(null);
+  };
+
+  const handleLogOut = (): void => {
+    logOut();
+    setMenuButton(null);
+  };
+
+  const handleHelpRequestsClick = () => {
+    setMenuButton(null);
+    navigate("/catalog");
+  };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="default">
       <Toolbar
         sx={{
           maxWidth: theme.breakpoints.values.lg,
@@ -50,9 +66,20 @@ const Header: React.FC = () => {
           <Logo />
         </Box>
 
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
+        <Typography
+          onClick={handleHelpRequestsClick}
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "center",
+            cursor: "pointer",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Запросы о помощи
         </Typography>
+
         <Box sx={{ flex: 1 }}>
           <IconButton
             sx={{ display: "block", marginLeft: "auto", height: 56, width: 56 }}
@@ -70,14 +97,14 @@ const Header: React.FC = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuList>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleProfile}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={logOut}>
+          <MenuItem onClick={handleLogOut}>
+            <ListItemIcon>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>
@@ -87,5 +114,3 @@ const Header: React.FC = () => {
     </AppBar>
   );
 };
-
-export default Header;

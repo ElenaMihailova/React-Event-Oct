@@ -2,11 +2,11 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import vk from "../../../assets/vk.svg";
 import telegram from "../../../assets/telegram.svg";
 import whatsapp from "../../../assets/whatsapp.svg";
-import { useGetUserInfoQuery } from "../../../API/RTKQuery/api";
+import { useLoadUserInfoQuery } from "../../../API/RTKQuery/api";
 import { ErrorBlock } from "../../../components/ErrorBlock";
 
 export const Contacts = () => {
-  const { data, error, isLoading } = useGetUserInfoQuery(undefined);
+  const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
   if (isLoading) {
     return <CircularProgress />;

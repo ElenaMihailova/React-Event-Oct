@@ -3,14 +3,14 @@ import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
-import { HelpReqCard } from "./lib/HelpReqCard";
-import { useGetUserInfoQuery } from "../../API/RTKQuery/api";
+import { useLoadUserInfoQuery } from "../../API/RTKQuery/api";
 import { ErrorBlock } from "../../components/ErrorBlock";
+import { Favorites } from "./lib/Favorites";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");
-  
-  const { data, error, isLoading } = useGetUserInfoQuery(undefined);
+    
+  const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
   const firstName = data?.name || '';
   const lastName = data?.lastName || '';
@@ -23,13 +23,7 @@ export const ProfilePage = () => {
       case "button2":
         return <Contacts />;
       case "button3":
-        return (
-          <Box sx={{ display: "flex" }}>
-            <HelpReqCard />
-            <HelpReqCard />
-            <HelpReqCard />
-          </Box>
-        );
+        return <Favorites />;
       default:
         return <PersonalData />;
     }
@@ -40,8 +34,8 @@ export const ProfilePage = () => {
       maxWidth="xl"
       component="section"
       sx={{
-        width: 1500,
-        height: 1138,
+        maxWidth: 1500,
+        flex: "grow",
         backgroundColor: "#F5F5F5",
         marginY: 0,
         marginX: "auto",
@@ -61,7 +55,7 @@ export const ProfilePage = () => {
             src={PersonalRounded}
             alt="Фото профиля"
           />
-          <Box sx={{ width: 320, height: 196 }}>
+          <Box sx={{ width: 320, height: "auto" }}>
             <Typography
               variant="h5"
               sx={{
@@ -98,17 +92,26 @@ export const ProfilePage = () => {
         </Box>
         <Box
           sx={{
-            width: 1080,
-            height: 982,
+            maxWidth: 1080,
+            minHeight: 980, // Минимальная высота
+            minWidth: 750, // Минимальная ширина
+            height: "auto",
             ml: 2.5,
             pl: 4,
             pt: 1.25,
+            mb: 6,
             textAlign: "left",
             backgroundColor: "#FFFFFF",
           }}
         >
           <Tabs
-            value={0}
+            value={
+              activeButton === "button1"
+                ? 0
+                : activeButton === "button2"
+                  ? 1
+                  : 2
+            }
             indicatorColor="primary"
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
@@ -118,7 +121,14 @@ export const ProfilePage = () => {
             <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
           </Tabs>
 
-          {renderContent()}
+          <Box
+            sx={{
+              minHeight: "980px", // Установите минимальную высоту для контента
+              minWidth: "600px", // Установите минимальную ширину для контента
+            }}
+          >
+            {renderContent()}
+          </Box>
         </Box>
       </Box>
     </Container>

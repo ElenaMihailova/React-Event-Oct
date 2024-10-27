@@ -6,6 +6,7 @@ import {
   Button,
   LinearProgress,
 } from "@mui/material";
+import { toast } from "react-toastify";
 
 interface DonateWidgetProps {
   requestId: string;
@@ -22,7 +23,11 @@ const DonateWidget = ({
 }: DonateWidgetProps) => {
   const date = new Date(endingDate);
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
-
+  const handleClickHelp = (): void => {
+    toast.success("Успех! Спасибо за помощь");
+    console.log(requestId);
+  };
+  const progress = (requestGoalCurrentValue / requestGoal) * 100;
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -49,13 +54,8 @@ const DonateWidget = ({
           <Box sx={{ width: "100%" }}>
             <LinearProgress
               variant="determinate"
-              sx={{
-                backgroundColor: "#a5cff5", // Цвет фона полосы
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "#1E88E5",
-                },
-              }}
-              value={requestGoalCurrentValue}
+              color="primary"
+              value={progress}
             />
           </Box>
           <Box
@@ -79,7 +79,7 @@ const DonateWidget = ({
             Нас уже 3 566 987
           </Typography>
           <Button
-            onClick={() => console.log(requestId)}
+            onClick={handleClickHelp}
             variant="contained"
             fullWidth
             sx={{

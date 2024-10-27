@@ -1,10 +1,10 @@
 import { Box, Typography, CircularProgress } from "@mui/material";
-import { useGetUserInfoQuery } from "../../../API/RTKQuery/api";
+import { useLoadUserInfoQuery } from "../../../API/RTKQuery/api";
 import { ErrorBlock } from "../../../components/ErrorBlock";
 
 
 export const PersonalData = () => {
-  const { data, error, isLoading } = useGetUserInfoQuery(undefined);
+  const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -27,7 +27,7 @@ export const PersonalData = () => {
 
   return (
     <Box>
-      <Box sx={{ mt: 3.75, width: 550, height: 860 }}>
+      <Box sx={{ mt: 3.75, width: 550 }}>
         <Box sx={{ mb: 4 }}>
           <Typography
             variant="body1"

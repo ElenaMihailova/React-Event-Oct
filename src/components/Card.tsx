@@ -113,7 +113,7 @@ export const CardInformation: React.FC<HelpRequestData> = ({
             <LinearProgress
               variant="determinate"
               value={progress}
-              color="secondary"
+              color="primary"
             />
             <Box
               sx={{
