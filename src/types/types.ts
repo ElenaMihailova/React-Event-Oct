@@ -37,33 +37,3 @@ export type HelpRequestData = {
   targetAmount: number;
 };
 
-export type UserData = {
-  id: string;
-  name: string;
-  lastName: string;
-  birthdate: Date;
-  status: 'Начинающий' | 'Опытный',
-  baseLocations: Array<{
-      latitude: number;
-      longitude: number;
-      district: string;
-      city: string;
-  }>,
-  educations: Array<{
-     organizationName: string;
-     level: 'Среднее общее' | 'Среднее профессиональное' | 'Высшее';
-     specialization: string;
-     graduationYear: number;
-  }>,
-  additionalInfo: string;
-  contacts: {
-      email: string;
-      phone?: string;
-      social: {
-          telegram?: string;
-          whatsapp?: string;
-          vk?: string;
-      }
-  }
-  favouriteRequests: string[]; // request ids
-}
