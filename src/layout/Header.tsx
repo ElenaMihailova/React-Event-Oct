@@ -24,6 +24,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const { logOut } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);
@@ -31,22 +33,12 @@ const Header: React.FC = () => {
 
   const handleClose = () => {
     setMenuButton(null);
+    logOut();
   };
 
-  const { logOut } = useAuth();
-
-  const handleHelpRequestsClick = () => {
-    navigate(`/catalog`);
-  };
-
-  const handleMyProfileClick = () => {
-    navigate(`/profile`);
+  const handleProfile = () => {
     setMenuButton(null);
-  };
-
-  const handleLogoutClick = () => {
-    console.log("handleLogoutClick");
-    setMenuButton(null);
+    navigate("./profile");
   };
 
   return (
@@ -96,7 +88,7 @@ const Header: React.FC = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuList>
-          <MenuItem onClick={handleMyProfileClick}>
+          <MenuItem onClick={handleProfile}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
