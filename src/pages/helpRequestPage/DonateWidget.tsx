@@ -25,7 +25,9 @@ const DonateWidget = ({
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
   const handleClickHelp = (): void => {
     toast.success("Успех! Спасибо за помощь");
+    console.log(requestId);
   };
+  const progress = (requestGoalCurrentValue / requestGoal) * 100;
   return (
     <Box width={320}>
       <Card variant="outlined">
