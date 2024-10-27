@@ -38,10 +38,13 @@ export const api = createApi({
       }),
     }),
 
-    addToFavourites: builder.query<AddToFavouritesResponse, undefined>({
-      query: () => ({
+    addToFavourites: builder.query<AddToFavouritesResponse, string>({
+      query: (requestId) => ({
         url: routes.userFavourites,
         method: "POST",
+        body: {
+          requestId: requestId,
+        },
       }),
     }),
 
@@ -79,8 +82,6 @@ export const api = createApi({
         method: "GET",
       }),
     }),
-
-    
   }),
 });
 
@@ -94,4 +95,3 @@ export const {
   useLoadUserFavoritesQuery,
   useRemoveFromFavouritesQuery,
 } = api;
-
