@@ -4,9 +4,16 @@ import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
 import { Favorites } from "./lib/Favorites";
+import useAuth from "../../auth/hook";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");
+
+  const { logOut } = useAuth();
+
+  const handleLogOut = (): void => {
+    logOut();
+  }
 
   const renderContent = () => {
     switch (activeButton) {
@@ -69,6 +76,7 @@ export const ProfilePage = () => {
             <Box
               component="button"
               sx={{ width: 280, height: 42, m: 2.5, fontSize: 24 }}
+              onClick={handleLogOut}
             >
               Выйти из аккаунта
             </Box>
