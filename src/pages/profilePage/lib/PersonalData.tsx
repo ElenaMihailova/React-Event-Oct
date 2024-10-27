@@ -2,17 +2,16 @@ import { Box, Typography, CircularProgress } from "@mui/material";
 import { useLoadUserInfoQuery } from "../../../API/RTKQuery/api";
 import { ErrorBlock } from "../../../components/ErrorBlock";
 
-
 export const PersonalData = () => {
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
   if (isLoading) {
     return <CircularProgress />;
-  };  
+  }
 
   if (error) {
-    return <ErrorBlock />
-  };
+    return <ErrorBlock />;
+  }
 
   const {
     name: firstName,
@@ -23,7 +22,9 @@ export const PersonalData = () => {
     additionalInfo,
   } = data || {};
 
-  const formattedBirthdate = birthdate ? new Date(birthdate).toLocaleDateString('ru-RU') : "Дата не указана";
+  const formattedBirthdate = birthdate
+    ? new Date(birthdate).toLocaleDateString("ru-RU")
+    : "Дата не указана";
 
   return (
     <Box>
@@ -88,7 +89,7 @@ export const PersonalData = () => {
                   <Typography variant="body2">{location.city}</Typography>
                 </Box>
               </>
-            )
+            );
           })}
         </Box>
 
@@ -99,31 +100,28 @@ export const PersonalData = () => {
           {educations?.map((education) => {
             return (
               <Box sx={{ mb: 2 }}>
-            <Typography variant="body2">
-              {education.organizationName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {education.level}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {education.specialization}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Год окончания: {education.graduationYear}
-            </Typography>
-          </Box>
-            )
+                <Typography variant="body2">
+                  {education.organizationName}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {education.level}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {education.specialization}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Год окончания: {education.graduationYear}
+                </Typography>
+              </Box>
+            );
           })}
-          
         </Box>
 
         <Box sx={{ mb: 4 }}>
           <Typography variant="h6" sx={{ fontSize: 20, mb: 1 }}>
             Обо мне
           </Typography>
-          <Typography variant="body1">
-           {additionalInfo}
-          </Typography>
+          <Typography variant="body1">{additionalInfo}</Typography>
         </Box>
       </Box>
     </Box>

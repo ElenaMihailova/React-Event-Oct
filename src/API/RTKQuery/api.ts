@@ -2,10 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import routes from "./routes";
 import {
   AddToFavouritesResponse,
-  AuthResponse,
   FavoritesList,
   RequestDetails,
-  UserCredentials,
   UserInfo,
 } from "../models/ResponseTypes";
 
@@ -23,7 +21,7 @@ export const api = createApi({
   }),
 
   endpoints: (builder) => ({
-    getAuthToken: builder.mutation<AuthResponse, UserCredentials>({
+    getAuthToken: builder.mutation({
       query: (user) => ({
         url: routes.auth,
         method: "POST",
