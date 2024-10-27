@@ -24,7 +24,7 @@ import theme from "../theme";
 export const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
-  const { logOut, loggedIn } = useAuth();
+  const { logOut } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);
