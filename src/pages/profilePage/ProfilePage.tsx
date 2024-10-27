@@ -27,7 +27,7 @@ export const ProfilePage = () => {
       component="section"
       sx={{
         maxWidth: 1500,
-        flex: 'grow',
+        flex: "grow",
         backgroundColor: "#F5F5F5",
         marginY: 0,
         marginX: "auto",
@@ -47,7 +47,7 @@ export const ProfilePage = () => {
             src={PersonalRounded}
             alt="Фото профиля"
           />
-          <Box sx={{ width: 320, height: 'auto' }}>
+          <Box sx={{ width: 320, height: "auto" }}>
             <Typography
               variant="h5"
               sx={{
@@ -78,8 +78,8 @@ export const ProfilePage = () => {
           sx={{
             maxWidth: 1080,
             minHeight: 980, // Минимальная высота
-            minWidth: 750,  // Минимальная ширина
-            height: 'auto',
+            minWidth: 750, // Минимальная ширина
+            height: "auto",
             ml: 2.5,
             pl: 4,
             pt: 1.25,
@@ -89,20 +89,29 @@ export const ProfilePage = () => {
           }}
         >
           <Tabs
-            value={activeButton === "button1" ? 0 : activeButton === "button2" ? 1 : 2}
+            value={
+              activeButton === "button1"
+                ? 0
+                : activeButton === "button2"
+                  ? 1
+                  : 2
+            }
             indicatorColor="primary"
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab label="Личные данные" onClick={() => setActiveButton("button1")} />
+            <Tab
+              label="Личные данные"
+              onClick={() => setActiveButton("button1")}
+            />
             <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
             <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
           </Tabs>
 
           <Box
             sx={{
-              minHeight: '980px', // Установите минимальную высоту для контента
-              minWidth: '600px', // Установите минимальную ширину для контента
+              minHeight: "980px", // Установите минимальную высоту для контента
+              minWidth: "600px", // Установите минимальную ширину для контента
             }}
           >
             {renderContent()}

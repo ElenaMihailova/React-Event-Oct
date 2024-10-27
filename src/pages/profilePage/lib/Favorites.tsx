@@ -52,80 +52,75 @@ export const Favorites: React.FC = () => {
   const paginatedCards = cards.slice(startIndex, endIndex);
 
   return (
-      <Box display="flex" mt={2} flex="1">
-        <Box flex="1" display="flex" flexDirection="column" height="100%">
-          <Box
-            sx={{
-              backgroundColor: "white",
-              padding: `${theme.spacing(2.5)}`,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              borderRadius: theme.shape.borderRadius,
-              flex: 1,
-              minHeight: "100%",
-            }}
-          >
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="right"
-            >
-
-              <Box>
-                <ButtonIcon
-                  src={GridonRounded}
-                  alt="Grid View"
-                  onClickTable={() => handleDisplayModeChange("grid")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "grid"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon
-                  src={ListAltRounded}
-                  alt="List View"
-                  onClickTable={() => handleDisplayModeChange("list")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "list"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon src={LocationOnFilled} alt="Map View" />
-              </Box>
+    <Box display="flex" mt={2} flex="1">
+      <Box flex="1" display="flex" flexDirection="column" height="100%">
+        <Box
+          sx={{
+            backgroundColor: "white",
+            padding: `${theme.spacing(2.5)}`,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            borderRadius: theme.shape.borderRadius,
+            flex: 1,
+            minHeight: "100%",
+          }}
+        >
+          <Box display="flex" flexDirection="row" justifyContent="right">
+            <Box>
+              <ButtonIcon
+                src={GridonRounded}
+                alt="Grid View"
+                onClickTable={() => handleDisplayModeChange("grid")}
+                sx={{
+                  backgroundColor:
+                    displayMode === "grid"
+                      ? "rgba(0, 0, 0, 0.08)"
+                      : "transparent",
+                }}
+              />
+              <ButtonIcon
+                src={ListAltRounded}
+                alt="List View"
+                onClickTable={() => handleDisplayModeChange("list")}
+                sx={{
+                  backgroundColor:
+                    displayMode === "list"
+                      ? "rgba(0, 0, 0, 0.08)"
+                      : "transparent",
+                }}
+              />
+              <ButtonIcon src={LocationOnFilled} alt="Map View" />
             </Box>
-
-            {isLoading ? (
-              <Typography>Загрузка...</Typography>
-            ) : error ? (
-              <ErrorBlock />
-            ) : (
-              <>
-                <ResultSection
-                  cards={paginatedCards.map((card: HelpRequestData) => ({
-                    ...card,
-                    collectedAmount: card.requestGoalCurrentValue,
-                    targetAmount: card.requestGoal,
-                    contributorsCount: card.contributorsCount,
-                  }))}
-                  onCardClick={handleCardClick}
-                  displayMode={displayMode}
-                />
-                <Pagination
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePageChange}
-                  sx={{ mt: 2, display: "flex", justifyContent: "center" }}
-                />
-              </>
-            )}
           </Box>
+
+          {isLoading ? (
+            <Typography>Загрузка...</Typography>
+          ) : error ? (
+            <ErrorBlock />
+          ) : (
+            <>
+              <ResultSection
+                cards={paginatedCards.map((card: HelpRequestData) => ({
+                  ...card,
+                  collectedAmount: card.requestGoalCurrentValue,
+                  targetAmount: card.requestGoal,
+                  contributorsCount: card.contributorsCount,
+                }))}
+                onCardClick={handleCardClick}
+                displayMode={displayMode}
+              />
+              <Pagination
+                count={totalPages}
+                page={page}
+                onChange={handlePageChange}
+                sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+              />
+            </>
+          )}
         </Box>
       </Box>
+    </Box>
   );
 };
 
