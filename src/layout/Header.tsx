@@ -21,8 +21,6 @@ import Logo from "./Logo";
 import theme from "../theme";
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
-
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -39,6 +37,11 @@ const Header: React.FC = () => {
   const handleProfile = () => {
     setMenuButton(null);
     navigate("./profile");
+  };
+
+  const handleHelpRequestsClick = () => {
+    setMenuButton(null);
+    navigate("/catalog");
   };
 
   return (
@@ -71,6 +74,7 @@ const Header: React.FC = () => {
         >
           Запросы о помощи
         </Typography>
+
         <Box sx={{ flex: 1 }}>
           <IconButton
             sx={{ display: "block", marginLeft: "auto", height: 56, width: 56 }}
@@ -95,7 +99,7 @@ const Header: React.FC = () => {
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={handleLogoutClick}>
+            <ListItemIcon onClick={logOut}>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>

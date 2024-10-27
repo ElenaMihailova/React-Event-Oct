@@ -16,13 +16,14 @@ interface DonateWidgetProps {
 
 const DonateWidget = ({
   requestId,
-  requestGoal,
-  requestGoalCurrentValue,
+  requestGoal: requestGoalCurrentValue,
+  requestGoalCurrentValue: requestGoal,
   endingDate,
 }: DonateWidgetProps) => {
   const date = new Date(endingDate);
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
 
+  const progress = (requestGoalCurrentValue / requestGoal) * 100;
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -50,7 +51,7 @@ const DonateWidget = ({
             <LinearProgress
               variant="determinate"
               color="primary"
-              value={requestGoalCurrentValue}
+              value={progress}
             />
           </Box>
           <Box
