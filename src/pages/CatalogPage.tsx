@@ -40,12 +40,6 @@ export const CatalogPage: React.FC = () => {
     setDisplayMode(mode);
   };
 
-  useEffect(() => {
-    console.log("Cards data:", cards);
-    console.log("Loading state:", isLoading);
-    console.log("Error:", error);
-  }, [cards, isLoading, error]);
-
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
     value: number,
