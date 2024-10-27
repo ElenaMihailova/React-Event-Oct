@@ -40,8 +40,11 @@ export const api = createApi({
 
     addToFavourites: builder.query<AddToFavouritesResponse, string>({
       query: (requestId) => ({
-        url: routes.userFavoritesWithID(requestId),
+        url: routes.userFavourites,
         method: "POST",
+        body: {
+          requestId: requestId,
+        },
       }),
     }),
 
