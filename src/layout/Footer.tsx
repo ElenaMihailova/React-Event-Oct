@@ -14,13 +14,46 @@ const Footer = () => {
           maxWidth: theme.breakpoints.values.lg,
         }}
       >
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "left" }}>
+        <Typography
+          component="a"
+          href="https://t.me/natti_jun_front_chat/838451"
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "left",
+            textDecoration: "none",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Об ивенте
         </Typography>
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
+        <Typography
+          component="a"
+          href="https://github.com/ElenaMihailova/React-Event-Oct"
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "center",
+            textDecoration: "none",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Github проекта
         </Typography>
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "right" }}>
+        <Typography
+          component="a"
+          href="https://t.me/natti_jun_front_chat"
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "right",
+            textDecoration: "none",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Чат для джунов
         </Typography>
       </Box>

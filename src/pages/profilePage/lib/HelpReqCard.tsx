@@ -98,11 +98,7 @@ export const HelpReqCard = () => {
             Мы собрали
           </Typography>
           <Box>
-            <LinearProgress
-              variant="determinate"
-              value={40}
-              color="secondary"
-            />
+            <LinearProgress variant="determinate" value={40} color="primary" />
           </Box>
           <Box
             sx={{
