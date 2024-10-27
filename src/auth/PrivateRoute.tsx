@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }: Props) => {
   return auth.loggedIn ? (
     children
   ) : (
-    <Navigate to="/login" state={{ from: location }} />
+    <Navigate to="/" state={{ from: location }} />
   );
 };
 

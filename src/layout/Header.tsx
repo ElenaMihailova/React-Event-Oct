@@ -15,12 +15,15 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import { useNavigate } from "react-router-dom";
 import useAuth from "../auth/hook";
 import Logo from "./Logo";
 import theme from "../theme";
 
 const Header: React.FC = () => {
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const { logOut } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);
@@ -28,9 +31,13 @@ const Header: React.FC = () => {
 
   const handleClose = () => {
     setMenuButton(null);
+    logOut();
   };
 
-  const { logOut } = useAuth();
+  const handleProfile = () => {
+    setMenuButton(null);
+    navigate("./profile");
+  };
 
   return (
     <AppBar position="fixed">
@@ -69,7 +76,7 @@ const Header: React.FC = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuList>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleProfile}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>

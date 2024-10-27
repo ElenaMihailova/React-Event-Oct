@@ -6,6 +6,7 @@ import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
 import { ProfilePage } from "../pages/profilePage/ProfilePage";
 import { Login } from "../pages/Login";
+import PrivateRoute from "../auth/PrivateRoute";
 
 const AppRoutes = () => {
   return (
@@ -13,9 +14,30 @@ const AppRoutes = () => {
       <ReduxProvider store={store}>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="details" element={<HelpRequestPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/catalog"
+            element={
+              <PrivateRoute>
+                <CatalogPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="details"
+            element={
+              <PrivateRoute>
+                <HelpRequestPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </ReduxProvider>
     </AuthProvider>
