@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import routes from "./routes";
+import { UserData } from "../../types/types";
 
 export const api = createApi({
   reducerPath: "queryApi",
@@ -43,6 +44,15 @@ export const api = createApi({
         method: "GET",
       }),
     }),
+
+    getUserInfo: builder.query<UserData, void>({
+      query: () => ({
+        url: routes.userInfo,
+        method: "GET",
+      }),
+    }),
+
+
   }),
 });
 
@@ -51,4 +61,5 @@ export const {
   useGetRequestCardsQuery,
   useGetRequestCardQuery,
   useGetRequestContributeQuery,
+  useGetUserInfoQuery,
 } = api;

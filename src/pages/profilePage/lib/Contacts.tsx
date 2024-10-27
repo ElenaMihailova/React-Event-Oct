@@ -1,9 +1,28 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import vk from "../../../assets/vk.svg";
 import telegram from "../../../assets/telegram.svg";
 import whatsapp from "../../../assets/whatsapp.svg";
+import { useGetUserInfoQuery } from "../../../API/RTKQuery/api";
+import { ErrorBlock } from "../../../components/ErrorBlock";
 
 export const Contacts = () => {
+  const { data, error, isLoading } = useGetUserInfoQuery(undefined);
+
+  if (isLoading) {
+    return <CircularProgress />;
+  };
+
+  if (error) {
+    return <ErrorBlock />
+  };
+
+  const {
+    email,
+    phone
+  } = data?.contacts || {};
+
+
+
   return (
     <Box sx={{ w: 260, h: 334, pt: 3.75 }}>
       <Box sx={{ mb: 3.75 }}>
@@ -14,7 +33,7 @@ export const Contacts = () => {
           E-mail
         </Typography>
         <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>
-          forexample12@gmail.com
+          {email}
         </Typography>
       </Box>
       <Box sx={{ mb: 3.75 }}>
@@ -25,7 +44,7 @@ export const Contacts = () => {
           Телефон
         </Typography>
         <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>
-          +7 999 555 66 11
+          {phone}
         </Typography>
       </Box>
       <Box sx={{ mb: 1 }}>

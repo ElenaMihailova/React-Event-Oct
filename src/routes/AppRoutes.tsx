@@ -14,7 +14,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="details" element={<HelpRequestPage />} />
+          <Route path="/details" element={<HelpRequestPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </ReduxProvider>
