@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
+import { ToastContainer, Bounce } from "react-toastify";
 import AuthProvider from "../auth/AuthProvider";
+import "react-toastify/dist/ReactToastify.css";
 import store from "../API/RTKQuery/index";
 import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
@@ -12,6 +14,19 @@ const AppRoutes = () => {
   return (
     <AuthProvider>
       <ReduxProvider store={store}>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition={Bounce}
+        />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route

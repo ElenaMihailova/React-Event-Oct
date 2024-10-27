@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { toast } from "react-toastify";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
 import CheckListIcon from "./lib/CheckListIcon";
 import verifiedIcon from "../../assets/verifyed-icon.svg";
@@ -42,6 +43,10 @@ const HelpMainInformation = ({
 }: HelpMainInformationProps) => {
   const date = new Date(endingDate);
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
+
+  const handleClickToFavourite = (): void => {
+    toast.success("Успех! Добавлено в избранное");
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -127,7 +132,7 @@ const HelpMainInformation = ({
           </Box>
         </CardContent>
         <CardContent>
-          <ButtonInFavorites onClick={() => {}} filled={false}>
+          <ButtonInFavorites onClick={handleClickToFavourite} filled={false}>
             В избранное
           </ButtonInFavorites>
         </CardContent>
