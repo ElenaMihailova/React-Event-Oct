@@ -17,8 +17,8 @@ interface DonateWidgetProps {
 
 const DonateWidget = ({
   requestId,
-  requestGoal: requestGoalCurrentValue,
-  requestGoalCurrentValue: requestGoal,
+  requestGoal,
+  requestGoalCurrentValue,
   endingDate,
 }: DonateWidgetProps) => {
   const date = new Date(endingDate);
