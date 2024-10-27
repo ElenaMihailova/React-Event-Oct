@@ -5,15 +5,17 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  FormHelperText,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface PropsField {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  failAuth: boolean;
 }
 
-export const PasswordField = ({ value, onChange }: PropsField) => {
+export const PasswordField = ({ value, onChange, failAuth }: PropsField) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -57,6 +59,9 @@ export const PasswordField = ({ value, onChange }: PropsField) => {
         value={value}
         onChange={onChange}
       />
+      <FormHelperText id="errorPassword" error>
+        {failAuth && "Введите корректный пароль"}
+      </FormHelperText>
     </FormControl>
   );
 };
