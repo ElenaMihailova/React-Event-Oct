@@ -29,14 +29,18 @@ const Header: React.FC = () => {
     setMenuButton(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setMenuButton(null);
-    logOut();
   };
 
-  const handleProfile = () => {
-    setMenuButton(null);
+  const handleProfile = (): void => {
     navigate("./profile");
+    setMenuButton(null);
+  };
+
+  const handleLogOut = (): void => {
+    logOut();
+    setMenuButton(null);
   };
 
   const handleHelpRequestsClick = () => {
@@ -98,8 +102,8 @@ const Header: React.FC = () => {
             </ListItemIcon>
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={logOut}>
+          <MenuItem onClick={handleLogOut}>
+            <ListItemIcon>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>
