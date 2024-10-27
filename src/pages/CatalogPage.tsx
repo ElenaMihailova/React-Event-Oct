@@ -10,7 +10,7 @@ import { ButtonIcon } from "../components/IconButton";
 import GridonRounded from "../assets/icon/GridonRounded.png";
 import ListAltRounded from "../assets/icon/ListAltRounded.png";
 import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
-import { HelpRequestData } from '../types/types';
+import { HelpRequestData } from "../types/types";
 
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
@@ -19,7 +19,11 @@ export const CatalogPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { data: cards = [], isLoading, error } = useGetRequestCardsQuery(undefined);
+  const {
+    data: cards = [],
+    isLoading,
+    error,
+  } = useGetRequestCardsQuery(undefined);
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
   const [displayMode, setDisplayMode] = useState<"grid" | "list">("grid");

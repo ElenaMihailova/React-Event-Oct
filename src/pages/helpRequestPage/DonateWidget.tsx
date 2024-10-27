@@ -49,12 +49,7 @@ const DonateWidget = ({
           <Box sx={{ width: "100%" }}>
             <LinearProgress
               variant="determinate"
-              sx={{
-                backgroundColor: "#a5cff5", // Цвет фона полосы
-                "& .MuiLinearProgress-bar": {
-                  backgroundColor: "#1E88E5",
-                },
-              }}
+              color="primary"
               value={requestGoalCurrentValue}
             />
           </Box>

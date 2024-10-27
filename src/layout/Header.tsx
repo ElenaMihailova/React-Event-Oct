@@ -15,11 +15,14 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import { useNavigate } from "react-router-dom";
 import useAuth from "../auth/hook";
 import Logo from "./Logo";
 import theme from "../theme";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   const [menuButton, setMenuButton] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,8 +35,22 @@ const Header: React.FC = () => {
 
   const { logOut } = useAuth();
 
+  const handleHelpRequestsClick = () => {
+    navigate(`/catalog`);
+  };
+
+  const handleMyProfileClick = () => {
+    navigate(`/profile`);
+    setMenuButton(null);
+  };
+
+  const handleLogoutClick = () => {
+    console.log("handleLogoutClick");
+    setMenuButton(null);
+  };
+
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="default">
       <Toolbar
         sx={{
           maxWidth: theme.breakpoints.values.lg,
@@ -49,7 +66,17 @@ const Header: React.FC = () => {
           <Logo />
         </Box>
 
-        <Typography variant="body1" sx={{ flex: 1, textAlign: "center" }}>
+        <Typography
+          onClick={handleHelpRequestsClick}
+          variant="body1"
+          sx={{
+            flex: 1,
+            textAlign: "center",
+            cursor: "pointer",
+            color: "inherit",
+            "&:hover": { color: theme.palette.text.secondary },
+          }}
+        >
           Запросы о помощи
         </Typography>
         <Box sx={{ flex: 1 }}>
@@ -69,14 +96,14 @@ const Header: React.FC = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuList>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleMyProfileClick}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Мой профиль</ListItemText>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <ListItemIcon onClick={logOut}>
+            <ListItemIcon onClick={handleLogoutClick}>
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Выйти</ListItemText>
