@@ -21,7 +21,6 @@ const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
 
   const logIn = (): void => {
-    console.log("AUTH");
     setLoggedIn(true);
   };
   const logOut = (): void => {

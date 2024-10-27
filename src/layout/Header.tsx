@@ -35,7 +35,6 @@ export const Header: React.FC = () => {
 
   const handleProfile = (): void => {
     setMenuButton(null);
-    console.log(loggedIn);
     navigate("./profile");
   };
 
