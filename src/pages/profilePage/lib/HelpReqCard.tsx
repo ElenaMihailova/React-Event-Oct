@@ -6,27 +6,42 @@ import {
   Button,
   LinearProgress,
 } from "@mui/material";
-import Volunteering from "../../../assets/Volunteering1.png";
 import Star from "../../../assets/star-filled.svg";
 
-export const HelpReqCard = () => {
+interface propsData {
+  img: string,
+  for: string,
+  organizer: string,
+  loc: {
+    reg: string,
+    city: string
+  },
+  target: string,
+  status: string,
+  sum1: number,
+  sum2: number,
+  final: string,
+  philantropists: number
+}
+
+export const HelpReqCard = (props: propsData) => {
   return (
-    <Box sx={{ width: 320, height: 843, p: 3 }}>
+    <Box sx={{ width: 320, height: 843, pt: 2, pr: 3 }}>
       <Card variant="outlined">
         <CardContent>
           <Box
             component="img"
             sx={{ display: "block", height: 220, mx: "auto" }}
-            src={Volunteering}
+            src={props.img}
             alt="Фото Запроса"
           />
 
-          <Box sx={{ height: 128, display: "flex" }}>
+          <Box sx={{ height: 128, display: "flex", borderBottom: 1  }}>
             <Typography
-              sx={{ width: 256, height: 96, marginTop: 1, mt: 2, mb: 2 }}
+              sx={{ width: 256, height: 96, marginTop: 1, mt: 2, mb: 2}}
               variant="h5"
             >
-              Сбор средств для пенсионерки Ангелины Ивановны
+              {props.for}
             </Typography>
             <Box
               sx={{
@@ -55,7 +70,7 @@ export const HelpReqCard = () => {
               Организатор
             </Typography>
             <Typography variant="body2">
-              Фонд помощи для ветеранов и инвалидов "Вера"
+              {props.organizer}
             </Typography>
           </Box>
 
@@ -67,13 +82,13 @@ export const HelpReqCard = () => {
               <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>
                 Область:
               </Typography>
-              <Typography variant="body2">Владимирская</Typography>
+              <Typography variant="body2">{props.loc.reg}</Typography>
             </Box>
             <Box sx={{ display: "flex", mb: 1 }}>
               <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>
                 Населённый пункт:
               </Typography>
-              <Typography variant="body2">Владимир</Typography>
+              <Typography variant="body2">{props.loc.city} Владимир</Typography>
             </Box>
           </Box>
 
@@ -82,16 +97,15 @@ export const HelpReqCard = () => {
               Цель сбора
             </Typography>
             <Typography variant="body2">
-              Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний
-              сезон...
+              {props.target}
             </Typography>
           </Box>
 
           <Box sx={{ mt: 1.125, mb: 2.25 }}>
             <Typography variant="subtitle2" sx={{ textWeight: 500, mt: 2 }}>
-              Завершение
+              {props.status}
             </Typography>
-            <Typography variant="body2">20.03.2025</Typography>
+            <Typography variant="body2">{props.final}</Typography>
           </Box>
 
           <Typography variant="subtitle2" sx={{ textWeight: 500, mt: 2 }}>
@@ -100,7 +114,7 @@ export const HelpReqCard = () => {
           <Box>
             <LinearProgress
               variant="determinate"
-              value={40}
+              value={(props.sum1/props.sum2)*100}
               color="secondary"
             />
           </Box>
@@ -114,15 +128,15 @@ export const HelpReqCard = () => {
             }}
           >
             <Typography variant="body2" color="textSecondary">
-              1 102 563 руб
+              {props.sum1.toLocaleString('ru-RU')} руб
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              из 2 056 489 руб
+              из {props.sum2.toLocaleString('ru-RU')} руб
             </Typography>
           </Box>
 
           <Typography variant="body2" color="textSecondary" mt={2}>
-            Нас уже 3 566 987
+            Нас уже {props.philantropists.toLocaleString('ru-RU')}
           </Typography>
           <Button
             variant="contained"

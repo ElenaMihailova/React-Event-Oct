@@ -6,19 +6,35 @@ import { Contacts } from "./lib/Contacts";
 import { HelpReqCard } from "./lib/HelpReqCard";
 
 export const ProfilePage = () => {
-  const [activeButton, setActiveButton] = useState("button1");
+  const [activeButton, setActiveButton] = useState(0);
+  const dataFromApi = {
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzOnoKOKOWxKk-l2e8Q4rF9KKtHeZmKBD2-A&s',
+    for: 'Сбор средств для пенсионерки Ангелины Ивановны',
+    organizer: 'Фонд помощи для ветеранов и инвалидов "Вера"',
+    loc: {
+      reg: 'Владимирская',
+      city: 'Владимир',
+    },
+    target: 'Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на зимний сезон...',
+    final: '20.03.2025',
+    status: 'Завершение',
+    sum1: 1102563,
+    sum2: 2056489,
+    philantropists: 3566987 
+  }
+
   const renderContent = () => {
     switch (activeButton) {
-      case "button1":
+      case 0:
         return <PersonalData />;
-      case "button2":
+      case 1:
         return <Contacts />;
-      case "button3":
+      case 2:
         return (
           <Box sx={{ display: "flex" }}>
-            <HelpReqCard />
-            <HelpReqCard />
-            <HelpReqCard />
+            <HelpReqCard {...dataFromApi} />
+            <HelpReqCard {...dataFromApi} />
+            <HelpReqCard {...dataFromApi} />
           </Box>
         );
       default:
@@ -91,17 +107,14 @@ export const ProfilePage = () => {
           }}
         >
           <Tabs
-            value={0}
+            value={activeButton}
             indicatorColor="primary"
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
           >
-            <Tab
-              label="Личные данные"
-              onClick={() => setActiveButton("button1")}
-            />
-            <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
-            <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
+            <Tab label="Личные данные" onClick={() => setActiveButton(0)}/>
+            <Tab label="Контакты" onClick={() => setActiveButton(1)} />
+            <Tab label="Избранное" onClick={() => setActiveButton(2)} />
           </Tabs>
 
           {renderContent()}
