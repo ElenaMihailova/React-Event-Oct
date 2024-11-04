@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "./hook";
+import useAuth from "./AuthProvider";
 
 interface Props {
   children: React.ReactNode;

@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import AppRoutes from "./routes/AppRoutes";
 import theme from "./theme"; // Импорт темы
 import Wrapper from "../src/layout/Wrapper";
-import AuthProvider from "./auth/AuthProvider";
+import { AuthProvider } from "./auth/AuthProvider";
 
 function App() {
   return (

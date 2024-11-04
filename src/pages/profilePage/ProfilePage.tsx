@@ -6,7 +6,7 @@ import { Contacts } from "./lib/Contacts";
 import { useLoadUserInfoQuery } from "../../API/RTKQuery/api";
 import { ErrorBlock } from "../../components/ErrorBlock";
 import { Favorites } from "./lib/Favorites";
-import useAuth from "../../auth/hook";
+import useAuth from "../../auth/AuthProvider";
 
 export const ProfilePage = () => {
   const [activeButton, setActiveButton] = useState("button1");

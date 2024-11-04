@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
 import { useGetRequestCardQuery } from "../../API/RTKQuery/api";
-import useAuth from "../../auth/hook";
+import useAuth from "../../auth/AuthProvider";
 
 export interface ActionsScheduleElement {
   stepLabel: string;
