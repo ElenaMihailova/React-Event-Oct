@@ -26,7 +26,6 @@ export const LoginForm: React.FC = () => {
         localStorage.setItem("userId", data.token);
         setFailAuth(false);
         logIn();
-
       } catch (err) {
         setFailAuth(true);
         toast.error("Ошибка! Попробуйте еще раз");
