@@ -16,10 +16,11 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../auth/AuthProvider";
 
 export const UserMenu = () => {
-  const navigate = useNavigate();
   const { logOut, loggedIn } = useAuth();
 
   const [menuButton, setMenuButton] = useState<null | HTMLElement>(null);
+
+  const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuButton(event.currentTarget);

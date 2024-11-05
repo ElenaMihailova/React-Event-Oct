@@ -1,7 +1,5 @@
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
-
 import Logo from "./Logo";
-
 import theme from "../theme";
 import { UserMenu } from "./UserMenu";
 
