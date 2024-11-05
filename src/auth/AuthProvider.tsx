@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "./contexts";
+import { createContext } from "react";
+
+interface AuthContextType {
+  loggedIn: boolean;
+  logIn: () => void;
+  logOut: () => void;
+}
 
 interface Props {
   children: React.ReactNode;
 }
 
-const AuthProvider = ({ children }: Props) => {
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = ({ children }: Props) => {
   const localStorageToken = localStorage.getItem("userId");
 
   const initLoggedIn = () => {
@@ -22,7 +32,9 @@ const AuthProvider = ({ children }: Props) => {
 
   const logIn = (): void => {
     setLoggedIn(true);
+    navigate("/catalog");
   };
+
   const logOut = (): void => {
     localStorage.removeItem("userId");
     setLoggedIn(false);
@@ -42,4 +54,4 @@ const AuthProvider = ({ children }: Props) => {
   );
 };
 
-export default AuthProvider;
+export default useAuth;

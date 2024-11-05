@@ -17,7 +17,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { useNavigate } from "react-router-dom";
-import useAuth from "../auth/hook";
+import useAuth from "../auth/AuthProvider";
 import Logo from "./Logo";
 import theme from "../theme";
 

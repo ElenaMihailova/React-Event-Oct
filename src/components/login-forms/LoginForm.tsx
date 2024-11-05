@@ -1,13 +1,12 @@
 import { useFormik } from "formik";
 import { Stack } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { NameField } from "./NameField";
 import { PasswordField } from "./PasswordFiels";
 import { SubmitButton } from "./SubmitButton";
 import { useGetAuthTokenMutation } from "../../API/RTKQuery/api";
-import useAuth from "../../auth/hook";
+import useAuth from "../../auth/AuthProvider";
 
 export const LoginForm: React.FC = () => {
   const [failAuth, setFailAuth] = useState(false);
@@ -15,8 +14,6 @@ export const LoginForm: React.FC = () => {
   const { logIn } = useAuth();
 
   const [getToken] = useGetAuthTokenMutation();
-
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -29,7 +26,7 @@ export const LoginForm: React.FC = () => {
         localStorage.setItem("userId", data.token);
         setFailAuth(false);
         logIn();
-        navigate("/catalog");
+
       } catch (err) {
         setFailAuth(true);
         toast.error("Ошибка! Попробуйте еще раз");
