@@ -6,13 +6,12 @@ import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
 import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
 import { ErrorBlock } from "../components/ErrorBlock";
-import { ButtonIcon } from "../components/IconButton";
-import GridonRounded from "../assets/icon/GridonRounded.png";
-import ListAltRounded from "../assets/icon/ListAltRounded.png";
-import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
+
 import { EmptyBlock } from "../components/EmpryBlock";
 import { HelpRequestData } from "../types/types";
 import MapBlock from "../components/Map";
+import { ViewToggleGroup } from "../components/ViewToggleGroup";
+
 
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
@@ -37,6 +36,8 @@ export const CatalogPage: React.FC = () => {
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
   }>({});
+
+
 
   const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
     setDisplayMode(mode);
@@ -144,42 +145,7 @@ export const CatalogPage: React.FC = () => {
               <Typography variant="h6">
                 Найдено: {filteredCards.length}
               </Typography>
-
-              <Box>
-                <ButtonIcon
-                  src={GridonRounded}
-                  alt="Grid View"
-                  onClickTable={() => handleDisplayModeChange("grid")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "grid"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon
-                  src={ListAltRounded}
-                  alt="List View"
-                  onClickTable={() => handleDisplayModeChange("list")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "list"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon
-                  src={LocationOnFilled}
-                  alt="Map View"
-                  onClickTable={() => handleDisplayModeChange("map")} // Устанавливаем "map"
-                  sx={{
-                    backgroundColor:
-                      displayMode === "map"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-              </Box>
+              <ViewToggleGroup handleDisplayModeChange={handleDisplayModeChange} displayMode={displayMode} />
             </Box>
 
             {isLoading ? (
