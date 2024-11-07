@@ -5,7 +5,6 @@ import {
   ListItemIcon,
   ListItemText,
   Box,
-  Button,
   IconButton,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -32,7 +31,7 @@ export const UserMenu = () => {
 
   const handleProfile = (): void => {
     setMenuButton(null);
-    navigate("./profile");
+    navigate("/profile");
   };
 
   const handleLogOut = (): void => {
@@ -40,19 +39,9 @@ export const UserMenu = () => {
     setMenuButton(null);
   };
 
+
   if (!loggedIn)
-    return (
-      <Button
-        variant="outlined"
-        color="secondary"
-        sx={{
-          marginLeft: "auto",
-          display: "block",
-        }}
-      >
-        Войти
-      </Button>
-    );
+    return null
 
   return (
     <Box>
