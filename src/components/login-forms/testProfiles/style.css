@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: start;
+};
+
+.card {
+  padding: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  min-width: 320px;
+  border-radius: 6px;
+  border: 1px solid #0288D1;
+  color: #014361;
+}
