@@ -1,0 +1,12 @@
+.gridStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 64px 40px 0;
+}
+
+.containerStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -9,7 +9,7 @@ export const SubmitButton = ({ isDisabled }: SubmitButtonProps) => {
     <Button
       variant="contained"
       type="submit"
-      style={{
+      sx={{
         margin: "16px 16px 16px 0",
         padding: "8px 16px",
       }}

@@ -6,7 +6,7 @@ import store from "../API/RTKQuery/index";
 import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
 import { ProfilePage } from "../pages/profilePage/ProfilePage";
-import { Login } from "../pages/Login";
+import { Login } from "../pages/login/Login";
 import PrivateRoute from "../auth/PrivateRoute";
 
 const AppRoutes = () => {

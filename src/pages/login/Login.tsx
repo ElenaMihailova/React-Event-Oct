@@ -1,27 +1,13 @@
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { LoginForm } from "../components/login-forms/LoginForm";
-import { TestProfiles } from "../components/login-forms/TestProfiles";
+import { LoginForm } from "../../components/login-forms/LoginForm";
+import { TestProfiles } from "../../components/login-forms/testProfiles/TestProfiles";
+import "./style.css";
 
 export const Login: React.FC = () => {
-  const gridStyle: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "start",
-    flexWrap: "wrap",
-    gap: "30px",
-    paddingTop: "30px",
-  };
-
-  const boxStyle: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-  };
-
   return (
-    <Grid container spacing={1} style={boxStyle}>
-      <Grid style={gridStyle}>
+    <Grid container spacing={1} className="containerStyle">
+      <Grid className="gridStyle">
         <Typography
           variant="h4"
           gutterBottom
@@ -38,7 +24,7 @@ export const Login: React.FC = () => {
         <LoginForm />
       </Grid>
 
-      <Grid style={gridStyle}>
+      <Grid className="gridStyle">
         <Typography
           variant="h4"
           gutterBottom
