@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   gap: 30px;
   justify-content: start;
-};
+}
 
 .card {
   padding: 6px;
