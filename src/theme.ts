@@ -4,23 +4,22 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#1E88E5",
-      // light: "#1976d2",
     },
     secondary: {
-      main: "#ff4081",
+      main: "#000000",
     },
     text: {
       primary: "#000000DE",
       secondary: "#00000099",
     },
     background: {
-      default: "#f5f5f5", // основной цвет фона
+      default: "#f5f5f5",
+      paper: "#ffffff",
     },
   },
 
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
-
     body1: {
       fontSize: "16px",
       fontWeight: 400,
