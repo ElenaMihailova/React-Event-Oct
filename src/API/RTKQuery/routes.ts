@@ -1,4 +1,4 @@
-const apiPath = "https://yatsenko.site/react-event-server/";
+const apiPath = "https://yatsenko.site/react-event-server";
 
 export default {
   apiPath,
