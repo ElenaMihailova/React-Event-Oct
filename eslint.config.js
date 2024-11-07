@@ -41,6 +41,7 @@ export default [
       ],
       "import/no-unresolved": "error",
       "import/no-duplicates": "warn",
+      "react-refresh/only-export-components": "off",
     },
     settings: {
       "import/resolver": {
