@@ -87,11 +87,19 @@
 ## Технологии
 
 Фреймворк: React с Vite
+
 TypeScript: Статическая проверка типов
+
 Управление состоянием: Redux Toolkit
+
 UI-библиотека: MUI (Material UI) и Emotion для стилизации
+
 Работа с формами: Formik
+
 Маршрутизация: React Router DOM
+
 Карты: Leaflet и React Leaflet
+
 Уведомления: React Toastify
+
 Линтинг и форматирование: ESLint и Prettier
