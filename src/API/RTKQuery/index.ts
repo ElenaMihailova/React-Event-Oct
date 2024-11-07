@@ -8,7 +8,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,  // Отключаем проверку сериализуемости
+      serializableCheck: false, // Отключаем проверку сериализуемости
     }).concat(api.middleware),
 });
 

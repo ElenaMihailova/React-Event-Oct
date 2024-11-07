@@ -39,9 +39,7 @@ export const UserMenu = () => {
     setMenuButton(null);
   };
 
-
-  if (!loggedIn)
-    return null
+  if (!loggedIn) return null;
 
   return (
     <Box>
