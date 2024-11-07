@@ -4,11 +4,11 @@ import { Header } from "./Header";
 import Footer from "./Footer";
 import theme from "../theme";
 
-interface WrapperProps {
+interface AppWrapperProps {
   children: React.ReactNode;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   return (
     <Box
       sx={{
@@ -34,5 +34,3 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
     </Box>
   );
 };
-
-export default Wrapper;
