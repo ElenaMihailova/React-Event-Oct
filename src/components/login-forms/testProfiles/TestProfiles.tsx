@@ -7,7 +7,7 @@ const containerStyle: React.CSSProperties = {
   flexDirection: "column",
   flexWrap: "wrap",
   gap: "30px",
-  justifyContent: "start",  
+  justifyContent: "start",
 };
 
 const cardStyle: React.CSSProperties = {
