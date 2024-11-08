@@ -80,7 +80,7 @@ export const LoginForm: React.FC = () => {
       />
       <SubmitButton
         isDisabled={
-          loginFormData.values.login === "" &&
+          loginFormData.values.login === "" ||
           loginFormData.values.password === ""
         }
       />
