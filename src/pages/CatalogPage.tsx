@@ -35,6 +35,7 @@ export const CatalogPage: React.FC = () => {
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
   }>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
     setDisplayMode(mode);
@@ -51,6 +52,14 @@ export const CatalogPage: React.FC = () => {
     navigate(`/details?id=${id}`);
   };
 
+  const handleDateChange = (date: string | null) => {
+    setSelectedDate(date);
+    setFilters((prev) => ({
+      ...prev,
+      date: date,
+    }));
+  };
+
   const filteredCards = useMemo(() => {
     return cards.filter((card: HelpRequestData) => {
       const matchesFilters = Object.entries(filters).every(
@@ -60,6 +69,14 @@ export const CatalogPage: React.FC = () => {
             return card.requesterType === filterValue;
           if (filterKey === "Чем мы помогаем")
             return card.helpType === filterValue;
+          if (filterKey === "date" && selectedDate) {
+            const cardDate = new Date(card.endingDate);
+            const selectedDateObj = new Date(selectedDate);
+            return (
+              cardDate.setHours(0, 0, 0, 0) <=
+              selectedDateObj.setHours(0, 0, 0, 0)
+            );
+          }
           return true;
         },
       );
@@ -88,7 +105,7 @@ export const CatalogPage: React.FC = () => {
 
       return matchesFilters && matchesVolunteerFilters && matchesSearch;
     });
-  }, [cards, filters, selectedVolunteerFilters, searchText]);
+  }, [cards, filters, selectedVolunteerFilters, searchText, selectedDate]);
 
   const paginatedCards = filteredCards.slice(
     (page - 1) * itemsPerPage,
@@ -109,6 +126,7 @@ export const CatalogPage: React.FC = () => {
           filters={filters}
           selectedVolunteerFilters={selectedVolunteerFilters}
           setSelectedVolunteerFilters={setSelectedVolunteerFilters}
+          onDateChange={handleDateChange}
         />
         <Stack sx={{ flex: "1", height: "100%" }}>
           <SearchSection onSearchChange={setSearchText} />

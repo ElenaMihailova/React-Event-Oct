@@ -15,6 +15,7 @@ interface FilterSidebarProps {
   setSelectedVolunteerFilters: React.Dispatch<
     React.SetStateAction<{ [key: string]: string | null }>
   >;
+  onDateChange: (date: string | null) => void;
 }
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
@@ -22,6 +23,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   setFilters,
   selectedVolunteerFilters,
   setSelectedVolunteerFilters,
+  onDateChange,
 }) => {
   const theme = useTheme();
 
@@ -66,7 +68,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           selectedFilters={selectedVolunteerFilters}
           onCheckboxChange={handleVolunteerCheckboxChange}
         />
-        <DateFilter />
+        <DateFilter onDateChange={onDateChange} />
       </FormControl>
 
       <ResetButton
