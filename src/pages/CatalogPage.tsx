@@ -12,7 +12,6 @@ import { HelpRequestData } from "../types/types";
 import MapBlock from "../components/Map";
 import { ViewToggleGroup } from "../components/ViewToggleGroup";
 
-
 export const CatalogPage: React.FC = () => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
@@ -36,8 +35,6 @@ export const CatalogPage: React.FC = () => {
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
   }>({});
-
-
 
   const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
     setDisplayMode(mode);
@@ -145,7 +142,10 @@ export const CatalogPage: React.FC = () => {
               <Typography variant="h6">
                 Найдено: {filteredCards.length}
               </Typography>
-              <ViewToggleGroup handleDisplayModeChange={handleDisplayModeChange} displayMode={displayMode} />
+              <ViewToggleGroup
+                handleDisplayModeChange={handleDisplayModeChange}
+                displayMode={displayMode}
+              />
             </Box>
 
             {isLoading ? (

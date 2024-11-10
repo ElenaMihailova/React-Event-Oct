@@ -15,7 +15,10 @@ const buttonConfigs = [
   { mode: "map", icon: LocationOnFilled, alt: "Map View" },
 ];
 
-export const ViewToggleGroup: React.FC<ViewToggleGroupProps> = ({ handleDisplayModeChange, displayMode }) => {
+export const ViewToggleGroup: React.FC<ViewToggleGroupProps> = ({
+  handleDisplayModeChange,
+  displayMode,
+}) => {
   return (
     <Box>
       {buttonConfigs.map(({ mode, icon, alt }) => (
@@ -23,13 +26,15 @@ export const ViewToggleGroup: React.FC<ViewToggleGroupProps> = ({ handleDisplayM
           key={mode}
           src={icon}
           alt={alt}
-          onClickTable={() => handleDisplayModeChange(mode as "grid" | "list" | "map")}
+          onClickTable={() =>
+            handleDisplayModeChange(mode as "grid" | "list" | "map")
+          }
           sx={{
-            backgroundColor: displayMode === mode ? "rgba(0, 0, 0, 0.08)" : "transparent",
+            backgroundColor:
+              displayMode === mode ? "rgba(0, 0, 0, 0.08)" : "transparent",
           }}
         />
       ))}
     </Box>
-  )
-}
-
+  );
+};
