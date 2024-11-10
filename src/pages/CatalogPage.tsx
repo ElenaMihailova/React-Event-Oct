@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Box, Typography, useTheme, Pagination } from "@mui/material";
+import React, { useState, useMemo } from "react";
+import { Box, Typography, useTheme, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { FilterSidebar } from "../components/FilterSidebar";
+import { FilterSidebar } from "../components/filter-slidebar/FilterSidebar";
 import SearchSection from "../components/SearchSection";
 import { ResultSection } from "../components/ResultSection";
 import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
@@ -51,47 +51,44 @@ export const CatalogPage: React.FC = () => {
     navigate(`/details?id=${id}`);
   };
 
-  const filteredCards = cards.filter((card: HelpRequestData) => {
-    const matchesFilters = Object.entries(filters).every(
-      ([filterKey, filterValue]) => {
+  const filteredCards = useMemo(() => {
+    return cards.filter((card: HelpRequestData) => {
+      const matchesFilters = Object.entries(filters).every(
+        ([filterKey, filterValue]) => {
+          if (filterValue === null) return true;
+          if (filterKey === "Кому мы помогаем")
+            return card.requesterType === filterValue;
+          if (filterKey === "Чем мы помогаем")
+            return card.helpType === filterValue;
+          return true;
+        },
+      );
+
+      const matchesVolunteerFilters = Object.entries(
+        selectedVolunteerFilters,
+      ).every(([filterKey, filterValue]) => {
         if (filterValue === null) return true;
-
-        if (filterKey === "Кому мы помогаем") {
-          return card.requesterType === filterValue;
-        }
-        if (filterKey === "Чем мы помогаем") {
-          return card.helpType === filterValue;
-        }
+        if (filterKey === "Специализация")
+          return card.helperRequirements?.qualification === filterValue;
+        if (filterKey === "Необходимо волонтеров")
+          return card.helperRequirements?.helperType === filterValue;
+        if (filterKey === "Формат")
+          return filterValue === "online"
+            ? card.helperRequirements?.isOnline === true
+            : card.helperRequirements?.isOnline === false;
         return true;
-      },
-    );
+      });
 
-    const matchesVolunteerFilters = Object.entries(
-      selectedVolunteerFilters,
-    ).every(([filterKey, filterValue]) => {
-      if (filterValue === null) return true;
+      const matchesSearch =
+        searchText === "" ||
+        card.title.toLowerCase().includes(searchText.toLowerCase()) ||
+        card.organization.title
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
 
-      if (filterKey === "Специализация") {
-        return card.helperRequirements?.qualification === filterValue;
-      }
-      if (filterKey === "Необходимо волонтеров") {
-        return card.helperRequirements?.helperType === filterValue;
-      }
-      if (filterKey === "Формат") {
-        return filterValue === "online"
-          ? card.helperRequirements?.isOnline === true
-          : card.helperRequirements?.isOnline === false;
-      }
-      return true;
+      return matchesFilters && matchesVolunteerFilters && matchesSearch;
     });
-
-    const matchesSearch =
-      searchText === "" ||
-      card.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      card.organization.title.toLowerCase().includes(searchText.toLowerCase());
-
-    return matchesFilters && matchesVolunteerFilters && matchesSearch;
-  });
+  }, [cards, filters, selectedVolunteerFilters, searchText]);
 
   const paginatedCards = filteredCards.slice(
     (page - 1) * itemsPerPage,
@@ -99,26 +96,21 @@ export const CatalogPage: React.FC = () => {
   );
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
+    <Stack
       sx={{ width: "100%", boxSizing: "border-box", paddingX: 2, paddingY: 4 }}
     >
       <Typography variant="h4" sx={{ textAlign: "left" }}>
         Запросы о помощи
       </Typography>
 
-      <Box display="flex" mt={2} flex="1">
-        <Box sx={{ width: theme.spacing(32), marginRight: theme.spacing(1.5) }}>
-          <FilterSidebar
-            setFilters={setFilters}
-            filters={filters}
-            selectedVolunteerFilters={selectedVolunteerFilters}
-            setSelectedVolunteerFilters={setSelectedVolunteerFilters}
-          />
-        </Box>
-
-        <Box flex="1" display="flex" flexDirection="column" height="100%">
+      <Box sx={{ display: "flex", marginTop: 2, flex: "1" }}>
+        <FilterSidebar
+          setFilters={setFilters}
+          filters={filters}
+          selectedVolunteerFilters={selectedVolunteerFilters}
+          setSelectedVolunteerFilters={setSelectedVolunteerFilters}
+        />
+        <Stack sx={{ flex: "1", height: "100%" }}>
           <SearchSection onSearchChange={setSearchText} />
 
           <Box
@@ -131,6 +123,7 @@ export const CatalogPage: React.FC = () => {
               borderRadius: theme.shape.borderRadius,
               flex: 1,
               minHeight: "100%",
+              border: theme.borders.default,
             }}
           >
             <Box
@@ -160,29 +153,24 @@ export const CatalogPage: React.FC = () => {
                 onMarkerClick={handleCardClick}
               />
             ) : (
-              <>
-                <ResultSection
-                  cards={paginatedCards.map((card: HelpRequestData) => ({
-                    ...card,
-                    collectedAmount: card.requestGoalCurrentValue,
-                    targetAmount: card.requestGoal,
-                    contributorsCount: card.contributorsCount,
-                  }))}
-                  onCardClick={handleCardClick}
-                  displayMode={displayMode}
-                />
-                <Pagination
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePageChange}
-                  sx={{ mt: 2, display: "flex", justifyContent: "center" }}
-                />
-              </>
+              <ResultSection
+                cards={paginatedCards.map((card: HelpRequestData) => ({
+                  ...card,
+                  collectedAmount: card.requestGoalCurrentValue,
+                  targetAmount: card.requestGoal,
+                  contributorsCount: card.contributorsCount,
+                }))}
+                onCardClick={handleCardClick}
+                displayMode={displayMode}
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             )}
           </Box>
-        </Box>
+        </Stack>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 

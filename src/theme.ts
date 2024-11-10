@@ -1,5 +1,20 @@
 import { createTheme } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+  interface Theme {
+    borders: {
+      default: string;
+      defaultRadius: number;
+    };
+  }
+  interface ThemeOptions {
+    borders?: {
+      default: string;
+      defaultRadius: number;
+    };
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -46,6 +61,10 @@ const theme = createTheme({
   },
   shape: {
     borderRadius: 4,
+  },
+  borders: {
+    default: "1px solid #E0E0E0",
+    defaultRadius: 1,
   },
 });
 

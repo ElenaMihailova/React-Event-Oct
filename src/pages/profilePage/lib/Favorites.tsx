@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, useTheme, Pagination } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ResultSection } from "../../../components/ResultSection";
 import { useGetRequestCardsQuery } from "../../../API/RTKQuery/api";
@@ -109,12 +109,9 @@ export const Favorites: React.FC = () => {
                 }))}
                 onCardClick={handleCardClick}
                 displayMode={displayMode}
-              />
-              <Pagination
-                count={totalPages}
-                page={page}
-                onChange={handlePageChange}
-                sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
               />
             </>
           )}

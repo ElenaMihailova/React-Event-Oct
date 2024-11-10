@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { ButtonIcon } from "../components/IconButton";
 import GridonRounded from "../assets/icon/GridonRounded.png";
 import ListAltRounded from "../assets/icon/ListAltRounded.png";
@@ -19,8 +20,15 @@ export const ViewToggleGroup: React.FC<ViewToggleGroupProps> = ({
   handleDisplayModeChange,
   displayMode,
 }) => {
+  const theme = useTheme();
+
   return (
-    <Box>
+    <Box
+      sx={{
+        border: theme.borders.default,
+        borderRadius: theme.borders.defaultRadius,
+      }}
+    >
       {buttonConfigs.map(({ mode, icon, alt }) => (
         <ButtonIcon
           key={mode}
@@ -32,6 +40,8 @@ export const ViewToggleGroup: React.FC<ViewToggleGroupProps> = ({
           sx={{
             backgroundColor:
               displayMode === mode ? "rgba(0, 0, 0, 0.08)" : "transparent",
+            borderRadius: "0",
+            borderRight: theme.borders.default,
           }}
         />
       ))}
