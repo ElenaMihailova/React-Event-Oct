@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
+import { FilterTitle } from "./FilterTitle";
 
 interface DateFilterProps {
   onDateChange: (date: string | null) => void;
@@ -15,12 +16,9 @@ export const DateFilter: React.FC<DateFilterProps> = ({ onDateChange }) => {
   };
 
   return (
-    <Box mt={2}>
-      <Typography variant="subtitle1" mb={1}>
-        Помощь актуальна до:
-      </Typography>
+    <Box sx={{ paddingY: 3 }}>
+      <FilterTitle title='Помощь актуальна до:' />
       <TextField
-        label="Выберите дату"
         type="date"
         fullWidth
         value={selectedDate || ""}
@@ -28,6 +26,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({ onDateChange }) => {
         InputLabelProps={{
           shrink: true,
         }}
+        sx={{ marginTop: 1 }}
       />
     </Box>
   );

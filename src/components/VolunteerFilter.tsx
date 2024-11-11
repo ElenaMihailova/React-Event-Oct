@@ -22,7 +22,7 @@ export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({
   return (
     <Accordion>
       <AccordionSummary aria-controls="volunteer-content" id="volunteer-header">
-        <Typography variant="h6">Волонтерство</Typography>
+        <Typography variant="h4">Волонтерство</Typography>
       </AccordionSummary>
 
       <AccordionDetails

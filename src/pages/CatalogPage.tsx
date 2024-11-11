@@ -116,7 +116,7 @@ export const CatalogPage: React.FC = () => {
     <Stack
       sx={{ width: "100%", boxSizing: "border-box", paddingX: 2, paddingY: 4 }}
     >
-      <Typography variant="h4" sx={{ textAlign: "left" }}>
+      <Typography variant="h2" sx={{ textAlign: "left" }}>
         Запросы о помощи
       </Typography>
 

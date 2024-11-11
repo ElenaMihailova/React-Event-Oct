@@ -1,10 +1,10 @@
 import {
   Box,
-  Typography,
   FormGroup,
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import { FilterTitle } from "./FilterTitle";
 
 interface FilterItemProps {
   title: string;
@@ -20,11 +20,8 @@ export const FilterItem: React.FC<FilterItemProps> = ({
   onCheckboxChange,
 }) => {
   return (
-    <Box mb={2}>
-      <Typography variant="subtitle1" mb={1}>
-        {title}
-      </Typography>
-
+    <Box sx={{ marginTop: 2 }}>
+      <FilterTitle title={title} />
       <FormGroup>
         {options.map((option) => (
           <FormControlLabel
