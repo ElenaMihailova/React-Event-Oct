@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
 import { useLoadUserInfoQuery } from "../../API/RTKQuery/api";
-import { ErrorBlock } from "../../components/ErrorBlock";
 import { Favorites } from "./lib/Favorites";
 import useAuth from "../../auth/AuthProvider";
+import { ProfileTabs } from "../../components/ProfilTabs";
 
 export const ProfilePage = () => {
-  const [activeButton, setActiveButton] = useState("button1");
+  const [activeTab, setActiveTab] = useState("personalInfo");
 
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
@@ -24,12 +24,12 @@ export const ProfilePage = () => {
   };
 
   const renderContent = () => {
-    switch (activeButton) {
-      case "button1":
+    switch (activeTab) {
+      case "personalInfo":
         return <PersonalData />;
-      case "button2":
+      case "contacts":
         return <Contacts />;
-      case "button3":
+      case "favorites":
         return <Favorites />;
       default:
         return <PersonalData />;
@@ -37,23 +37,14 @@ export const ProfilePage = () => {
   };
 
   return (
-    <Container
-      maxWidth="xl"
-      component="section"
-      sx={{
-        // maxWidth: 1500,
-        flex: "grow",
-        backgroundColor: "#F5F5F5",
-        marginY: 0,
-        marginX: "auto",
-      }}
+    <Stack
+      sx={{ width: "100%", boxSizing: "border-box", paddingX: 2, paddingY: 4 }}
     >
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: "bold", textAlign: "left", mt: 3.75, mb: 2.5 }}
-      >
+
+      <Typography variant="h2" sx={{ textAlign: "left" }}>
         Мой профиль:
       </Typography>
+
       <Box sx={{ display: "flex" }}>
         <Box sx={{ width: 320, height: 436, backgroundColor: "#FFFFFF" }}>
           <Box
@@ -76,7 +67,7 @@ export const ProfilePage = () => {
               {isLoading ? (
                 "Загрузка..."
               ) : error ? (
-                <ErrorBlock />
+                <>Ошибка</>
               ) : (
                 `${firstName} ${lastName}`
               )}
@@ -110,26 +101,8 @@ export const ProfilePage = () => {
             backgroundColor: "#FFFFFF",
           }}
         >
-          <Tabs
-            value={
-              activeButton === "button1"
-                ? 0
-                : activeButton === "button2"
-                  ? 1
-                  : 2
-            }
-            indicatorColor="primary"
-            textColor="primary"
-            sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
-          >
-            <Tab
-              label="Личные данные"
-              onClick={() => setActiveButton("button1")}
-            />
-            <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
-            <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
-          </Tabs>
 
+          <ProfileTabs activeButton={activeTab} setActiveButton={setActiveTab} />
           <Box
             sx={{
               minHeight: "980px", // Установите минимальную высоту для контента
@@ -140,6 +113,6 @@ export const ProfilePage = () => {
           </Box>
         </Box>
       </Box>
-    </Container>
+    </Stack>
   );
 };
