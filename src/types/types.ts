@@ -35,4 +35,5 @@ export type HelpRequestData = {
   requestGoalCurrentValue: number;
   collectedAmount: number;
   targetAmount: number;
+  onClick?: () => void;
 };

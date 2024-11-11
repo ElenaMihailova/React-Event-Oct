@@ -27,7 +27,7 @@ const DonateWidget = ({
     toast.success("Успех! Спасибо за помощь");
     console.log(requestId);
   };
-  const progress = (requestGoalCurrentValue / requestGoal) * 100;
+  const progressValue = (requestGoalCurrentValue / requestGoal) * 100;
   return (
     <Box width={320}>
       <Card variant="outlined">
@@ -55,7 +55,7 @@ const DonateWidget = ({
             <LinearProgress
               variant="determinate"
               color="primary"
-              value={progress}
+              value={progressValue}
             />
           </Box>
           <Box
