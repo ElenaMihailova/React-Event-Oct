@@ -17,7 +17,7 @@ export const DateFilter: React.FC<DateFilterProps> = ({ onDateChange }) => {
 
   return (
     <Box sx={{ paddingY: 3 }}>
-      <FilterTitle title='Помощь актуальна до:' />
+      <FilterTitle title="Помощь актуальна до:" />
       <TextField
         type="date"
         fullWidth

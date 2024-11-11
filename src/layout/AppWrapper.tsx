@@ -20,7 +20,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       <Header />
       <Container
         component="main"
-        maxWidth='xl'
+        maxWidth="xl"
         sx={{
           flexGrow: 1,
           width: "100%",

@@ -1,9 +1,7 @@
-import {
-  Typography,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 
 interface FilterTitleProps {
-  title: string,
+  title: string;
 }
 
 export const FilterTitle: React.FC<FilterTitleProps> = ({ title }) => {
@@ -11,5 +9,5 @@ export const FilterTitle: React.FC<FilterTitleProps> = ({ title }) => {
     <Typography variant="h4" sx={{ opacity: "60%" }}>
       {title}
     </Typography>
-  )
-}
+  );
+};

@@ -1,9 +1,4 @@
-import {
-  Box,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-} from "@mui/material";
+import { Box, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import { FilterTitle } from "./FilterTitle";
 
 interface FilterItemProps {

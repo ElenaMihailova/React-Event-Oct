@@ -68,8 +68,7 @@ const theme = createTheme({
     h6: {
       fontSize: "20px",
       fontWeight: 500,
-      lineHeight: "160%", 
-
+      lineHeight: "160%",
     },
   },
   shape: {

@@ -1,33 +1,27 @@
 import React, { useState, useMemo } from "react";
-import { Box, Typography, useTheme, Stack } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FilterSidebar } from "../components/filter-slidebar/FilterSidebar";
 import SearchSection from "../components/SearchSection";
-import { ResultSection } from "../components/ResultSection";
 import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
-import { ErrorBlock } from "../components/ErrorBlock";
+import ContentDisplayPanel from "../components/ContentDisplayPanel";
 
-import { EmptyBlock } from "../components/EmpryBlock";
-import { HelpRequestData } from "../types/types";
-import MapBlock from "../components/Map";
-import { ViewToggleGroup } from "../components/ViewToggleGroup";
+import {
+  matchesFilters,
+  matchesVolunteerFilters,
+  matchesSearch,
+} from "../utils/FilterHelper";
 
 export const CatalogPage: React.FC = () => {
-  const theme = useTheme();
+  // Навигация
+  const navigate = useNavigate();
+
+  // Пагинация и количество элементов на странице
   const [page, setPage] = useState(1);
   const itemsPerPage = 3;
 
-  const navigate = useNavigate();
+  // Фильтрация и поиск
   const [searchText, setSearchText] = useState("");
-
-  const {
-    data: cards = [],
-    isLoading,
-    error,
-  } = useGetRequestCardsQuery(undefined);
-
-  const totalPages = Math.ceil(cards.length / itemsPerPage);
-
   const [displayMode, setDisplayMode] = useState<"grid" | "list" | "map">(
     "grid",
   );
@@ -37,79 +31,44 @@ export const CatalogPage: React.FC = () => {
   }>({});
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
-    setDisplayMode(mode);
-  };
+  // Данные из API
+  const {
+    data: cards = [],
+    isLoading,
+    error,
+  } = useGetRequestCardsQuery(undefined);
 
-  const handlePageChange = (
+  // Обработчики событий
+  const handleDisplayModeChange = (mode: "grid" | "list" | "map") =>
+    setDisplayMode(mode);
+  const handlePaginationChange = (
     _event: React.ChangeEvent<unknown>,
     value: number,
-  ) => {
-    setPage(value);
-  };
-
-  const handleCardClick = (id: string) => {
-    navigate(`/details?id=${id}`);
-  };
-
+  ) => setPage(value);
+  const handleCardClick = (id: string) => navigate(`/details?id=${id}`);
   const handleDateChange = (date: string | null) => {
     setSelectedDate(date);
-    setFilters((prev) => ({
-      ...prev,
-      date: date,
-    }));
+    setFilters((prev) => ({ ...prev, date: date }));
   };
 
+  // Мемоизированные значения
   const filteredCards = useMemo(() => {
-    return cards.filter((card: HelpRequestData) => {
-      const matchesFilters = Object.entries(filters).every(
-        ([filterKey, filterValue]) => {
-          if (filterValue === null) return true;
-          if (filterKey === "Кому мы помогаем")
-            return card.requesterType === filterValue;
-          if (filterKey === "Чем мы помогаем")
-            return card.helpType === filterValue;
-          if (filterKey === "date" && selectedDate) {
-            const cardDate = new Date(card.endingDate);
-            const selectedDateObj = new Date(selectedDate);
-            return (
-              cardDate.setHours(0, 0, 0, 0) <=
-              selectedDateObj.setHours(0, 0, 0, 0)
-            );
-          }
-          return true;
-        },
-      );
-
-      const matchesVolunteerFilters = Object.entries(
-        selectedVolunteerFilters,
-      ).every(([filterKey, filterValue]) => {
-        if (filterValue === null) return true;
-        if (filterKey === "Специализация")
-          return card.helperRequirements?.qualification === filterValue;
-        if (filterKey === "Необходимо волонтеров")
-          return card.helperRequirements?.helperType === filterValue;
-        if (filterKey === "Формат")
-          return filterValue === "online"
-            ? card.helperRequirements?.isOnline === true
-            : card.helperRequirements?.isOnline === false;
-        return true;
-      });
-
-      const matchesSearch =
-        searchText === "" ||
-        card.title.toLowerCase().includes(searchText.toLowerCase()) ||
-        card.organization.title
-          .toLowerCase()
-          .includes(searchText.toLowerCase());
-
-      return matchesFilters && matchesVolunteerFilters && matchesSearch;
-    });
+    return cards.filter(
+      (card) =>
+        matchesFilters(card, filters, selectedDate) &&
+        matchesVolunteerFilters(card, selectedVolunteerFilters) &&
+        matchesSearch(card, searchText),
+    );
   }, [cards, filters, selectedVolunteerFilters, searchText, selectedDate]);
 
-  const paginatedCards = filteredCards.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
+  const paginatedCards = useMemo(
+    () => filteredCards.slice((page - 1) * itemsPerPage, page * itemsPerPage),
+    [filteredCards, page, itemsPerPage],
+  );
+
+  const totalPages = useMemo(
+    () => Math.ceil(filteredCards.length / itemsPerPage),
+    [filteredCards.length, itemsPerPage],
   );
 
   return (
@@ -131,61 +90,18 @@ export const CatalogPage: React.FC = () => {
         <Stack sx={{ flex: "1", height: "100%" }}>
           <SearchSection onSearchChange={setSearchText} />
 
-          <Box
-            sx={{
-              backgroundColor: "white",
-              padding: `${theme.spacing(2.5)}`,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              borderRadius: theme.shape.borderRadius,
-              flex: 1,
-              minHeight: "100%",
-              border: theme.borders.default,
-            }}
-          >
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-between"
-              marginBottom={3}
-            >
-              <Typography variant="h6">
-                Найдено: {filteredCards.length}
-              </Typography>
-              <ViewToggleGroup
-                handleDisplayModeChange={handleDisplayModeChange}
-                displayMode={displayMode}
-              />
-            </Box>
-
-            {isLoading ? (
-              <Typography>Загрузка...</Typography>
-            ) : error ? (
-              <ErrorBlock />
-            ) : filteredCards.length === 0 ? (
-              <EmptyBlock />
-            ) : displayMode === "map" ? (
-              <MapBlock
-                requests={filteredCards}
-                onMarkerClick={handleCardClick}
-              />
-            ) : (
-              <ResultSection
-                cards={paginatedCards.map((card: HelpRequestData) => ({
-                  ...card,
-                  collectedAmount: card.requestGoalCurrentValue,
-                  targetAmount: card.requestGoal,
-                  contributorsCount: card.contributorsCount,
-                }))}
-                onCardClick={handleCardClick}
-                displayMode={displayMode}
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            )}
-          </Box>
+          <ContentDisplayPanel
+            filteredCards={filteredCards}
+            displayMode={displayMode}
+            onDisplayModeChange={handleDisplayModeChange}
+            paginatedCards={paginatedCards}
+            onCardClick={handleCardClick}
+            isLoading={isLoading}
+            error={!!error}
+            page={page}
+            totalPages={totalPages}
+            onPageChange={handlePaginationChange}
+          />
         </Stack>
       </Box>
     </Stack>

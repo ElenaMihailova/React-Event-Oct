@@ -8,12 +8,15 @@ import { SidebarContainer, ResetButton } from "./styles";
 
 interface FilterSidebarProps {
   filters: Record<string, string | null>;
-  setFilters: React.Dispatch<React.SetStateAction<Record<string, string | null>>>;
+  setFilters: React.Dispatch<
+    React.SetStateAction<Record<string, string | null>>
+  >;
   selectedVolunteerFilters: Record<string, string | null>;
-  setSelectedVolunteerFilters: React.Dispatch<React.SetStateAction<Record<string, string | null>>>;
+  setSelectedVolunteerFilters: React.Dispatch<
+    React.SetStateAction<Record<string, string | null>>
+  >;
   onDateChange: (date: string | null) => void;
 }
-
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   filters,
