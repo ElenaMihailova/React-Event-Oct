@@ -7,6 +7,7 @@ import CatalogPage from "../pages/CatalogPage";
 import HelpRequestPage from "../pages/helpRequestPage/HelpRequestPage";
 import { ProfilePage } from "../pages/profilePage/ProfilePage";
 import { Login } from "../pages/login/Login";
+import { NotFoundPage } from "../pages/NotFoundPage";
 import PrivateRoute from "../auth/PrivateRoute";
 
 const AppRoutes = () => {
@@ -51,6 +52,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </ReduxProvider>
   );

@@ -33,7 +33,7 @@ const DisplayModeSwitcher: React.FC<DisplayModeSwitcherProps> = ({
   }
 
   if (error) {
-    return <ErrorBlock />;
+    return <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />;
   }
 
   if (cards.length === 0) {
