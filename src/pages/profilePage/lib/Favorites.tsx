@@ -54,8 +54,12 @@ export const Favorites: React.FC = () => {
   return (
     <Box
       sx={{
-        display: "flex", flex: "1", marginTop: 2, flexWrap: "wrap"
-      }}>
+        display: "flex",
+        flex: "1",
+        marginTop: 2,
+        flexWrap: "wrap",
+      }}
+    >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
         <Box
           sx={{
