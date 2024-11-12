@@ -11,7 +11,7 @@ const Footer = () => {
           p: 4,
           display: "flex",
           justifyContent: "space-between",
-          maxWidth: theme.breakpoints.values.lg,
+          maxWidth: theme.breakpoints.values.xl,
         }}
       >
         <Typography

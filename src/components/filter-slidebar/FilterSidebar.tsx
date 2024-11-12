@@ -1,19 +1,21 @@
 import React from "react";
-import { Box, Typography, FormControl, Button, useTheme } from "@mui/material";
-import { FilterItem } from "./FilterItem";
-import { VolunteerFilter } from "./VolunteerFilter";
-import { filterData } from "../data/FilterData";
-import { DateFilter } from "./DateFilter";
+import { Typography, FormControl, useTheme } from "@mui/material";
+import { FilterItem } from "../FilterItem";
+import { VolunteerFilter } from "../VolunteerFilter";
+import { filterData } from "../../data/FilterData";
+import { DateFilter } from "../DateFilter";
+import { SidebarContainer, ResetButton } from "./styles";
 
 interface FilterSidebarProps {
-  filters: { [key: string]: string | null };
+  filters: Record<string, string | null>;
   setFilters: React.Dispatch<
-    React.SetStateAction<{ [key: string]: string | null }>
+    React.SetStateAction<Record<string, string | null>>
   >;
-  selectedVolunteerFilters: { [key: string]: string | null };
+  selectedVolunteerFilters: Record<string, string | null>;
   setSelectedVolunteerFilters: React.Dispatch<
-    React.SetStateAction<{ [key: string]: string | null }>
+    React.SetStateAction<Record<string, string | null>>
   >;
+  onDateChange: (date: string | null) => void;
 }
 
 export const FilterSidebar: React.FC<FilterSidebarProps> = ({
@@ -21,6 +23,7 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   setFilters,
   selectedVolunteerFilters,
   setSelectedVolunteerFilters,
+  onDateChange,
 }) => {
   const theme = useTheme();
 
@@ -44,19 +47,8 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
   };
 
   return (
-    <Box
-      p={2}
-      sx={{
-        backgroundColor: "white",
-        padding: `${theme.spacing(2.5)}`,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        borderRadius: theme.shape.borderRadius,
-        textAlign: "left",
-      }}
-    >
-      <Typography variant="h6" mb={2}>
+    <SidebarContainer sx={{ borderRadius: theme.shape.borderRadius }}>
+      <Typography variant="h6" mb={1}>
         Фильтрация
       </Typography>
 
@@ -76,24 +68,16 @@ export const FilterSidebar: React.FC<FilterSidebarProps> = ({
           selectedFilters={selectedVolunteerFilters}
           onCheckboxChange={handleVolunteerCheckboxChange}
         />
-        <DateFilter />
+        <DateFilter onDateChange={onDateChange} />
       </FormControl>
 
-      <Button
+      <ResetButton
         variant="outlined"
         color="secondary"
         onClick={handleResetFilters}
-        sx={{
-          color: "black",
-          borderColor: "black",
-          "&:hover": {
-            borderColor: "black",
-            backgroundColor: "rgba(0, 0, 0, 0.04)",
-          },
-        }}
       >
         Сбросить
-      </Button>
-    </Box>
+      </ResetButton>
+    </SidebarContainer>
   );
 };
