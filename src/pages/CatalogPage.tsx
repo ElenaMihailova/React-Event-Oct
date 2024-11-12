@@ -1,35 +1,27 @@
-import React, { useState } from "react";
-import { Box, Typography, useTheme, Pagination } from "@mui/material";
+import React, { useState, useMemo } from "react";
+import { Box, Typography, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { FilterSidebar } from "../components/FilterSidebar";
+import { FilterSidebar } from "../components/filter-slidebar/FilterSidebar";
 import SearchSection from "../components/SearchSection";
-import { ResultSection } from "../components/ResultSection";
 import { useGetRequestCardsQuery } from "../API/RTKQuery/api";
-import { ErrorBlock } from "../components/ErrorBlock";
-import { ButtonIcon } from "../components/IconButton";
-import GridonRounded from "../assets/icon/GridonRounded.png";
-import ListAltRounded from "../assets/icon/ListAltRounded.png";
-import LocationOnFilled from "../assets/icon/LocationOnFilled.png";
-import { EmptyBlock } from "../components/EmpryBlock";
-import { HelpRequestData } from "../types/types";
-import MapBlock from "../components/Map";
+import ContentDisplayPanel from "../components/ContentDisplayPanel";
+
+import {
+  matchesFilters,
+  matchesVolunteerFilters,
+  matchesSearch,
+} from "../utils/FilterHelper";
 
 export const CatalogPage: React.FC = () => {
-  const theme = useTheme();
+  // Навигация
+  const navigate = useNavigate();
+
+  // Пагинация и количество элементов на странице
   const [page, setPage] = useState(1);
   const itemsPerPage = 3;
 
-  const navigate = useNavigate();
+  // Фильтрация и поиск
   const [searchText, setSearchText] = useState("");
-
-  const {
-    data: cards = [],
-    isLoading,
-    error,
-  } = useGetRequestCardsQuery(undefined);
-
-  const totalPages = Math.ceil(cards.length / itemsPerPage);
-
   const [displayMode, setDisplayMode] = useState<"grid" | "list" | "map">(
     "grid",
   );
@@ -37,186 +29,82 @@ export const CatalogPage: React.FC = () => {
   const [selectedVolunteerFilters, setSelectedVolunteerFilters] = useState<{
     [key: string]: string | null;
   }>({});
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const handleDisplayModeChange = (mode: "grid" | "list" | "map") => {
+  // Данные из API
+  const {
+    data: cards = [],
+    isLoading,
+    error,
+  } = useGetRequestCardsQuery(undefined);
+
+  // Обработчики событий
+  const handleDisplayModeChange = (mode: "grid" | "list" | "map") =>
     setDisplayMode(mode);
-  };
-
-  const handlePageChange = (
+  const handlePaginationChange = (
     _event: React.ChangeEvent<unknown>,
     value: number,
-  ) => {
-    setPage(value);
+  ) => setPage(value);
+  const handleCardClick = (id: string) => navigate(`/details?id=${id}`);
+  const handleDateChange = (date: string | null) => {
+    setSelectedDate(date);
+    setFilters((prev) => ({ ...prev, date: date }));
   };
 
-  const handleCardClick = (id: string) => {
-    navigate(`/details?id=${id}`);
-  };
-
-  const filteredCards = cards.filter((card: HelpRequestData) => {
-    const matchesFilters = Object.entries(filters).every(
-      ([filterKey, filterValue]) => {
-        if (filterValue === null) return true;
-
-        if (filterKey === "Кому мы помогаем") {
-          return card.requesterType === filterValue;
-        }
-        if (filterKey === "Чем мы помогаем") {
-          return card.helpType === filterValue;
-        }
-        return true;
-      },
+  // Мемоизированные значения
+  const filteredCards = useMemo(() => {
+    return cards.filter(
+      (card) =>
+        matchesFilters(card, filters, selectedDate) &&
+        matchesVolunteerFilters(card, selectedVolunteerFilters) &&
+        matchesSearch(card, searchText),
     );
+  }, [cards, filters, selectedVolunteerFilters, searchText, selectedDate]);
 
-    const matchesVolunteerFilters = Object.entries(
-      selectedVolunteerFilters,
-    ).every(([filterKey, filterValue]) => {
-      if (filterValue === null) return true;
+  const paginatedCards = useMemo(
+    () => filteredCards.slice((page - 1) * itemsPerPage, page * itemsPerPage),
+    [filteredCards, page, itemsPerPage],
+  );
 
-      if (filterKey === "Специализация") {
-        return card.helperRequirements?.qualification === filterValue;
-      }
-      if (filterKey === "Необходимо волонтеров") {
-        return card.helperRequirements?.helperType === filterValue;
-      }
-      if (filterKey === "Формат") {
-        return filterValue === "online"
-          ? card.helperRequirements?.isOnline === true
-          : card.helperRequirements?.isOnline === false;
-      }
-      return true;
-    });
-
-    const matchesSearch =
-      searchText === "" ||
-      card.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      card.organization.title.toLowerCase().includes(searchText.toLowerCase());
-
-    return matchesFilters && matchesVolunteerFilters && matchesSearch;
-  });
-
-  const paginatedCards = filteredCards.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage,
+  const totalPages = useMemo(
+    () => Math.ceil(filteredCards.length / itemsPerPage),
+    [filteredCards.length, itemsPerPage],
   );
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
+    <Stack
       sx={{ width: "100%", boxSizing: "border-box", paddingX: 2, paddingY: 4 }}
     >
-      <Typography variant="h4" sx={{ textAlign: "left" }}>
+      <Typography variant="h2" sx={{ textAlign: "left" }}>
         Запросы о помощи
       </Typography>
 
-      <Box display="flex" mt={2} flex="1">
-        <Box sx={{ width: theme.spacing(32), marginRight: theme.spacing(1.5) }}>
-          <FilterSidebar
-            setFilters={setFilters}
-            filters={filters}
-            selectedVolunteerFilters={selectedVolunteerFilters}
-            setSelectedVolunteerFilters={setSelectedVolunteerFilters}
-          />
-        </Box>
-
-        <Box flex="1" display="flex" flexDirection="column" height="100%">
+      <Box sx={{ display: "flex", marginTop: 2, flex: "1" }}>
+        <FilterSidebar
+          setFilters={setFilters}
+          filters={filters}
+          selectedVolunteerFilters={selectedVolunteerFilters}
+          setSelectedVolunteerFilters={setSelectedVolunteerFilters}
+          onDateChange={handleDateChange}
+        />
+        <Stack sx={{ flex: "1", height: "100%" }}>
           <SearchSection onSearchChange={setSearchText} />
 
-          <Box
-            sx={{
-              backgroundColor: "white",
-              padding: `${theme.spacing(2.5)}`,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              borderRadius: theme.shape.borderRadius,
-              flex: 1,
-              minHeight: "100%",
-            }}
-          >
-            <Box
-              display="flex"
-              flexDirection="row"
-              justifyContent="space-between"
-              marginBottom={3}
-            >
-              <Typography variant="h6">
-                Найдено: {filteredCards.length}
-              </Typography>
-
-              <Box>
-                <ButtonIcon
-                  src={GridonRounded}
-                  alt="Grid View"
-                  onClickTable={() => handleDisplayModeChange("grid")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "grid"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon
-                  src={ListAltRounded}
-                  alt="List View"
-                  onClickTable={() => handleDisplayModeChange("list")}
-                  sx={{
-                    backgroundColor:
-                      displayMode === "list"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-                <ButtonIcon
-                  src={LocationOnFilled}
-                  alt="Map View"
-                  onClickTable={() => handleDisplayModeChange("map")} // Устанавливаем "map"
-                  sx={{
-                    backgroundColor:
-                      displayMode === "map"
-                        ? "rgba(0, 0, 0, 0.08)"
-                        : "transparent",
-                  }}
-                />
-              </Box>
-            </Box>
-
-            {isLoading ? (
-              <Typography>Загрузка...</Typography>
-            ) : error ? (
-              <ErrorBlock />
-            ) : filteredCards.length === 0 ? (
-              <EmptyBlock />
-            ) : displayMode === "map" ? (
-              <MapBlock
-                requests={filteredCards}
-                onMarkerClick={handleCardClick}
-              />
-            ) : (
-              <>
-                <ResultSection
-                  cards={paginatedCards.map((card: HelpRequestData) => ({
-                    ...card,
-                    collectedAmount: card.requestGoalCurrentValue,
-                    targetAmount: card.requestGoal,
-                    contributorsCount: card.contributorsCount,
-                  }))}
-                  onCardClick={handleCardClick}
-                  displayMode={displayMode}
-                />
-                <Pagination
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePageChange}
-                  sx={{ mt: 2, display: "flex", justifyContent: "center" }}
-                />
-              </>
-            )}
-          </Box>
-        </Box>
+          <ContentDisplayPanel
+            filteredCards={filteredCards}
+            displayMode={displayMode}
+            onDisplayModeChange={handleDisplayModeChange}
+            paginatedCards={paginatedCards}
+            onCardClick={handleCardClick}
+            isLoading={isLoading}
+            error={!!error}
+            page={page}
+            totalPages={totalPages}
+            onPageChange={handlePaginationChange}
+          />
+        </Stack>
       </Box>
-    </Box>
+    </Stack>
   );
 };
 

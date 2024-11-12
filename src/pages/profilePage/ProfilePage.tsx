@@ -41,7 +41,7 @@ export const ProfilePage = () => {
       maxWidth="xl"
       component="section"
       sx={{
-        maxWidth: 1500,
+        // maxWidth: 1500,
         flex: "grow",
         backgroundColor: "#F5F5F5",
         marginY: 0,

@@ -26,6 +26,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({ onSearchChange }) => {
         flexDirection: "column",
         justifyContent: "space-between",
         borderRadius: theme.shape.borderRadius,
+        border: theme.borders.default,
       }}
     >
       <Typography

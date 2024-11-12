@@ -1,10 +1,9 @@
-import React from "react";
 import {
-  Box,
   Typography,
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  useTheme,
 } from "@mui/material";
 import { FilterItem } from "./FilterItem";
 import { filterDataVolunteer } from "../data/FilterData";
@@ -18,30 +17,27 @@ export const VolunteerFilter: React.FC<VolunteerFilterProps> = ({
   selectedFilters,
   onCheckboxChange,
 }) => {
-  return (
-    <Box>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="volunteer-content"
-          id="volunteer-header"
-        >
-          <Typography variant="h6">Волонтерство</Typography>
-        </AccordionSummary>
+  const theme = useTheme();
 
-        <AccordionDetails sx={{ backgroundColor: "#F5F5F5" }}>
-          {filterDataVolunteer.map((filter) => (
-            <FilterItem
-              key={filter.title}
-              title={filter.title}
-              options={filter.options}
-              selectedOption={selectedFilters[filter.title] || null}
-              onCheckboxChange={(value) =>
-                onCheckboxChange(filter.title, value)
-              }
-            />
-          ))}
-        </AccordionDetails>
-      </Accordion>
-    </Box>
+  return (
+    <Accordion>
+      <AccordionSummary aria-controls="volunteer-content" id="volunteer-header">
+        <Typography variant="h4">Волонтерство</Typography>
+      </AccordionSummary>
+
+      <AccordionDetails
+        sx={{ backgroundColor: theme.palette.background.default }}
+      >
+        {filterDataVolunteer.map((filter) => (
+          <FilterItem
+            key={filter.title}
+            title={filter.title}
+            options={filter.options}
+            selectedOption={selectedFilters[filter.title] || null}
+            onCheckboxChange={(value) => onCheckboxChange(filter.title, value)}
+          />
+        ))}
+      </AccordionDetails>
+    </Accordion>
   );
 };
