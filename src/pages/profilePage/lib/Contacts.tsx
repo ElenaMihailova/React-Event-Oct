@@ -13,7 +13,7 @@ export const Contacts = () => {
   }
 
   if (error) {
-    return <ErrorBlock />;
+    return <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />;
   }
 
   const { email, phone } = data?.contacts || {};

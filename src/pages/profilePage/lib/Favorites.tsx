@@ -52,7 +52,14 @@ export const Favorites: React.FC = () => {
   const paginatedCards = cards.slice(startIndex, endIndex);
 
   return (
-    <Box display="flex" mt={2} flex="1">
+    <Box
+      sx={{
+        display: "flex",
+        flex: "1",
+        marginTop: 2,
+        flexWrap: "wrap",
+      }}
+    >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
         <Box
           sx={{
@@ -97,7 +104,7 @@ export const Favorites: React.FC = () => {
           {isLoading ? (
             <Typography>Загрузка...</Typography>
           ) : error ? (
-            <ErrorBlock />
+            <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />
           ) : (
             <>
               <ResultSection

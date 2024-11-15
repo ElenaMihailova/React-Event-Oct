@@ -79,7 +79,7 @@ export const CatalogPage: React.FC = () => {
         Запросы о помощи
       </Typography>
 
-      <Box sx={{ display: "flex", marginTop: 2, flex: "1" }}>
+      <Box sx={{ display: "flex", marginTop: 2, flex: "1", flexWrap: "wrap" }}>
         <FilterSidebar
           setFilters={setFilters}
           filters={filters}
