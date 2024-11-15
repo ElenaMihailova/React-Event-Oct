@@ -10,7 +10,7 @@ export const PersonalData = () => {
   }
 
   if (error) {
-    return <ErrorBlock />;
+    return <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />;
   }
 
   const {
