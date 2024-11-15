@@ -6,6 +6,7 @@ import {
   ListItemText,
   Box,
   IconButton,
+  Button
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -39,7 +40,9 @@ export const UserMenu = () => {
     setMenuButton(null);
   };
 
-  if (!loggedIn) return null;
+  if (!loggedIn) {
+    return null;
+  }
 
   return (
     <Box>

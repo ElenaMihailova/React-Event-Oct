@@ -14,6 +14,22 @@ export interface AddToFavouritesResponse {
   requestId: string;
 }
 
+export interface ErrorRequest {
+  status: number;
+  data: { message: string };
+}
+
+export interface ErrorRequest403 {
+  error: {
+    data: {
+    message: string,
+    status: number
+    }
+  },
+  isUnhandledError: boolean,
+  meta:{},
+}
+
 interface Location {
   latitude: number;
   longitude: number;
