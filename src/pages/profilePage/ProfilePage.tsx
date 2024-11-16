@@ -67,7 +67,7 @@ export const ProfilePage = () => {
               {isLoading ? (
                 "Загрузка..."
               ) : error ? (
-                <>Ошибка</>
+                <ErrorBlock />
               ) : (
                 `${firstName} ${lastName}`
               )}
