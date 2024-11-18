@@ -1,4 +1,4 @@
-import { Box, Typography, Container } from "@mui/material";
+import { Box, Typography, Container, Card } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
@@ -11,17 +11,11 @@ const HelpRequestPage = () => {
 
   const { data, error, isLoading } = useGetRequestCardQuery(requestId || "");
 
-  if (error) {
-    return (
-      <ErrorBlock errorText="Ошибка! Не удалось загрузить информацию. Попробуйте обновить страницу" />
-    );
-  }
-
   if (!requestId) {
     return <Typography>Не передан requestId в searchParams</Typography>;
   }
 
-  if (!data || isLoading) {
+  if (isLoading) {
     return <Typography>Загрузка данных...</Typography>;
   }
 
@@ -31,22 +25,39 @@ const HelpRequestPage = () => {
         Запрос о помощи
       </Typography>
       <Box sx={{ display: "flex", gap: 2 }}>
-        <HelpMainInformation
-          actionsSchedule={data.actionsSchedule}
-          description={data.description}
-          contacts={data.contacts}
-          endingDate={data.endingDate}
-          goalDescription={data.goalDescription}
-          location={data.location}
-          organization={data.organization}
-          title={data.title}
-        />
-        <DonateWidget
-          requestId={requestId}
-          requestGoal={data.requestGoal}
-          requestGoalCurrentValue={data.requestGoalCurrentValue}
-          endingDate={data.endingDate}
-        />
+        {error ? (
+          <Card
+            variant="outlined"
+            sx={{
+              width: "100%",
+              height: "calc(100vh - 292px)", //подогнано под высоту экрана
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ErrorBlock errorText="Ошибка! Не удалось загрузить информацию" />
+          </Card>
+        ) : (
+          <>
+            <HelpMainInformation
+              actionsSchedule={data!.actionsSchedule}
+              description={data!.description}
+              contacts={data!.contacts}
+              endingDate={data!.endingDate}
+              goalDescription={data!.goalDescription}
+              location={data!.location}
+              organization={data!.organization}
+              title={data!.title}
+            />
+            <DonateWidget
+              requestId={requestId}
+              requestGoal={data!.requestGoal}
+              requestGoalCurrentValue={data!.requestGoalCurrentValue}
+              endingDate={data!.endingDate}
+            />
+          </>
+        )}
       </Box>
     </Container>
   );
