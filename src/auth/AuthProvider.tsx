@@ -1,5 +1,7 @@
 import { useState, useContext, createContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogIn } from "../API/slices/isLoggedInSlice";
 
 interface AuthContextType {
   loggedIn: boolean;
@@ -26,11 +28,12 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const [loggedIn, setLoggedIn] = useState(initLoggedIn());
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logIn = (): void => {
     setLoggedIn(true);
+    dispatch(setLogIn(true));
     navigate("/catalog");
   };
 

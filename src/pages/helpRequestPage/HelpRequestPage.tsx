@@ -56,7 +56,6 @@ const HelpRequestPage = () => {
   const [searchParams] = useSearchParams();
   const requestId: string | null = searchParams.get("id");
 
-
   const { data, error } = useGetRequestCardQuery<GetRequestCardQuery>(
     requestId || "",
   );

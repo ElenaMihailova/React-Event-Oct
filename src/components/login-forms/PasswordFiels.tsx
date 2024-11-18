@@ -33,7 +33,10 @@ export const PasswordField = ({ value, onChange, failAuth }: PropsField) => {
   };
 
   return (
-    <FormControl sx={{ m: 2, marginLeft: 0, maxWidth: "485px" }} variant="outlined">
+    <FormControl
+      sx={{ m: 2, marginLeft: 0, maxWidth: "485px" }}
+      variant="outlined"
+    >
       <InputLabel htmlFor="password">Пароль</InputLabel>
       <OutlinedInput
         id="password"

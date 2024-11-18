@@ -2,12 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import routes from "./routes";
 import {
   AddToFavouritesResponse,
-  ErrorRequest403,
   FavoritesList,
   RequestDetails,
   UserInfo,
 } from "../models/ResponseTypes";
-import { toast } from "react-toastify";
+import { onQueryErrorAuth403 } from "../queryErrorsInterceptors/onQueryErrorsAuth";
 
 export const api = createApi({
   reducerPath: "queryApi",
@@ -60,6 +59,7 @@ export const api = createApi({
         url: routes.userInfo,
         method: "GET",
       }),
+      onQueryStarted: onQueryErrorAuth403,
     }),
 
     contributeToRequest: builder.query<string, string>({
@@ -74,17 +74,7 @@ export const api = createApi({
         url: routes.requestLoadAll,
         method: "GET",
       }),
-      async onQueryStarted(args, { queryFulfilled }): Promise<void> {
-        try { 
-          await queryFulfilled;
-        } catch (err: unknown) {
-          const error = (err as ErrorRequest403).error;
-          if (error.data.status === 403) {
-            localStorage.removeItem("userId");
-            toast.error("Ошибка авторизации! Перейдите на страницу авторизации");
-          }
-        }
-      }
+      onQueryStarted: onQueryErrorAuth403,
     }),
 
     getRequestCard: builder.query<RequestDetails, string>({
@@ -92,6 +82,7 @@ export const api = createApi({
         url: routes.requestLoadDetails(requestId),
         method: "GET",
       }),
+      onQueryStarted: onQueryErrorAuth403,
     }),
   }),
 });

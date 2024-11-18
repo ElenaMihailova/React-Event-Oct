@@ -14,20 +14,13 @@ export interface AddToFavouritesResponse {
   requestId: string;
 }
 
-export interface ErrorRequest {
-  status: number;
-  data: { message: string };
-}
-
 export interface ErrorRequest403 {
   error: {
     data: {
-    message: string,
-    status: number
-    }
-  },
-  isUnhandledError: boolean,
-  meta:{},
+      message: string;
+    };
+    status: number;
+  };
 }
 
 interface Location {
