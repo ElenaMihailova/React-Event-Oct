@@ -62,7 +62,7 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <Stack component="form" autoComplete="off" onSubmit={handleSubmit}>
+    <Stack component="form" onSubmit={handleSubmit}>
       <NameField
         value={loginFormData.values.login}
         onChange={handleChange}

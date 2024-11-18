@@ -7,7 +7,7 @@ import "./style.css";
 export const Login: React.FC = () => {
   return (
     <Grid container spacing={3} className="container-style">
-      <Grid size="grow" className="grid-style">
+      <Grid size={6} className="grid-style">
         <Typography
           variant="h2"
           gutterBottom
