@@ -5,11 +5,11 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 interface QueryCacheLifecycleApi {
   dispatch: Dispatch,
-  queryFulfilled: void,
+  queryFulfilled: unknown,
 }
 
 export const onQueryErrorAuth403 = async (
-  args: unknown,
+  args: undefined | string,
   { dispatch, queryFulfilled }: QueryCacheLifecycleApi,
 ): Promise<void> => {
   try {
