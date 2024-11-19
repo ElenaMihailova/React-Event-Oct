@@ -1,10 +1,10 @@
-import { useState, useContext, createContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLogIn } from "../API/slices/isLoggedInSlice";
+import { useContext, createContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogIn, isLoggedInSelector } from "../API/slices/isLoggedInSlice";
 
 interface AuthContextType {
-  loggedIn: boolean;
+  isLoggedIn: boolean;
   logIn: () => void;
   logOut: () => void;
 }
@@ -16,40 +16,27 @@ interface Props {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 const useAuth = () => useContext(AuthContext);
-const location = useLocation;
-const fromPage = location?.state?.from?.pathname || '/catalog';
-console.log(location?.state?.from?.pathname);
 
 export const AuthProvider = ({ children }: Props) => {
-  const localStorageToken = localStorage.getItem("userId");
+  const isLoggedIn = useSelector(isLoggedInSelector);
 
-  const initLoggedIn = () => {
-    if (localStorageToken) {
-      return true;
-    }
-    return false;
-  };
-
-  const [loggedIn, setLoggedIn] = useState(initLoggedIn());
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const logIn = (): void => {
-    setLoggedIn(true);
     dispatch(setLogIn(true));
-    navigate(fromPage);
+    navigate("/catalog");
   };
 
   const logOut = (): void => {
     localStorage.removeItem("userId");
-    setLoggedIn(false);
     navigate("/");
   };
 
   return (
     <AuthContext.Provider
       value={{
-        loggedIn,
+        isLoggedIn,
         logIn,
         logOut,
       }}
