@@ -25,12 +25,12 @@ const HelpRequestPage = () => {
         Запрос о помощи
       </Typography>
       <Box sx={{ display: "flex", gap: 2 }}>
-        {error ? (
+      {error && (
           <Card
             variant="outlined"
             sx={{
               width: "100%",
-              height: "calc(100vh - 292px)", //подогнано под высоту экрана
+              minHeight: "calc(100vh - 292px)", //подогнано под высоту экрана
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -38,26 +38,28 @@ const HelpRequestPage = () => {
           >
             <ErrorBlock errorText="Ошибка! Не удалось загрузить информацию" />
           </Card>
-        ) : (
-          <>
+        )}
+        {data && (
+          <Box sx={{ display: "flex", gap: 2 }}>
             <HelpMainInformation
-              actionsSchedule={data!.actionsSchedule}
-              description={data!.description}
-              contacts={data!.contacts}
-              endingDate={data!.endingDate}
-              goalDescription={data!.goalDescription}
-              location={data!.location}
-              organization={data!.organization}
-              title={data!.title}
+              actionsSchedule={data.actionsSchedule}
+              description={data.description}
+              contacts={data.contacts}
+              endingDate={data.endingDate}
+              goalDescription={data.goalDescription}
+              location={data.location}
+              organization={data.organization}
+              title={data.title}
             />
             <DonateWidget
               requestId={requestId}
-              requestGoal={data!.requestGoal}
-              requestGoalCurrentValue={data!.requestGoalCurrentValue}
-              endingDate={data!.endingDate}
+              requestGoal={data.requestGoal}
+              requestGoalCurrentValue={data.requestGoalCurrentValue}
+              endingDate={data.endingDate}
             />
-          </>
+          </Box>
         )}
+
       </Box>
     </Container>
   );
