@@ -1,5 +1,5 @@
 import { useState, useContext, createContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogIn } from "../API/slices/isLoggedInSlice";
 
@@ -16,6 +16,9 @@ interface Props {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 const useAuth = () => useContext(AuthContext);
+const location = useLocation;
+const fromPage = location?.state?.from?.pathname || '/catalog';
+console.log(location?.state?.from?.pathname);
 
 export const AuthProvider = ({ children }: Props) => {
   const localStorageToken = localStorage.getItem("userId");
@@ -34,7 +37,7 @@ export const AuthProvider = ({ children }: Props) => {
   const logIn = (): void => {
     setLoggedIn(true);
     dispatch(setLogIn(true));
-    navigate("/catalog");
+    navigate(fromPage);
   };
 
   const logOut = (): void => {
