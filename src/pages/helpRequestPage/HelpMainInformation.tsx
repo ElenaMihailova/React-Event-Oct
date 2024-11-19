@@ -12,20 +12,36 @@ import { toast } from "react-toastify";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
 import CheckListIcon from "./lib/CheckListIcon";
 import verifiedIcon from "../../assets/verifyed-icon.svg";
-import {
-  ActionsScheduleElement,
-  Contacts,
-  Location,
-  Organization,
-} from "./HelpRequestPage";
+
+interface ActionsScheduleElement {
+  stepLabel: string;
+  isDone?: boolean;
+}
+
+interface Organization {
+  title: string;
+  isVerified: boolean;
+}
+
+interface Location {
+  latitude: number;
+  longitude: number;
+  district: string;
+  city: string;
+}
+interface Contacts {
+  email: string;
+  phone: string;
+  website: string;
+}
 
 interface HelpMainInformationProps {
   actionsSchedule: ActionsScheduleElement[];
   title: string;
-  organization: Organization;
+  organization?: Organization;
   description: string;
   goalDescription: string;
-  endingDate: string;
+  endingDate: Date;
   location: Location;
 
   contacts: Contacts;
@@ -58,8 +74,8 @@ const HelpMainInformation = ({
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Организация
           </Typography>
-          <Typography>{organization.title}</Typography>
-          {organization.isVerified && (
+          <Typography>{organization?.title}</Typography>
+          {organization?.isVerified && (
             <>
               <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                 <img src={verifiedIcon} alt="" />

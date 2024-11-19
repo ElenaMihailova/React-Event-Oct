@@ -1,74 +1,21 @@
-import { Box, Typography, Container } from "@mui/material";
-
+import { Box, Typography, Container, Card } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import DonateWidget from "./DonateWidget";
 import HelpMainInformation from "./HelpMainInformation";
 import { useGetRequestCardQuery } from "../../API/RTKQuery/api";
 import { ErrorBlock } from "../../components/ErrorBlock";
 
-export interface ActionsScheduleElement {
-  stepLabel: string;
-  isDone?: boolean;
-}
-
-export interface Organization {
-  title: string;
-  isVerified: boolean;
-}
-
-export interface Location {
-  latitude: number;
-  longitude: number;
-  district: string;
-  city: string;
-}
-export interface Contacts {
-  email: string;
-  phone: string;
-  website: string;
-}
-
-interface DataRequestCard {
-  id: string;
-  actionsSchedule: ActionsScheduleElement[];
-  title: string;
-  organization: Organization;
-  description: string;
-  goalDescription: string;
-  endingDate: string;
-  location: Location;
-  requestGoal: number;
-  requestGoalCurrentValue: number;
-  contacts: Contacts;
-}
-
-interface ErrorRequesrCard {
-  status: number;
-  data: { message: string };
-}
-
-interface GetRequestCardQuery {
-  data?: DataRequestCard;
-  error?: ErrorRequesrCard;
-}
-
 const HelpRequestPage = () => {
   const [searchParams] = useSearchParams();
   const requestId: string | null = searchParams.get("id");
 
-  const { data, error } = useGetRequestCardQuery<GetRequestCardQuery>(
-    requestId || "",
-  );
-
-  if (error) {
-    console.log(error);
-  }
+  const { data, error, isLoading } = useGetRequestCardQuery(requestId || "");
 
   if (!requestId) {
     return <Typography>Не передан requestId в searchParams</Typography>;
   }
 
-  if (!data) {
+  if (isLoading) {
     return <Typography>Загрузка данных...</Typography>;
   }
 
@@ -78,22 +25,41 @@ const HelpRequestPage = () => {
         Запрос о помощи
       </Typography>
       <Box sx={{ display: "flex", gap: 2 }}>
-        <HelpMainInformation
-          actionsSchedule={data.actionsSchedule}
-          description={data.description}
-          contacts={data.contacts}
-          endingDate={data.endingDate}
-          goalDescription={data.goalDescription}
-          location={data.location}
-          organization={data.organization}
-          title={data.title}
-        />
-        <DonateWidget
-          requestId={requestId}
-          requestGoal={data.requestGoal}
-          requestGoalCurrentValue={data.requestGoalCurrentValue}
-          endingDate={data.endingDate}
-        />
+      {error && (
+          <Card
+            variant="outlined"
+            sx={{
+              width: "100%",
+              minHeight: "calc(100vh - 292px)", //подогнано под высоту экрана
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ErrorBlock errorText="Ошибка! Не удалось загрузить информацию" />
+          </Card>
+        )}
+        {data && (
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <HelpMainInformation
+              actionsSchedule={data.actionsSchedule}
+              description={data.description}
+              contacts={data.contacts}
+              endingDate={data.endingDate}
+              goalDescription={data.goalDescription}
+              location={data.location}
+              organization={data.organization}
+              title={data.title}
+            />
+            <DonateWidget
+              requestId={requestId}
+              requestGoal={data.requestGoal}
+              requestGoalCurrentValue={data.requestGoalCurrentValue}
+              endingDate={data.endingDate}
+            />
+          </Box>
+        )}
+
       </Box>
     </Container>
   );

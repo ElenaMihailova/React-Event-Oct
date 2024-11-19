@@ -12,7 +12,7 @@ interface DonateWidgetProps {
   requestId: string;
   requestGoal: number;
   requestGoalCurrentValue: number;
-  endingDate: string;
+  endingDate: Date;
 }
 
 const DonateWidget = ({

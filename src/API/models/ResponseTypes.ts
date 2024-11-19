@@ -80,7 +80,7 @@ export interface RequestDetails {
   title: string;
   organization: {
     title: string;
-    isVerified?: boolean;
+    isVerified: boolean;
   };
   description: string;
   goalDescription: string;
@@ -97,8 +97,8 @@ export interface RequestDetails {
   };
   contacts: {
     email: string;
-    phone?: string;
-    website?: string;
+    phone: string;
+    website: string;
   };
   requesterType: "person" | "organization";
   helpType: "finance" | "material";
