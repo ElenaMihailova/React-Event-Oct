@@ -6,6 +6,7 @@ import {
   RequestDetails,
   UserInfo,
 } from "../models/ResponseTypes";
+import { onQueryErrorAuth403 } from "../queryErrorsInterceptors/onQueryErrorsAuth";
 
 export const api = createApi({
   reducerPath: "queryApi",
@@ -58,6 +59,7 @@ export const api = createApi({
         url: routes.userInfo,
         method: "GET",
       }),
+      onQueryStarted: onQueryErrorAuth403,
     }),
 
     contributeToRequest: builder.query<string, string>({
@@ -72,6 +74,7 @@ export const api = createApi({
         url: routes.requestLoadAll,
         method: "GET",
       }),
+      onQueryStarted: onQueryErrorAuth403,
     }),
 
     getRequestCard: builder.query<RequestDetails, string>({
@@ -79,6 +82,7 @@ export const api = createApi({
         url: routes.requestLoadDetails(requestId),
         method: "GET",
       }),
+      onQueryStarted: onQueryErrorAuth403,
     }),
   }),
 });

@@ -14,6 +14,15 @@ export interface AddToFavouritesResponse {
   requestId: string;
 }
 
+export interface ErrorRequest403 {
+  error: {
+    data: {
+      message: string;
+    };
+    status: number;
+  };
+}
+
 interface Location {
   latitude: number;
   longitude: number;

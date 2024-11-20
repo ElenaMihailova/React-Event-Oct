@@ -1,12 +1,10 @@
 .grid-style {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 64px 40px 0;
+  padding-top: 64px;
 }
 
 .container-style {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-flow: row, wrap;
 }

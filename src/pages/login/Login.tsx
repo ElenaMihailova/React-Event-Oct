@@ -6,10 +6,10 @@ import "./style.css";
 
 export const Login: React.FC = () => {
   return (
-    <Grid container spacing={1} className="container-style">
-      <Grid className="grid-style">
+    <Grid container spacing={3} className="container-style">
+      <Grid size={6} className="grid-style">
         <Typography
-          variant="h4"
+          variant="h2"
           gutterBottom
           style={{
             marginBottom: "60px",
@@ -26,7 +26,7 @@ export const Login: React.FC = () => {
 
       <Grid className="grid-style">
         <Typography
-          variant="h4"
+          variant="h2"
           gutterBottom
           style={{
             marginBottom: "90px",

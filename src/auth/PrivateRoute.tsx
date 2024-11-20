@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }: Props) => {
   const auth = useAuth();
   const location = useLocation();
 
-  return auth.loggedIn ? (
+  return auth.isLoggedIn ? (
     children
   ) : (
     <Navigate to="/" state={{ from: location }} />

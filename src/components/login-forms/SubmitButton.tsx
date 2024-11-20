@@ -12,6 +12,7 @@ export const SubmitButton = ({ isDisabled }: SubmitButtonProps) => {
       sx={{
         margin: "16px 16px 16px 0",
         padding: "8px 16px",
+        maxWidth: "485px",
       }}
       disabled={isDisabled}
     >
