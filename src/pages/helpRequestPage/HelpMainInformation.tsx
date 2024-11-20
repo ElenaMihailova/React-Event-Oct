@@ -3,15 +3,11 @@ import {
   Card,
   CardContent,
   Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
 } from "@mui/material";
 import { toast } from "react-toastify";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
-import CheckListIcon from "./lib/CheckListIcon";
 import verifiedIcon from "../../assets/verifyed-icon.svg";
+import { ActionsSchedule } from "./ActionsSchedule";
 
 interface ActionsScheduleElement {
   stepLabel: string;
@@ -97,19 +93,8 @@ const HelpMainInformation = ({
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             План действий
           </Typography>
-          <List>
-            {actionsSchedule.map((item, index) => (
-              <ListItem key={index}>
-                <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>
-                  <CheckListIcon green={item.isDone} />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{ variant: "body2" }}
-                  primary={item.stepLabel}
-                />
-              </ListItem>
-            ))}
-          </List>
+
+          <ActionsSchedule actionsSchedule={actionsSchedule} />
 
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Завершение
