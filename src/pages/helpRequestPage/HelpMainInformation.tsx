@@ -1,9 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
 import verifiedIcon from "../../assets/verifyed-icon.svg";

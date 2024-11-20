@@ -7,22 +7,24 @@ interface ActionsScheduleElement {
 }
 
 interface CollActionsSchedule {
-  actionsSchedule: ActionsScheduleElement[]
+  actionsSchedule: ActionsScheduleElement[];
 }
 
-export const ActionsSchedule: React.FC<CollActionsSchedule> = ({ actionsSchedule }) => {
+export const ActionsSchedule: React.FC<CollActionsSchedule> = ({
+  actionsSchedule,
+}) => {
   return (
     <List>
       {actionsSchedule.map((item, index) => (
         <ListItem key={index}>
           <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>
-             <CheckListIcon green={item.isDone} />
-           </ListItemIcon>
-           <ListItemText
-             primaryTypographyProps={{ variant: "body2" }}
-             primary={item.stepLabel}
-           />
-         </ListItem>
+            <CheckListIcon green={item.isDone} />
+          </ListItemIcon>
+          <ListItemText
+            primaryTypographyProps={{ variant: "body2" }}
+            primary={item.stepLabel}
+          />
+        </ListItem>
       ))}
     </List>
   );
