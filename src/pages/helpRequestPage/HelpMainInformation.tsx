@@ -67,12 +67,10 @@ const HelpMainInformation = ({
           </Typography>
           <Typography>{organization?.title}</Typography>
           {organization?.isVerified && (
-            <>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                <img src={verifiedIcon} alt="" />
-                <Typography variant="caption">Организация проверена</Typography>
-              </Box>
-            </>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <img src={verifiedIcon} alt="" />
+              <Typography variant="caption">Организация проверена</Typography>
+            </Box>
           )}
 
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
