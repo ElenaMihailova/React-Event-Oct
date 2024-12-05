@@ -18,9 +18,9 @@ export const UsersLocations: React.FC<PropsFieldUsersLocations> = ({
         Локация для помощи
       </Typography>
 
-      {usersLocations?.map((location) => {
+      {usersLocations?.map((location, index) => {
         return (
-          <Box>
+          <Box key={index}>
             <Box sx={{ display: "flex", mb: 1 }}>
               <Typography variant="body2" sx={{ fontWeight: 500, mr: 0.5 }}>
                 Область:

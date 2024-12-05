@@ -19,9 +19,9 @@ export const UsersEducation: React.FC<PropsFieldUsersEducation> = ({
       <Typography variant="h6" sx={{ fontSize: 20, mb: 1 }}>
         Образование
       </Typography>
-      {usersEducation?.map((education) => {
+      {usersEducation?.map((education, index) => {
         return (
-          <Box sx={{ mb: 2 }}>
+          <Box key={index} sx={{ mb: 2 }}>
             <Typography variant="body2">
               {education.organizationName}
             </Typography>
