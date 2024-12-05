@@ -25,7 +25,7 @@ const HelpRequestPage = () => {
         Запрос о помощи
       </Typography>
       <Box sx={{ display: "flex", gap: 2 }}>
-      {error && (
+        {error && (
           <Card
             variant="outlined"
             sx={{
@@ -59,7 +59,6 @@ const HelpRequestPage = () => {
             />
           </Box>
         )}
-
       </Box>
     </Container>
   );

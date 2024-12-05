@@ -1,17 +1,8 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import ButtonInFavorites from "./lib/ButtonInFavorites";
-import CheckListIcon from "./lib/CheckListIcon";
 import verifiedIcon from "../../assets/verifyed-icon.svg";
+import { ActionsSchedule } from "./ActionsSchedule";
 
 interface ActionsScheduleElement {
   stepLabel: string;
@@ -76,12 +67,10 @@ const HelpMainInformation = ({
           </Typography>
           <Typography>{organization?.title}</Typography>
           {organization?.isVerified && (
-            <>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                <img src={verifiedIcon} alt="" />
-                <Typography variant="caption">Организация проверена</Typography>
-              </Box>
-            </>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <img src={verifiedIcon} alt="" />
+              <Typography variant="caption">Организация проверена</Typography>
+            </Box>
           )}
 
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
@@ -97,19 +86,8 @@ const HelpMainInformation = ({
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             План действий
           </Typography>
-          <List>
-            {actionsSchedule.map((item, index) => (
-              <ListItem key={index}>
-                <ListItemIcon sx={{ minWidth: 0, paddingRight: 1 }}>
-                  <CheckListIcon green={item.isDone} />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{ variant: "body2" }}
-                  primary={item.stepLabel}
-                />
-              </ListItem>
-            ))}
-          </List>
+
+          <ActionsSchedule actionsSchedule={actionsSchedule} />
 
           <Typography sx={{ marginTop: 3, marginBottom: 1 }} variant="h6">
             Завершение

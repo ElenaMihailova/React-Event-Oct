@@ -1,11 +1,11 @@
 import { toast } from "react-toastify";
+import { Dispatch } from "@reduxjs/toolkit";
 import { ErrorRequest403 } from "../models/ResponseTypes";
 import { setLogIn } from "../slices/isLoggedInSlice";
-import { Dispatch } from "@reduxjs/toolkit";
 
 interface QueryCacheLifecycleApi {
-  dispatch: Dispatch,
-  queryFulfilled: unknown,
+  dispatch: Dispatch;
+  queryFulfilled: unknown;
 }
 
 export const onQueryErrorAuth403 = async (
@@ -23,6 +23,6 @@ export const onQueryErrorAuth403 = async (
         "Ошибка авторизации! Перейдите на страницу авторизации или перезагрузите эту страницу",
       );
     }
-    throw(args);
+    throw args;
   }
 };
