@@ -29,12 +29,6 @@ export const Favorites: React.FC = () => {
     setDisplayMode(mode);
   };
 
-  useEffect(() => {
-    console.log("Cards data:", cards);
-    console.log("Loading state:", isLoading);
-    console.log("Error:", error);
-  }, [cards, isLoading, error]);
-
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
     value: number,
@@ -106,21 +100,19 @@ export const Favorites: React.FC = () => {
           ) : error ? (
             <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />
           ) : (
-            <>
-              <ResultSection
-                cards={paginatedCards.map((card: HelpRequestData) => ({
-                  ...card,
-                  collectedAmount: card.requestGoalCurrentValue,
-                  targetAmount: card.requestGoal,
-                  contributorsCount: card.contributorsCount,
-                }))}
-                onCardClick={handleCardClick}
-                displayMode={displayMode}
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </>
+            <ResultSection
+              cards={paginatedCards.map((card: HelpRequestData) => ({
+                ...card,
+                collectedAmount: card.requestGoalCurrentValue,
+                targetAmount: card.requestGoal,
+                contributorsCount: card.contributorsCount,
+              }))}
+              onCardClick={handleCardClick}
+              displayMode={displayMode}
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           )}
         </Box>
       </Box>

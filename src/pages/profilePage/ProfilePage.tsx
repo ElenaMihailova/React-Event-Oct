@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Container, Tabs, Tab, Typography } from "@mui/material";
+import { Box, Container, Tabs, Tab, Typography, CircularProgress } from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
@@ -63,30 +63,30 @@ export const ProfilePage = () => {
             alt="Фото профиля"
           />
           <Box sx={{ width: 320, height: "auto" }}>
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: "bold",
-                textAlign: "left",
-                ml: 2.5,
-                mt: 2.5,
-                mb: 0,
-              }}
-            >
-              {isLoading ? (
-                "Загрузка..."
-              ) : error ? (
-                <ErrorBlock errorText="Ошибка! Не удалось загрузить запросы" />
-              ) : (
-                `${firstName} ${lastName}`
-              )}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ textAlign: "left", ml: 2.5, mt: 1.25, mb: 3.75 }}
-            >
-              Статус: {status}
-            </Typography>
+            {isLoading && <CircularProgress />} 
+            {error && <ErrorBlock errorText="Ошибка! Не удалось загрузить запросы" />}
+            {data && (
+              <Box sx={{ m: 2.5 }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: "bold",
+                    textAlign: "left",
+                    ml: 2.5,
+                    mt: 2.5,
+                    mb: 0,
+                  }}
+                >
+                  {`${firstName} ${lastName}`}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ textAlign: "left", ml: 2.5, mt: 1.25, mb: 3.75 }}
+                >
+                  Статус: {status}
+                </Typography>
+              </Box>
+            )}
             <Box
               component="button"
               sx={{ width: 280, height: 42, m: 2.5, fontSize: 24 }}

@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const logOut = (): void => {
+    dispatch(setLogIn(false));
     localStorage.removeItem("userId");
     navigate("/");
   };
