@@ -7,6 +7,7 @@ import { ErrorBlock } from "../../../components/ErrorBlock";
 
 export const Contacts = () => {
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
+  const { email, phone } = data?.contacts || {};
 
   if (isLoading) {
     return <CircularProgress />;
@@ -15,8 +16,6 @@ export const Contacts = () => {
   if (error) {
     return <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />;
   }
-
-  const { email, phone } = data?.contacts || {};
 
   return (
     <Box sx={{ w: 260, h: 334, pt: 3.75 }}>
