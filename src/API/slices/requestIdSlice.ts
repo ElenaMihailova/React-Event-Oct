@@ -1,7 +1,7 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 interface RequestId {
-  requestId: string | undefined,
+  requestId: string | undefined;
 }
 
 const requestIdAdapter = createEntityAdapter();
@@ -20,6 +20,5 @@ const requestIdSlice = createSlice({
 });
 
 export const { setRequestId } = requestIdSlice.actions;
-export const requestIdSelector = (state: RequestId) =>
-  state.requestId;
+export const requestIdSelector = (state: RequestId) => state.requestId;
 export default requestIdSlice.reducer;

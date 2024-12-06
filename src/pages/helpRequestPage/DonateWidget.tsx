@@ -28,7 +28,7 @@ const DonateWidget = ({
   const progress = (requestGoalCurrentValue / requestGoal) * 100;
 
   const dispatch = useDispatch();
-  
+
   const handleClickHelp = (): void => {
     toast.success("Успех! Спасибо за помощь");
     dispatch(setRequestId(requestId));

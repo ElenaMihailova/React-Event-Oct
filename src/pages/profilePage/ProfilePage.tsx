@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Box, Container, Tabs, Tab, Typography, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Container,
+  Tabs,
+  Tab,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import PersonalRounded from "../../assets/PersonRounded.png";
 import { PersonalData } from "./lib/PersonalData";
 import { Contacts } from "./lib/Contacts";
@@ -63,8 +70,10 @@ export const ProfilePage = () => {
             alt="Фото профиля"
           />
           <Box sx={{ width: 320, height: "auto" }}>
-            {isLoading && <CircularProgress />} 
-            {error && <ErrorBlock errorText="Ошибка! Не удалось загрузить запросы" />}
+            {isLoading && <CircularProgress />}
+            {error && (
+              <ErrorBlock errorText="Ошибка! Не удалось загрузить запросы" />
+            )}
             {data && (
               <Box sx={{ m: 2.5 }}>
                 <Typography
