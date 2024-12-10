@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ResultSection } from "../../../components/ResultSection";
@@ -28,12 +28,6 @@ export const Favorites: React.FC = () => {
   const handleDisplayModeChange = (mode: "grid" | "list") => {
     setDisplayMode(mode);
   };
-
-  useEffect(() => {
-    console.log("Cards data:", cards);
-    console.log("Loading state:", isLoading);
-    console.log("Error:", error);
-  }, [cards, isLoading, error]);
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
@@ -106,21 +100,19 @@ export const Favorites: React.FC = () => {
           ) : error ? (
             <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />
           ) : (
-            <>
-              <ResultSection
-                cards={paginatedCards.map((card: HelpRequestData) => ({
-                  ...card,
-                  collectedAmount: card.requestGoalCurrentValue,
-                  targetAmount: card.requestGoal,
-                  contributorsCount: card.contributorsCount,
-                }))}
-                onCardClick={handleCardClick}
-                displayMode={displayMode}
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </>
+            <ResultSection
+              cards={paginatedCards.map((card: HelpRequestData) => ({
+                ...card,
+                collectedAmount: card.requestGoalCurrentValue,
+                targetAmount: card.requestGoal,
+                contributorsCount: card.contributorsCount,
+              }))}
+              onCardClick={handleCardClick}
+              displayMode={displayMode}
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           )}
         </Box>
       </Box>
