@@ -7,6 +7,8 @@ import {
   LinearProgress,
 } from "@mui/material";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setRequestId } from "../../API/slices/requestIdSlice";
 
 interface DonateWidgetProps {
   requestId: string;
@@ -23,11 +25,15 @@ const DonateWidget = ({
 }: DonateWidgetProps) => {
   const date = new Date(endingDate);
   const formattedDate = `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
+  const progress = (requestGoalCurrentValue / requestGoal) * 100;
+
+  const dispatch = useDispatch();
+
   const handleClickHelp = (): void => {
     toast.success("Успех! Спасибо за помощь");
-    console.log(requestId);
+    dispatch(setRequestId(requestId));
   };
-  const progress = (requestGoalCurrentValue / requestGoal) * 100;
+
   return (
     <Box width={320}>
       <Card variant="outlined">
