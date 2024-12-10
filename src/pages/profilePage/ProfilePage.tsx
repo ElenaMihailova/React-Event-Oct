@@ -27,11 +27,7 @@ export const ProfilePage = () => {
 
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
-  const {
-    name: firstName,
-    lastName,
-    status,
-  } = data || {};
+  const { name: firstName, lastName, status } = data || {};
 
   const { logOut } = useAuth();
 
