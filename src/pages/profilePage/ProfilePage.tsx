@@ -27,9 +27,11 @@ export const ProfilePage = () => {
 
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
-  const firstName = data?.name || "";
-  const lastName = data?.lastName || "";
-  const status = data?.status || "Начинающий";
+  const {
+    name: firstName,
+    lastName,
+    status,
+  } = data || {};
 
   const { logOut } = useAuth();
 
