@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import InfoIcon from "../../../assets/login/IconInfo.png";
+import InfoIcon from "../../../assets/login/InfoIcon.svg";
 import { testsProfilesData } from "./testProfilesData";
 import "./style.css";
 
