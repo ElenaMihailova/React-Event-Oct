@@ -96,7 +96,9 @@ export const Favorites: React.FC = () => {
           </Box>
 
           {isLoading && <CircularProgress />}
-          {error && <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />}
+          {error && (
+            <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />
+          )}
           {cards && (
             <ResultSection
               cards={paginatedCards.map((card: HelpRequestData) => ({
