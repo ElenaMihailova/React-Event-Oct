@@ -17,9 +17,6 @@ import useAuth from "../../auth/AuthProvider";
 
 interface TabsMapping {
   [key: string]: number;
-  personalData: number;
-  contacts: number;
-  favorites: number;
 }
 
 export const ProfilePage = () => {
