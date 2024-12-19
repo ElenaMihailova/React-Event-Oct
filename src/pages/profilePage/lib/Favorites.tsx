@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, CircularProgress, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ResultSection } from "../../../components/ResultSection";
 import { useGetRequestCardsQuery } from "../../../API/RTKQuery/api";
@@ -95,11 +95,11 @@ export const Favorites: React.FC = () => {
             </Box>
           </Box>
 
-          {isLoading ? (
-            <Typography>Загрузка...</Typography>
-          ) : error ? (
+          {isLoading && <CircularProgress />}
+          {error && (
             <ErrorBlock errorText=" Ошибка! Не удалось загрузить информацию" />
-          ) : (
+          )}
+          {cards && (
             <ResultSection
               cards={paginatedCards.map((card: HelpRequestData) => ({
                 ...card,
