@@ -15,14 +15,16 @@ import { ErrorBlock } from "../../components/ErrorBlock";
 import { Favorites } from "./lib/Favorites";
 import useAuth from "../../auth/AuthProvider";
 
+interface TabsMapping {
+  [key: string]: number;
+}
+
 export const ProfilePage = () => {
-  const [activeButton, setActiveButton] = useState("button1");
+  const [activeTab, setActiveTab] = useState("personalData");
 
   const { data, error, isLoading } = useLoadUserInfoQuery(undefined);
 
-  const firstName = data?.name || "";
-  const lastName = data?.lastName || "";
-  const status = data?.status || "Начинающий";
+  const { name: firstName, lastName, status } = data || {};
 
   const { logOut } = useAuth();
 
@@ -31,16 +33,22 @@ export const ProfilePage = () => {
   };
 
   const renderContent = () => {
-    switch (activeButton) {
-      case "button1":
+    switch (activeTab) {
+      case "personalData":
         return <PersonalData />;
-      case "button2":
+      case "contacts":
         return <Contacts />;
-      case "button3":
+      case "favorites":
         return <Favorites />;
       default:
         return <PersonalData />;
     }
+  };
+
+  const tabsMapping: TabsMapping = {
+    personalData: 0,
+    contacts: 1,
+    favorites: 2,
   };
 
   return (
@@ -120,23 +128,17 @@ export const ProfilePage = () => {
           }}
         >
           <Tabs
-            value={
-              activeButton === "button1"
-                ? 0
-                : activeButton === "button2"
-                  ? 1
-                  : 2
-            }
+            value={tabsMapping[activeTab]}
             indicatorColor="primary"
             textColor="primary"
             sx={{ width: 388, borderBottom: 1, borderColor: "divider" }}
           >
             <Tab
               label="Личные данные"
-              onClick={() => setActiveButton("button1")}
+              onClick={() => setActiveTab("personalData")}
             />
-            <Tab label="Контакты" onClick={() => setActiveButton("button2")} />
-            <Tab label="Избранное" onClick={() => setActiveButton("button3")} />
+            <Tab label="Контакты" onClick={() => setActiveTab("contacts")} />
+            <Tab label="Избранное" onClick={() => setActiveTab("favorites")} />
           </Tabs>
 
           <Box
